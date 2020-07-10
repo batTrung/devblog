@@ -160,3 +160,19 @@ PRIVATE_MEDIA_ROOT = os.path.join(BASE_DIR, 'media/private')
 # ==============================================================================
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+# ==============================================================================
+# THIRD-PARTY APPS SETTINGS
+# ==============================================================================
+
+
+REDIS_HOST = 'localhost'
+
+REDIS_PORT = 6379
+
+REDIS_URL = config('REDIS_URL', default='redis://localhost:6379')
+
+CELERY_BROKER_URL = config('CELERY_BROKER_URL', default=REDIS_URL)
+
+CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default=REDIS_URL)

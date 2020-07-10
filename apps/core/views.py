@@ -1,3 +1,9 @@
 from django.shortcuts import render
 
-# Create your views here.
+from apps.blog.tasks import crawl
+
+
+def home(request):
+    crawl.delay()
+
+    return render(request, 'core/home.html')
