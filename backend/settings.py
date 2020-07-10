@@ -16,8 +16,7 @@ SECRET_KEY = config('SECRET_KEY', default=string.ascii_letters)
 
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost', cast=Csv(),
-)
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost', cast=Csv())
 
 
 DJANGO_APPS = [
@@ -30,7 +29,7 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-
+    'taggit',
 ]
 
 LOCAL_APPS = [
@@ -146,9 +145,18 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
-
+    os.path.join(BASE_DIR, 'static'),
 ]
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/public')
+
+PRIVATE_MEDIA_ROOT = os.path.join(BASE_DIR, 'media/private')
+
 
 # ==============================================================================
 # EMAIL SETTINGS
 # ==============================================================================
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
