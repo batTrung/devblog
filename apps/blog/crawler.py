@@ -1,6 +1,7 @@
 import re
 import os
 import requests
+import asyncio
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 
@@ -41,14 +42,14 @@ class Crawler():
         elif type_content == 'image':
             return self.get_image(web, elements)
 
-
     def safe_get(self, element, web, selector, type_content):
         children = element.select(selector)
         if children is not None and len(children) > 0:
             return self.get_content(web, children, type_content)
         return ''
 
-    def start_crawl(self, web):
+    def start_crawl(self, web_id):
+        web = Website.objects.get(id=web_id)
         bs = self.get_req(web.posts_url)
         count = 0
         if bs:
@@ -72,9 +73,11 @@ class Crawler():
                         post_saved = self.save_post(web, full_link_post, title, image)
                         if post_saved:
                             count += 1
-                            print('LINK DETAIL: ', full_link_post)
-                            print('TITLE: ', title)
-                            print('IMAGE: ', image)
+                        #     print('LINK DETAIL: ', full_link_post)
+                        #     print('TITLE: ', title)
+                        #     print('IMAGE: ', image)
+                    else:
+                        return
 
     def post_exists(self, title):
         slug = slugify(title)
@@ -111,10 +114,22 @@ class Crawler():
         return response.status_code == 200
 
     def run(self):
-        websites = Website.objects.actived()
-        for web in websites:
-            print(f'start with: {web}')
-            self.start_crawl(web)
+        website_ids = Website.objects.actived().values_list('id', flat=True)
+        website_ids = list(website_ids)
+        loop = asyncio.new_event_loop()
+        loop.run_until_complete(self.async_crawl(loop, website_ids))
+        loop.close()
+        # for web in websites:
+        #     print(f'start with: {web}')
+        #     self.start_crawl(web)
+
+    async def async_crawl(self, loop, website_ids):
+        futures = [asyncio.ensure_future(self.fetch_web(loop, web_id)) for web_id in website_ids]
+        await asyncio.gather(*futures)
+
+    async def fetch_web(self, loop, web_id):
+        return await loop.run_in_executor(None, self.start_crawl, web_id)
+
 
     def get_absolute_url(self, web, url):
         is_absolute = bool(urlparse(url).netloc)
