@@ -3,7 +3,7 @@ import string
 
 import dj_database_url
 from decouple import Csv, config
-
+from celery.schedules import crontab
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -176,3 +176,10 @@ REDIS_URL = config('REDIS_URL', default='redis://localhost:6379')
 CELERY_BROKER_URL = config('CELERY_BROKER_URL', default=REDIS_URL)
 
 CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default=REDIS_URL)
+
+CELERY_BEAT_SCHEDULE = {
+    'crawl-task': {
+        'task': 'apps.blog.tasks.crawl',
+        'schedule': crontab(),
+    },
+}

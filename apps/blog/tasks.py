@@ -4,5 +4,5 @@ from .crawler import blog_crawler
 
 
 @app.task()
-def crawl(*args, **kwargs):
+def crawl():
     blog_crawler.run()

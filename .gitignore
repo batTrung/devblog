@@ -29,3 +29,6 @@ media
 migrations/
 cert.crt
 cert.key
+
+celerybeat.pid
+celerybeat-schedule
