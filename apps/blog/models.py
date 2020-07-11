@@ -56,7 +56,7 @@ class Post(TitleSlugable):
     views = models.PositiveIntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     photo = models.ImageField(upload_to='posts/', blank=True, null=True)
-    saved = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='posts_saved')
+    users_saved = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='posts_saved')
 
     class Meta:
         ordering = ('created',)

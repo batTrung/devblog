@@ -30,6 +30,7 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     'taggit',
+    'rest_framework',
 ]
 
 LOCAL_APPS = [
@@ -85,7 +86,9 @@ MIDDLEWARE = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+        
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
