@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <li>Home</li>
+      <li>TheHeader</li>
     </ul>
   </div>
 </template>
