@@ -1,11 +1,10 @@
 from urllib.parse import urlparse
 
-from django.db import models
 from django.conf import settings
-
-from taggit.managers import TaggableManager
+from django.db import models
 
 from apps.common.behaviors import TitleSlugable
+from taggit.managers import TaggableManager
 
 from .constants import Language
 from .managers import WebsiteManager
@@ -42,11 +41,14 @@ class Website(models.Model):
 
     def get_name(self):
         netloc = urlparse(self.get_url()).netloc
-        domain = netloc.strip('www.')
-        return domain.split('.')[0]
+        return netloc
 
     def get_url(self):
-        parse_url = urlparse(self.posts_url)._replace(params='', query=None, fragment='')
+        parse_url = urlparse(self.posts_url)._replace(
+            params='',
+            query=None,
+            fragment='',
+        )
         return str(parse_url.geturl())
 
 

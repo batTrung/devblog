@@ -1,22 +1,22 @@
-import re
-import os
-import requests
 import asyncio
-from bs4 import BeautifulSoup
+import re
 from urllib.parse import urlparse
 
 from django.core.files.base import ContentFile
 from django.utils.text import slugify
 
-from .models import Website, Post
+import requests
+from bs4 import BeautifulSoup
+
+from .models import Post, Website
 
 
 class Crawler():
 
     def get_req(self, url):
         my_headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' +\
-                        ' (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'
+            'User-Agent': '''Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
+                        (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'''
         }
         try:
             req = requests.get(url, headers=my_headers)
@@ -59,8 +59,8 @@ class Crawler():
                     return
                 try:
                     link_post = result.select(web.link_tag)[0].attrs['href']
-                except IndexError:
-                    print(f"Không tìm thấy link post detail: {web}")
+                except IndexError as e:
+                    print(f"Không tìm thấy link post detail {web}: {e}")
                     return
                 full_link_post = self.get_absolute_url(web, link_post)
                 bs_detail = self.get_req(full_link_post)
@@ -83,7 +83,7 @@ class Crawler():
         slug = slugify(title)
         return Post.objects.filter(slug=slug).exists()
 
-    def save_post(self, web, full_link_post, title, link_image): 
+    def save_post(self, web, full_link_post, title, link_image):
         post = Post(website=web, link=full_link_post, title=title)
         try:
             post.save()
@@ -101,7 +101,7 @@ class Crawler():
                 print('Save photo: ', image_name)
                 post.photo.save(image_name, ContentFile(response.content), save=True)
             except AttributeError as e:
-                print("Can't save image")
+                print(f"Can't save image: {e}")
 
     def get_image_name(self, post, url):
         pattern = re.compile(r'/([^/]+\.(jpg|jpeg|png|gif))', re.IGNORECASE)
@@ -129,7 +129,6 @@ class Crawler():
 
     async def fetch_web(self, loop, web_id):
         return await loop.run_in_executor(None, self.start_crawl, web_id)
-
 
     def get_absolute_url(self, web, url):
         is_absolute = bool(urlparse(url).netloc)

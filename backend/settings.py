@@ -2,8 +2,8 @@ import os
 import string
 
 import dj_database_url
-from decouple import Csv, config
 from celery.schedules import crontab
+from decouple import Csv, config
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -86,9 +86,7 @@ MIDDLEWARE = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-        
-        ],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

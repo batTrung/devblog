@@ -4,7 +4,6 @@ from apps.blog.api import views as blog_views
 
 from .views import ApiRoot
 
-
 urlpatterns = [
     path(
         '',
