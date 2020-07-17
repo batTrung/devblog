@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <TheHeader />
+    <TheNav class="mb-6" />
     <div class="container">
       <router-view />
     </div>
@@ -8,12 +8,12 @@
 </template>
 
 <script>
-import TheHeader from './components/TheHeader.vue'
+import TheNav from './components/TheNav.vue'
 
 export default {
   name: 'App',
   components: {
-    TheHeader
+    TheNav
   }
 }
 </script>
