@@ -1,32 +1,205 @@
 <template>
     <main class="container my-4">
         <div class="page">
-            <h5>djngobat</h5>
+            <h5 class="active">Dev.to</h5>
             <div class="row">
-                <div class="col-md-6 col-lg-4">
-                    <b-card title="Card Title" img-src="https://picsum.photos/600/300/?image=25" img-alt="Image" img-top tag="article" style="max-width: 20rem;" class="mb-2">
-                        <b-card-text>
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                        </b-card-text>
-                        <b-button href="#" variant="primary">Go somewhere</b-button>
-                    </b-card>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 d-flex flex-column justify-content-between shadow-sm">
+                        <a href="/courses/authentication-with-django-react-and-docker-19/" class="position-relative">
+                            <img src="https://images.pexels.com/photos/34600/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="card-img-top p-2" alt="Authentication with Django, React, and Docker-19">
+                            <span class="badge badge-secondary position-absolute listing-badge"></span>
+                        </a>
+                        <div class="card-body">
+                            <div class="post-meta mb-3">
+                                <a class="mr-3"><i class="ti ti-eye text-dark mr-2"></i>1</a>
+                                <a class="mr-3"><i class="ti ti-heart text-danger mr-2"></i>0</a>
+                                <span class="font-small"><i class="ti ti-timer text-primary mr-2"></i>31</span>
+                            </div>
+                            <a href="/courses/authentication-with-django-react-and-docker-19/">
+                                <h5 class="font-weight-normal">Authentication with Django, React, and Docker-19</h5>
+                            </a>
+                            <div class="post-meta">
+                                <div class="media mr-2">
+                                    <div class="avatar-sm mr-1">
+                                        <a class="text-center" href="">
+                                            <div class="text-white rounded-circle mb-2 bg-primary">
+                                                U
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="avatar-name">
+                                        <a class="text-gray small" href="#">dev.to</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6 col-lg-4">
-                    <b-card title="Card Title" img-src="https://picsum.photos/600/300/?image=25" img-alt="Image" img-top tag="article" style="max-width: 20rem;" class="mb-2">
-                        <b-card-text>
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                        </b-card-text>
-                        <b-button href="#" variant="primary">Go somewhere</b-button>
-                    </b-card>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 d-flex flex-column justify-content-between shadow-sm">
+                        <a href="/courses/authentication-with-django-react-and-docker-19/" class="position-relative">
+                            <img src="https://images.pexels.com/photos/34600/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="card-img-top p-2" alt="Authentication with Django, React, and Docker-19">
+                            <span class="badge badge-secondary position-absolute listing-badge"></span>
+                        </a>
+                        <div class="card-body">
+                            <div class="post-meta mb-3">
+                                <a class="mr-3"><i class="ti ti-eye text-dark mr-2"></i>1</a>
+                                <a class="mr-3"><i class="ti ti-heart text-danger mr-2"></i>0</a>
+                                <span class="font-small"><i class="ti ti-timer text-primary mr-2"></i>31</span>
+                            </div>
+                            <a href="/courses/authentication-with-django-react-and-docker-19/">
+                                <h5 class="font-weight-normal">Authentication with Django, React, and Docker-19</h5>
+                            </a>
+                            <div class="post-meta">
+                                <div class="media mr-2">
+                                    <div class="avatar-sm mr-1">
+                                        <a class="text-center" href="">
+                                            <div class="text-white rounded-circle mb-2 bg-primary">
+                                                U
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="avatar-name">
+                                        <a class="text-gray small" href="#">dev.to</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6 col-lg-4">
-                    <b-card title="Card Title" img-src="https://picsum.photos/600/300/?image=25" img-alt="Image" img-top tag="article" style="max-width: 20rem;" class="mb-2">
-                        <b-card-text>
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                        </b-card-text>
-                        <b-button href="#" variant="primary">Go somewhere</b-button>
-                    </b-card>
-                </div> 
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 d-flex flex-column justify-content-between shadow-sm">
+                        <a href="/courses/authentication-with-django-react-and-docker-19/" class="position-relative">
+                            <img src="https://images.pexels.com/photos/34600/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="card-img-top p-2" alt="Authentication with Django, React, and Docker-19">
+                            <span class="badge badge-secondary position-absolute listing-badge"></span>
+                        </a>
+                        <div class="card-body">
+                            <div class="post-meta mb-3">
+                                <a class="mr-3"><i class="ti ti-eye text-dark mr-2"></i>1</a>
+                                <a class="mr-3"><i class="ti ti-heart text-danger mr-2"></i>0</a>
+                                <span class="font-small"><i class="ti ti-timer text-primary mr-2"></i>31</span>
+                            </div>
+                            <a href="/courses/authentication-with-django-react-and-docker-19/">
+                                <h5 class="font-weight-normal">Authentication with Django, React, and Docker-19</h5>
+                            </a>
+                            <div class="post-meta">
+                                <div class="media mr-2">
+                                    <div class="avatar-sm mr-1">
+                                        <a class="text-center" href="">
+                                            <div class="text-white rounded-circle mb-2 bg-primary">
+                                                U
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="avatar-name">
+                                        <a class="text-gray small" href="#">dev.to</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page">
+            <h5 class="active">Dev.to</h5>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 d-flex flex-column justify-content-between shadow-sm">
+                        <a href="/courses/authentication-with-django-react-and-docker-19/" class="position-relative">
+                            <img src="https://images.pexels.com/photos/34600/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="card-img-top p-2" alt="Authentication with Django, React, and Docker-19">
+                            <span class="badge badge-secondary position-absolute listing-badge"></span>
+                        </a>
+                        <div class="card-body">
+                            <div class="post-meta mb-3">
+                                <a class="mr-3"><i class="ti ti-eye text-dark mr-2"></i>1</a>
+                                <a class="mr-3"><i class="ti ti-heart text-danger mr-2"></i>0</a>
+                                <span class="font-small"><i class="ti ti-timer text-primary mr-2"></i>31</span>
+                            </div>
+                            <a href="/courses/authentication-with-django-react-and-docker-19/">
+                                <h5 class="font-weight-normal">Authentication with Django, React, and Docker-19</h5>
+                            </a>
+                            <div class="post-meta">
+                                <div class="media mr-2">
+                                    <div class="avatar-sm mr-1">
+                                        <a class="text-center" href="">
+                                            <div class="text-white rounded-circle mb-2 bg-primary">
+                                                U
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="avatar-name">
+                                        <a class="text-gray small" href="#">dev.to</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 d-flex flex-column justify-content-between shadow-sm">
+                        <a href="/courses/authentication-with-django-react-and-docker-19/" class="position-relative">
+                            <img src="https://images.pexels.com/photos/34600/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="card-img-top p-2" alt="Authentication with Django, React, and Docker-19">
+                            <span class="badge badge-secondary position-absolute listing-badge"></span>
+                        </a>
+                        <div class="card-body">
+                            <div class="post-meta mb-3">
+                                <a class="mr-3"><i class="ti ti-eye text-dark mr-2"></i>1</a>
+                                <a class="mr-3"><i class="ti ti-heart text-danger mr-2"></i>0</a>
+                                <span class="font-small"><i class="ti ti-timer text-primary mr-2"></i>31</span>
+                            </div>
+                            <a href="/courses/authentication-with-django-react-and-docker-19/">
+                                <h5 class="font-weight-normal">Authentication with Django, React, and Docker-19</h5>
+                            </a>
+                            <div class="post-meta">
+                                <div class="media mr-2">
+                                    <div class="avatar-sm mr-1">
+                                        <a class="text-center" href="">
+                                            <div class="text-white rounded-circle mb-2 bg-primary">
+                                                U
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="avatar-name">
+                                        <a class="text-gray small" href="#">dev.to</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 d-flex flex-column justify-content-between shadow-sm">
+                        <a href="/courses/authentication-with-django-react-and-docker-19/" class="position-relative">
+                            <img src="https://images.pexels.com/photos/34600/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="card-img-top p-2" alt="Authentication with Django, React, and Docker-19">
+                            <span class="badge badge-secondary position-absolute listing-badge"></span>
+                        </a>
+                        <div class="card-body">
+                            <div class="post-meta mb-3">
+                                <a class="mr-3"><i class="ti ti-eye text-dark mr-2"></i>1</a>
+                                <a class="mr-3"><i class="ti ti-heart text-danger mr-2"></i>0</a>
+                                <span class="font-small"><i class="ti ti-timer text-primary mr-2"></i>31</span>
+                            </div>
+                            <a href="/courses/authentication-with-django-react-and-docker-19/">
+                                <h5 class="font-weight-normal">Authentication with Django, React, and Docker-19</h5>
+                            </a>
+                            <div class="post-meta">
+                                <div class="media mr-2">
+                                    <div class="avatar-sm mr-1">
+                                        <a class="text-center" href="">
+                                            <div class="text-white rounded-circle mb-2 bg-primary">
+                                                U
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="avatar-name">
+                                        <a class="text-gray small" href="#">dev.to</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
