@@ -26,17 +26,23 @@
         <div class="nav-scroller bg-white box-shadow">
             <div class="container">
                 <nav class="nav nav-underline">
-                    <a class="nav-link text-dark active" href="#">
-                        <i class="ti ti-heart"></i>
+                    <a
+                        class="nav-link text-dark mb-0 h5"
+                        href="#"
+                        v-tooltip="'Bài viết xem sau'">
+                        <i class="ti ti-timer"></i>
                     </a>
-                    <a class="nav-link text-dark" href="#">
-                        <ti class="ti ti-timer"></ti>
+                    <a
+                        class="nav-link text-dark mb-0 h5"
+                        href="#"
+                        v-tooltip="'Danh sách đã lưu'">
+                        <i class="ti ti-control-play"></i>
                     </a>
-                    <a class="nav-link text-dark" href="#">
-                        <ti class="ti ti-list"></ti>
-                    </a>
-                    <a class="nav-link text-dark" href="#">
-                        <ti class="ti ti-save"></ti>
+                    <a
+                        class="nav-link text-dark mb-0 h5"
+                        href="#"
+                        v-tooltip="'Bài viết đã lưu'">
+                        <i class="ti ti-save"></i>
                     </a>
                 </nav>
             </div>
