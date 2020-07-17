@@ -141,3 +141,61 @@ h6,
     opacity: 1;
     transition: opacity .15s;
 }
+
+a:not(.active) {
+    color: #7e7e7e;
+}
+
+a, a:hover {
+    color: #2e2e2e;
+    text-decoration: none;
+}
+
+ul li>a.active {
+    color: #ea2c5a !important;
+}
+
+.input-group {
+    border-radius: .45rem;
+    transition: all .2s ease;
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+.icon-shape {
+    width: 2.25rem;
+    height: 2.25rem;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .45rem;
+}
+.icon {
+    text-align: center;
+    display: inline-flex;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+    -ms-flex-pack: center;
+}
+
+.icon-shape-secondary {
+    color: #c33c54 !important;
+    background-color: rgba(195,60,84,.1);
+}
+
+.icon-shape-success {
+    color: #208163 !important;
+    background-color: rgba(32,129,99,.1);
+}
+
+.icon-shape-dark {
+    color: #0d1b48 !important;
+    background-color: rgba(13,27,72,.1);
+}
