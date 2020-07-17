@@ -169,7 +169,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # THIRD-PARTY APPS SETTINGS
 # ==============================================================================
 
-
 REDIS_HOST = 'localhost'
 
 REDIS_PORT = 6379
@@ -185,4 +184,10 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'apps.blog.tasks.crawl',
         'schedule': crontab(),
     },
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
 }

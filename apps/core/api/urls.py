@@ -15,4 +15,9 @@ urlpatterns = [
         blog_views.PostList.as_view(),
         name=blog_views.PostList.name,
     ),
+    path(
+        'websites/',
+        blog_views.WebsiteList.as_view(),
+        name=blog_views.WebsiteList.name,
+    ),
 ]
