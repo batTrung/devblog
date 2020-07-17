@@ -1,11 +1,15 @@
 import Vue from 'vue'
+import BootstrapVue from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import '@icon/themify-icons/themify-icons.css'
 
 import App from './App.vue'
 import router from '@/router'
 import { titleMixin } from '@/common/mixins'
 
-// [
-// ].forEach((x) => Vue.use(x))
+[
+  BootstrapVue,
+].forEach((x) => Vue.use(x))
 
 Vue.mixin(titleMixin)
 
