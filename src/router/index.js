@@ -28,6 +28,21 @@ export default new Router({
       component: () => import('@/views/Setting'),
     },
     {
+      path: '/posts',
+      name: 'posts',
+      component: () => import('@/views/Posts'),
+    },
+    {
+      path: '/pages',
+      name: 'pages',
+      component: () => import('@/views/Pages'),
+    },
+    {
+      path: '/playlist',
+      name: 'play-list',
+      component: () => import('@/views/PlayList'),
+    },
+    {
       path: '*',
       name: '404',
       component: () => import('@/views/404'),

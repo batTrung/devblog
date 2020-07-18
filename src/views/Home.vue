@@ -1,9 +1,9 @@
 <template>
     <main class="container my-4">
         <div class="page">
-            <ul class="list-inline mb-0">
+            <ul class="list-inline mb-2">
                 <li class="list-inline-item mr-3">
-                    <h5>Bài viết</h5>
+                    <router-link :to="{ name: 'posts' }" class="h5">Bài viết</router-link>
                 </li>
                 <li class="list-inline-item mr-3 active">
                     <a href="" class="active">Mới nhất</a>
@@ -264,9 +264,9 @@
             </div>
         </div>
         <div class="page">
-            <ul class="list-inline mb-0">
+            <ul class="list-inline mb-2">
                 <li class="list-inline-item mr-3">
-                    <h5>Danh sách</h5>
+                    <router-link :to="{ name: 'play-list' }" class="h5">Danh sách</router-link>
                 </li>
                 <li class="list-inline-item mr-3">
                     <a href="" class="active">Phổ biến</a>
@@ -406,9 +406,9 @@
             </div>
         </div>
         <div class="page">
-            <ul class="list-inline mb-0">
+            <ul class="list-inline mb-2">
                 <li class="list-inline-item mr-3">
-                    <h5>Trang</h5>
+                    <router-link :to="{ name: 'pages' }" class="h5">Trang</router-link>
                 </li>
                 <li class="list-inline-item mr-3">
                     <a href="" class="active">Phổ biến</a>
