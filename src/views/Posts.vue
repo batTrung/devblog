@@ -12,7 +12,7 @@
                     <a href="">Xem nhiều</a>
                 </li>
                 <li class="list-inline-item mr-3">
-                    <a href="">Most stars</a>
+                    <a href="">Nhiều lượt thích</a>
                 </li>
             </ul>
             <b-nav>

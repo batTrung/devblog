@@ -15,7 +15,7 @@
                         :alt="post.title"
                         style="width: 100%; height: 169px">
                 </a>
-                <div class="v-add left" v-show="hoverPostId == index"><i class="far fa-star text-gray"></i></div>
+                <div class="v-add left" v-show="hoverPostId == index" v-tooltip="'Thích bài viết'"><i class="far fa-heart text-gray"></i></div>
                 <b-dropdown variant="link" class="v-add right" right v-show="hoverPostId == index">
                     <template v-slot:button-content>
                         <i class="fas fa-plus"></i>
@@ -27,7 +27,7 @@
                 <div class="card-body">
                     <div class="post-meta mb-2 small text-gray">
                         <span class="mr-3"><i class="ti ti-eye text-dark mr-1"></i>{{ post.views }}</span>
-                        <span class="mr-3"><i class="fas fa-star text-warning mr-1"></i>{{ post.users_saved.length }}</span>
+                        <span class="mr-3"><i class="far fa-heart text-danger mr-1"></i>{{ post.users_saved.length }}</span>
                         <span class=""><i class="ti ti-timer text-primary mr-1"></i>{{ post.timesince }} trước</span>
                     </div>
                     <a :href="post.link" target="_blank">

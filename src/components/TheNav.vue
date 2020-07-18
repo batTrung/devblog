@@ -56,8 +56,8 @@
                         <a class="nav-link text-dark mb-0 h5" href="#" v-tooltip="'Danh sách đã lưu'">
                             <i class="ti ti-layers-alt"></i>
                         </a>
-                        <a class="nav-link text-dark mb-0 h5" href="#" v-tooltip="'Bài viết đã lưu'">
-                            <i class="far fa-star" style="font-size: 18px"></i>
+                        <a class="nav-link text-dark mb-0 h5" href="#" v-tooltip="'Bài viết đã thích'">
+                            <i class="ti ti-heart"></i>
                         </a>
                         <a class="nav-link text-dark mb-0 h5" href="#" v-tooltip="'Xem lịch sử'">
                             <i class="ti ti-filter"></i>
