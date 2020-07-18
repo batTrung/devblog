@@ -62,7 +62,7 @@
                     <a href="">Xem nhiều</a>
                 </li>
             </ul>
-            <PageList :pages="3" />
+            <PageList :num_page="3" />
         </div>
     </div>
 </template>

@@ -51,3 +51,11 @@ export const PostsService = {
         })
     },
 }
+
+export const PagesService = {
+    query(params) {
+        return ApiService.query('websites', {
+            params: params
+        })
+    },
+}

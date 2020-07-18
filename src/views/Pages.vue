@@ -28,7 +28,7 @@
                 </b-nav-item-dropdown>
             </b-nav>
         </div>
-        <PageList :pages="18" />
+        <PageList />
     </div>
 </template>
 
