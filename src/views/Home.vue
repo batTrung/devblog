@@ -28,7 +28,7 @@
                     </b-nav-item-dropdown>
                 </b-nav>
             </div>
-            <PostList :posts="8" />
+            <PostList :num_post="8" />
         </div>
         <div class="page">
             <ul class="list-inline mb-2">

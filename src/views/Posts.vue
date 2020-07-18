@@ -28,7 +28,7 @@
                 </b-nav-item-dropdown>
             </b-nav>
         </div>
-        <PostList :posts="20" />
+        <PostList :num_post="20" />
     </div>
 </template>
 <script>
