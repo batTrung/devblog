@@ -7,7 +7,8 @@
                 <b-collapse id="nav-collapse" is-nav>
                     <b-navbar-nav>
                         <b-nav-item>Bài viết</b-nav-item>
-                        <b-nav-item>Danh sách trang</b-nav-item>
+                        <b-nav-item>Trang</b-nav-item>
+                        <b-nav-item>Danh sách</b-nav-item>
                     </b-navbar-nav>
                     <b-navbar-nav class="ml-auto">
                         <b-nav-form>
@@ -17,15 +18,15 @@
                                         <i class="ti ti-search"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control border-0 pb-2 mr-4 pl-0" placeholder="Tìm kiếm bài viết" required="">
-                                <b-nav-item-dropdown right>
-                                    <template slot="button-content">
-                                        <i class="ti ti-world mr-1"></i>
-                                    </template>
-                                    <b-dropdown-item>Tiếng Việt</b-dropdown-item>
-                                    <b-dropdown-item>Tiếng Anh</b-dropdown-item>
-                                </b-nav-item-dropdown>
+                                <input type="text" class="form-control border-0 pb-2 mr-4 pl-0" placeholder="Tìm kiếm" required="">
                             </div>
+                            <b-nav-item-dropdown right>
+                                <template slot="button-content">
+                                    <i class="ti ti-world mr-1"></i>
+                                </template>
+                                <b-dropdown-item>Tiếng Việt</b-dropdown-item>
+                                <b-dropdown-item>Tiếng Anh</b-dropdown-item>
+                            </b-nav-item-dropdown>
                         </b-nav-form>
                         <b-nav-item-dropdown right>
                             <template slot="button-content">
@@ -53,10 +54,13 @@
                             <i class="ti ti-timer"></i>
                         </a>
                         <a class="nav-link text-dark mb-0 h5" href="#" v-tooltip="'Danh sách đã lưu'">
-                            <i class="ti ti-control-play"></i>
+                            <i class="ti ti-layers-alt"></i>
                         </a>
                         <a class="nav-link text-dark mb-0 h5" href="#" v-tooltip="'Bài viết đã lưu'">
                             <i class="ti ti-save"></i>
+                        </a>
+                        <a class="nav-link text-dark mb-0 h5" href="#" v-tooltip="'Xem lịch sử'">
+                            <i class="ti ti-filter"></i>
                         </a>
                     </nav>
                     <div class="mt-1">

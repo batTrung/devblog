@@ -11,6 +11,18 @@
     text-align: center;
 }
 
+.avatar-lg {
+    width: 3rem;
+    height: 3rem;
+    overflow: hidden;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 3rem;
+    color: #fff;
+    text-align: center;
+}
+
 h1,
 h2,
 h3,
@@ -32,8 +44,9 @@ h6,
 }
 
 .page {
+    padding-bottom: 12px;
     border-bottom: solid 1px #eceff0;
-    padding-top: 24px;
+    padding-top: 28px;
 }
 
 .tooltip {
@@ -198,4 +211,72 @@ ul li>a.active {
 .icon-shape-dark {
     color: #0d1b48 !important;
     background-color: rgba(13,27,72,.1);
+}
+
+.card-footer {
+    background-color: transparent;
+    border-top: .0625rem solid rgba(239,242,245,.05);
+}
+
+.text-muted {
+    color: #869ab8!important;
+}
+
+.b-playlist .v-img {
+    border-radius: 2px;
+    position: relative;
+}
+
+.b-playlist .v-img img {
+    border: solid 2px #fbfdfe;
+    width: 100%;
+}
+
+.b-playlist .v-img a {
+    display: inline-block;
+    position: relative;
+    z-index: 3;
+    width: 100%;
+}
+
+.b-playlist .v-img .l-1 {
+    z-index: 1;
+    position: absolute;
+    width: 92%;
+    left: 4%;
+}
+
+.b-playlist .v-img .l-2 {
+    z-index: 2;
+    position: absolute;
+    margin-top: 11px;
+    width: 96%;
+    left: 2%;
+}
+
+.b-playlist .v-img .l-3 {
+    z-index: 3;
+    margin-top: 22px;
+}
+
+.b-playlist .v-img .items {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background-color: #373933;
+    border-radius: 2px;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 6px 9px 1px 9px;
+    line-height: 14px;
+    font-weight: 500;
+    z-index: 5;
+}
+
+.bg-soft {
+    background-color: #f5f9fe !important;
+}
+
+.bg-main {
+    background-color: #fbfdfe !important;
 }
