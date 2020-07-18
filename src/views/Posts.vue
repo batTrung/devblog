@@ -46,7 +46,7 @@
                     <div class="card-body">
                         <div class="post-meta mb-2 small text-gray">
                             <span class="mr-3"><i class="ti ti-eye text-dark mr-2"></i>1</span>
-                            <span class="mr-3"><i class="far fa-star text-warning mr-2"></i>31</span>
+                            <span class="mr-3"><i class="fas fa-star text-warning mr-2"></i>31</span>
                             <span class=""><i class="ti ti-timer text-primary mr-2"></i>31</span>
                         </div>
                         <a href="/courses/authentication-with-django-react-and-docker-19/">

@@ -30,7 +30,7 @@
                         </b-nav-form>
                         <b-nav-item-dropdown right>
                             <template slot="button-content">
-                                <b-avatar></b-avatar>
+                                <b-avatar size="2rem"></b-avatar>
                             </template>
                             <b-dropdown-item>Trang cá nhân</b-dropdown-item>
                             <b-dropdown-item>Cài đặt</b-dropdown-item>
@@ -38,6 +38,8 @@
                             <b-dropdown-item>Đăng xuất</b-dropdown-item>
                         </b-nav-item-dropdown>
                     </b-navbar-nav>
+                    <b-button variant="primary" size="sm" class="mr-2">Đăng ký</b-button>
+                    <b-button variant="outline-success" size="sm">Đăng nhập</b-button>
                 </b-collapse>
             </div>
         </b-navbar>
