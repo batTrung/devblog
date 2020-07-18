@@ -73,7 +73,7 @@ import PlayListList from '@/components/PlayListList'
 
 export default {
     name: 'Home',
-    title: 'DevBat - Tổng hợp các bài viết lập trình',
+    title: 'Tổng hợp các bài viết lập trình',
     components: {
         PostList,
         PageList,

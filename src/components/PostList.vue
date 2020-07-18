@@ -40,12 +40,16 @@
                 </div>
             </div>
         </div>
+        <VLoading :show="isLoading" />
     </div>
+
 </template>
 <script>
 import { mapGetters } from "vuex"
 import { FETCH_POSTS } from "../store/actions.type"
+import { PostsService } from "@/common/api.service"
 import { truncatechars } from '@/common/filters'
+import VLoading from '@/components/VLoading'
 
 export default {
     name: 'PostList',
@@ -58,9 +62,14 @@ export default {
     filters: {
         truncatechars,
     },
+    components: {
+        VLoading,
+    },
     data() {
         return {
             hoverPostId: null,
+            page: 2,
+            isLoading: false,
         }
     },
     computed: {
@@ -69,10 +78,34 @@ export default {
     },
     mounted() {
         this.fetchPosts()
+        this.scroll()
     },
     methods: {
         fetchPosts() {
             this.$store.dispatch(FETCH_POSTS)
+        },
+        scroll() {
+            let loadMore = true
+             window.onscroll = () => {
+                let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight + 200 > document.documentElement.offsetHeight;
+                if (bottomOfWindow && loadMore) {
+                    loadMore = false
+                    PostsService.query({'page': this.page})
+                        .then(({ data }) => {
+                            this.isLoading = true
+                            setTimeout(() => {
+                                this.isLoading = false
+                                this.posts.push(...data.results)
+                            }, 1000)
+                            this.page++
+                            if (data.has_next) {
+                                setTimeout(() => {
+                                    loadMore = true
+                                }, 1000)
+                            }
+                        })
+                }
+             }
         },
     },
 }
