@@ -1,9 +1,9 @@
 <template>
   <div id="app" class="bg-main">
     <TheNav class="mb-6" />
-    <div class="container">
+    <main class="container my-4">
       <router-view />
-    </div>
+    </main>
   </div>
 </template>
 

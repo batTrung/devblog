@@ -273,6 +273,20 @@ ul li>a.active {
     z-index: 5;
 }
 
+.b-playlist .v-img .star {
+position: absolute;
+    top: 25px;
+    left: 0px;
+    border-radius: 2px;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 6px 9px 1px;
+    line-height: 14px;
+    font-weight: 500;
+    z-index: 5;
+}
+
+
 .bg-soft {
     background-color: #f5f9fe !important;
 }

@@ -1,17 +1,33 @@
 <template>
-    <main class="container my-4">
+    <div>
         <div class="page">
-            <ul class="list-inline mb-2">
-                <li class="list-inline-item mr-3">
-                    <router-link :to="{ name: 'posts' }" class="h5">Bài viết</router-link>
-                </li>
-                <li class="list-inline-item mr-3 active">
-                    <a href="" class="active">Mới nhất</a>
-                </li>
-                <li class="list-inline-item mr-3">
-                    <a href="">Xem nhiều</a>
-                </li>
-            </ul>
+            <div class="d-flex justify-content-between">
+                <ul class="list-inline mb-2">
+                    <li class="list-inline-item mr-3">
+                        <router-link :to="{ name: 'posts' }" class="h5">Bài viết</router-link>
+                    </li>
+                    <li class="list-inline-item mr-3 active">
+                        <a href="" class="active">Mới nhất</a>
+                    </li>
+                    <li class="list-inline-item mr-3">
+                        <a href="">Xem nhiều</a>
+                    </li>
+                    <li class="list-inline-item mr-3">
+                        <a href="">Most stars</a>
+                    </li> 
+                </ul>
+                <b-nav>
+                    <b-nav-item-dropdown right>
+                        <template slot="button-content">
+                            Chủ đề
+                        </template>
+                        <b-dropdown-item>Web Deveopment</b-dropdown-item>
+                        <b-dropdown-item>Deep Learning</b-dropdown-item>
+                        <b-dropdown-item>Machine Learning</b-dropdown-item>
+                        <b-dropdown-item>DevOps</b-dropdown-item>
+                    </b-nav-item-dropdown>
+                </b-nav>
+            </div>
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-6 my-2">
                     <div class="card h-100 d-flex flex-column justify-content-between shadow-sm">
@@ -22,7 +38,8 @@
                         <div class="card-body">
                             <div class="post-meta mb-2 small text-gray">
                                 <span class="mr-3"><i class="ti ti-eye text-dark mr-2"></i>1</span>
-                                <span><i class="ti ti-timer text-primary mr-2"></i>31</span>
+                                <span class="mr-3"><i class="ti ti-star text-warning mr-2"></i>31</span>
+                                <span class=""><i class="ti ti-timer text-primary mr-2"></i>31</span>
                             </div>
                             <a href="/courses/authentication-with-django-react-and-docker-19/">
                                 <div class="mb-2 h6 font-weight-normal">Authentication with Django, React, and Docker-19</div>
@@ -114,7 +131,8 @@
                         </a>
                         <div class="card-body">
                             <div class="post-meta mb-2 small">
-                                <a class="mr-3"><i class="ti ti-eye text-dark mr-2"></i>1</a>
+                                <span class="mr-3"><i class="ti ti-eye text-dark mr-2"></i>1</span>
+                                <span class="mr-3 font-small"><i class="ti ti-timer text-primary mr-2"></i>31</span>
                                 <span class="font-small"><i class="ti ti-timer text-primary mr-2"></i>31</span>
                             </div>
                             <a href="/courses/authentication-with-django-react-and-docker-19/">
@@ -522,7 +540,7 @@
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 </template>
 <script>
 export default {
