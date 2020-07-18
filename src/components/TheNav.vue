@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-navbar toggleable="lg" type="light" style="background-color: #e3f2fd;">
+        <b-navbar toggleable="lg" type="light" style="background-color: #e3f2fd;" class="border-bottom">
             <div class="container">
                 <b-navbar-brand :to="{name: 'home'}">DevBlog</b-navbar-brand>
                 <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -30,9 +30,7 @@
                         </b-nav-form>
                         <b-nav-item-dropdown right>
                             <template slot="button-content">
-                                <a href="#" class="icon icon-shape icon-shape-dark rounded-circle">
-                                    <i class="ti ti-user"></i>
-                                </a>
+                                <b-avatar></b-avatar>
                             </template>
                             <b-dropdown-item>Trang cá nhân</b-dropdown-item>
                             <b-dropdown-item>Cài đặt</b-dropdown-item>
@@ -43,7 +41,7 @@
                 </b-collapse>
             </div>
         </b-navbar>
-        <div class="nav-scroller bg-white box-shadow">
+        <div class="nav-scroller bg-white box-shadow border-bottom">
             <div class="container">
                 <div class="d-flex justify-content-between">
                     <nav class="nav nav-underline">
@@ -57,7 +55,7 @@
                             <i class="ti ti-layers-alt"></i>
                         </a>
                         <a class="nav-link text-dark mb-0 h5" href="#" v-tooltip="'Bài viết đã lưu'">
-                            <i class="ti ti-star"></i>
+                            <i class="far fa-star" style="font-size: 18px"></i>
                         </a>
                         <a class="nav-link text-dark mb-0 h5" href="#" v-tooltip="'Xem lịch sử'">
                             <i class="ti ti-filter"></i>

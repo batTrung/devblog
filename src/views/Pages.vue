@@ -32,11 +32,9 @@
                 <div class="col-md-4 col-sm-6 my-2">
                     <div class="card h-100 d-flex flex-column justify-content-between shadow-sm border-light" style="border-radius: .35rem;">
                         <div class="card-body d-flex flex-column pb-0">
-                            <div class="media">
-                                <div class="avatar-lg mr-2">
-                                    <img class="img-fluid rounded-circle" src="https://avatars2.githubusercontent.com/u/27804?v=4" alt="avatar">
-                                </div>
-                                <p class="mt-2" style="position: relative;"><a target="_blank" href="https://github.com/django/django">dev.to</a></p>
+                            <div>
+                                <b-avatar button size="lg" variant="primary" text="FF" class="align-baseline mr-2"></b-avatar>
+                                <a target="_blank" href="">simplebetterthancomplex.com</a>
                             </div>
                             <p class="my-3">
                                 Miêu tả trang

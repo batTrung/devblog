@@ -33,30 +33,28 @@
                 <div class="card h-100 d-flex flex-column justify-content-between shadow-sm">
                     <a href="/courses/authentication-with-django-react-and-docker-19/" class="position-relative">
                         <img src="https://images.pexels.com/photos/34600/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="card-img-top p-1" alt="Authentication with Django, React, and Docker-19">
-                        <span class="badge badge-secondary position-absolute listing-badge"></span>
                     </a>
+                    <div class="v-add left"><i class="far fa-star text-gray"></i></div>
+                    <b-dropdown variant="link" class="v-add right" right>
+                        <template v-slot:button-content>
+                            <i class="fas fa-plus"></i>
+                        </template>
+                        <b-dropdown-item href="#" class="py-2 p-0"><i class="ti ti-timer mr-2"></i> Xem sau</b-dropdown-item>
+                        <div class="dropdown-divider"></div>
+                        <b-dropdown-item href="#" class="py-2 p-0"><i class="ti ti-layers-alt mr-2"></i> Thêm vào danh sách</b-dropdown-item>
+                    </b-dropdown>
                     <div class="card-body">
                         <div class="post-meta mb-2 small text-gray">
                             <span class="mr-3"><i class="ti ti-eye text-dark mr-2"></i>1</span>
-                            <span class="mr-3"><i class="ti ti-star text-warning mr-2"></i>31</span>
+                            <span class="mr-3"><i class="far fa-star text-warning mr-2"></i>31</span>
                             <span class=""><i class="ti ti-timer text-primary mr-2"></i>31</span>
                         </div>
                         <a href="/courses/authentication-with-django-react-and-docker-19/">
                             <div class="mb-2 h6 font-weight-normal">Authentication with Django, React, and Docker-19</div>
                         </a>
-                        <div class="post-meta">
-                            <div class="media mr-2">
-                                <div class="avatar-sm mr-1">
-                                    <a class="text-center" href="">
-                                        <div class="text-white rounded-circle mb-2 bg-primary">
-                                            U
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="avatar-name">
-                                    <a class="text-gray small" href="#">dev.to</a>
-                                </div>
-                            </div>
+                        <div class="small">
+                            <b-avatar button variant="primary" text="FF" class="align-baseline mr-1"></b-avatar>
+                            <a target="_blank" href="">simplebetterthancomplex.com</a>
                         </div>
                     </div>
                 </div>

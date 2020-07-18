@@ -14,7 +14,7 @@
                     </li>
                     <li class="list-inline-item mr-3">
                         <a href="">Most stars</a>
-                    </li> 
+                    </li>
                 </ul>
                 <b-nav>
                     <b-nav-item-dropdown right>
@@ -44,19 +44,9 @@
                             <a href="/courses/authentication-with-django-react-and-docker-19/">
                                 <div class="mb-2 h6 font-weight-normal">Authentication with Django, React, and Docker-19</div>
                             </a>
-                            <div class="post-meta">
-                                <div class="media mr-2">
-                                    <div class="avatar-sm mr-1">
-                                        <a class="text-center" href="">
-                                            <div class="text-white rounded-circle mb-2 bg-primary">
-                                                U
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="avatar-name">
-                                        <a class="text-gray small" href="#">dev.to</a>
-                                    </div>
-                                </div>
+                            <div class="small">
+                                <b-avatar button variant="primary" text="FF" class="align-baseline mr-1"></b-avatar>
+                                <a target="_blank" href="">simplebetterthancomplex.com</a>
                             </div>
                         </div>
                     </div>
