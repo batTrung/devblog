@@ -1,7 +1,7 @@
 <template>
     <div class="page">
         <div class="d-flex justify-content-between">
-            <ul class="list-inline mb-2">
+            <ul class="list-inline mt-2">
                 <li class="list-inline-item mr-3">
                     <h5>Danh sách</h5>
                 </li>
@@ -9,24 +9,22 @@
                     <a href="" class="active">Phổ biến</a>
                 </li>
                 <li class="list-inline-item mr-3">
-                    <a href="">Mới nhất</a>
+                    <a href="">Mới cập nhật</a>
                 </li>
                 <li class="list-inline-item mr-3">
                     <a href="">Xem nhiều</a>
                 </li>
             </ul>
-            <b-nav>
-                <b-nav-item-dropdown right>
-                    <template slot="button-content">
-                        Chủ đề
-                    </template>
-                    <b-dropdown-item>Tất cả</b-dropdown-item>
-                    <b-dropdown-item>Web Deveopment</b-dropdown-item>
-                    <b-dropdown-item>Deep Learning</b-dropdown-item>
-                    <b-dropdown-item>Machine Learning</b-dropdown-item>
-                    <b-dropdown-item>DevOps</b-dropdown-item>
-                </b-nav-item-dropdown>
-            </b-nav>
+            <b-form>
+                <div class="input-group bg-white rounded-pill border mr-2 mb-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-transparent border-0">
+                            <i class="ti ti-search"></i>
+                        </span>
+                    </div>
+                    <input type="text" class="form-control border-0 pb-2 mr-4 pl-0" placeholder="Tìm kiếm danh sách" required="">
+                </div>
+            </b-form>
         </div>
         <PlayListList :playLists="20" />
     </div>
