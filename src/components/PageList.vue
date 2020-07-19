@@ -16,7 +16,7 @@
                             {{ page.name }}
                         </router-link>
                         <p class="my-3">
-                            {{ page.description }}
+                            {{ page.description|truncatewords(30) }}
                         </p>
                     </div>
                     <div class="card-footer">
@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import { truncatewords } from '@/common/filters'
 import { mapGetters } from "vuex"
 import { FETCH_PAGES } from "../store/actions.type"
 import VLoading from '@/components/VLoading'
@@ -69,6 +70,9 @@ export default {
                 }
             },
         },
+    },
+    filters: {
+        truncatewords,
     },
     components: {
         VLoading,

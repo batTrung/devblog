@@ -62,3 +62,15 @@ export const PagesService = {
         return ApiService.get('websites', slug)
     },
 }
+
+
+export const PlayListsService = {
+    query(params) {
+        return ApiService.query('playlists', {
+            params: params
+        })
+    },
+    get(slug) {
+        return ApiService.get('playlists', slug)
+    },
+}

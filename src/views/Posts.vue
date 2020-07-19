@@ -84,6 +84,6 @@ export default {
         getActiveClass(a, b) {
             return a == b ? 'color-active' : ''
         },
-    }
+    },
 }
 </script>

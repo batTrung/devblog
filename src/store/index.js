@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import layout from './modules/layout.module'
 import post from './modules/post.module'
 import page from './modules/page.module'
+import playlist from './modules/playlist.module'
 
 Vue.use(Vuex)
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
     layout,
     post,
     page,
+    playlist,
   },
 })
 

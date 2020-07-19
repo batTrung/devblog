@@ -6,13 +6,25 @@
                     <h5>Danh sách</h5>
                 </li>
                 <li class="list-inline-item mr-3">
-                    <a href="" class="active">Phổ biến</a>
+                    <a 
+                        href=""
+                        :class="getActiveClass(playlistsQuery.ordering, '-updated')"
+                        @click.prevent="playlistsQuery.ordering = '-updated'">Vừa cập nhật
+                    </a>
                 </li>
                 <li class="list-inline-item mr-3">
-                    <a href="">Mới cập nhật</a>
+                    <a 
+                        href=""
+                        :class="getActiveClass(playlistsQuery.ordering, '-users_like')"
+                        @click.prevent="playlistsQuery.ordering = '-users_like'">Phổ biến
+                    </a>
                 </li>
                 <li class="list-inline-item mr-3">
-                    <a href="">Xem nhiều</a>
+                    <a 
+                        href=""
+                        :class="getActiveClass(playlistsQuery.ordering, '-views')"
+                        @click.prevent="playlistsQuery.ordering = '-views'">Xem nhiều
+                    </a>
                 </li>
             </ul>
             <b-form>
@@ -22,21 +34,39 @@
                             <i class="ti ti-search"></i>
                         </span>
                     </div>
-                    <input type="text" class="form-control border-0 pb-2 mr-4 pl-0" placeholder="Tìm kiếm danh sách" required="">
+                    <input
+                        type="text"
+                        class="form-control border-0 pb-2 mr-4 pl-0"
+                        placeholder="Tìm kiếm danh sách"
+                        v-model="playlistsQuery.search">
                 </div>
             </b-form>
         </div>
-        <PlayListList :playLists="20" />
+        <PlayLists
+            :query="playlistsQuery" />
     </div>
 </template>
 <script>
-import PlayListList from '@/components/PlayListList'
+import PlayLists from '@/components/PlayLists'
 
 export default {
     name: 'PlayList',
     title: 'Danh sách',
     components: {
-        PlayListList,
+        PlayLists,
     },
+    data() {
+        return {
+            playlistsQuery: {
+                ordering: '-updated',
+                search: '',
+            },
+        }
+    },
+    methods: {
+        getActiveClass(a, b) {
+            return a == b ? 'color-active' : ''
+        },
+    }
 }
 </script>

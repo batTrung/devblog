@@ -47,16 +47,30 @@
                     <router-link :to="{ name: 'play-list' }" class="h5">Danh sách</router-link>
                 </li>
                 <li class="list-inline-item mr-3">
-                    <a href="" class="active">Phổ biến</a>
+                    <a 
+                        href=""
+                        :class="getActiveClass(playlistsQuery.ordering, '-users_like')"
+                        @click.prevent="playlistsQuery.ordering = '-users_like'">Phổ biến
+                    </a>
                 </li>
                 <li class="list-inline-item mr-3">
-                    <a href="">Mới cập nhật</a>
+                    <a 
+                        href=""
+                        :class="getActiveClass(playlistsQuery.ordering, '-updated')"
+                        @click.prevent="playlistsQuery.ordering = '-updated'">Vừa cập nhật
+                    </a>
                 </li>
                 <li class="list-inline-item mr-3">
-                    <a href="">Xem nhiều</a>
+                    <a 
+                        href=""
+                        :class="getActiveClass(playlistsQuery.ordering, '-views')"
+                        @click.prevent="playlistsQuery.ordering = '-views'">Xem nhiều
+                    </a>
                 </li>
             </ul>
-            <PlayListList :playLists="4" />
+            <PlayLists
+                :numPlayList="4"
+                :query="playlistsQuery" />
         </div>
         <div class="page">
             <ul class="list-inline mb-2">
@@ -93,7 +107,7 @@
 <script>
 import PostList from '@/components/PostList';
 import PageList from '@/components/PageList'
-import PlayListList from '@/components/PlayListList'
+import PlayLists from '@/components/PlayLists'
 
 export default {
     name: 'Home',
@@ -101,7 +115,7 @@ export default {
     components: {
         PostList,
         PageList,
-        PlayListList,
+        PlayLists,
     },
     data() {
         return {
@@ -113,6 +127,10 @@ export default {
             pagesQuery: {
                 ordering: '-subscribers',
                 language: '',
+                search: '',
+            },
+            playlistsQuery: {
+                ordering: '-users_like',
                 search: '',
             },
         }
