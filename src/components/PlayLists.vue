@@ -17,6 +17,11 @@
                         </div>
                     </div>
                     <div class="card-body bg-white shadow-sm">
+                        <div class="post-meta mb-2 small text-gray">
+                            <span class="mr-3"><i class="ti ti-eye text-dark mr-1"></i>{{ playlist.views }}</span>
+                            <span class="mr-3"><i class="fas fa-star text-warning mr-1"></i>{{ playlist.users_like.length }}</span>
+                            <span class=""><i class="ti ti-timer text-primary mr-1"></i>{{ playlist.timesince }} trước</span>
+                        </div>
                         <a href="">
                             <h6 class="font-weight-normal">{{ playlist.title }}</h6>
                         </a>
