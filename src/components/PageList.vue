@@ -6,14 +6,15 @@
                 :key="index">
                 <div class="card h-100 d-flex flex-column justify-content-between shadow-sm border-light" style="border-radius: .35rem;">
                     <div class="card-body d-flex flex-column pb-0">
-                        <div>
+                        <router-link
+                            :to="{ name: 'page-detail', params: { name: page.name }}">
                             <b-avatar
                                 size="lg" 
                                 :src="page.photo"
                                 class="mr-2">   
                             </b-avatar>
-                            <a href="">{{ page.name }}</a>
-                        </div>
+                            {{ page.name }}
+                        </router-link>
                         <p class="my-3">
                             {{ page.description }}
                         </p>

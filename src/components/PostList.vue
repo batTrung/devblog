@@ -24,13 +24,15 @@
                         <a :href="post.link" target="_blank">
                             <div class="mb-2 h6 font-weight-normal">{{ post.title }}</div>
                         </a>
-                        <div class="small">
+                        <router-link
+                            class="small"
+                            :to="{ name: 'page-detail', params: { name: post.website.name }}">
                             <b-avatar
                                 :src="post.website.photo"
                                 class="mr-1">   
                             </b-avatar>
-                            <a href="">{{ post.website.name|truncatechars(25) }}</a>
-                        </div>
+                            {{ post.website.name|truncatechars(25) }}
+                        </router-link>
                     </div>
                 </div>
             </div>

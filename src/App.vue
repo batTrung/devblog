@@ -1,20 +1,23 @@
 <template>
-  <div id="app" class="bg-main">
-    <TheNav class="mb-6" />
-    <main class="container my-4" style="min-height: 100vh">
-      <router-view />
-    </main>
-  </div>
+    <component :is="layout"></component>
 </template>
 
 <script>
-import TheNav from './components/TheNav.vue'
+import { mapGetters } from "vuex";
+
+import Base from './layouts/Base.vue'
+import Full from './layouts/Full.vue'
+import Nav from './layouts/Nav.vue'
 
 export default {
   name: 'App',
   components: {
-    TheNav,
-  }
+    'base-layout': Base,
+    'full-layout': Full,
+    'nav-layout': Nav,
+  },
+  computed: {
+    ...mapGetters(['layout'])
+  },
 }
 </script>
-

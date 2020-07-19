@@ -335,3 +335,43 @@ ul li>a.active {
 .page .card .card-body a>.h6:hover {
     color: #ea2c5a !important
 }
+
+.mt-n6, .my-n6 {
+    margin-top: -5rem!important;
+}
+.card .profile-thumbnail {
+    width: 10rem;
+    height: 10rem;
+}
+
+.bg-green {
+    background-color: #5fd79a!important;
+}
+
+.header-image h1 {
+    font-weight: 200;
+    font-size: 48px;
+    line-height: 64px;
+    margin-bottom: 24px;
+    letter-spacing: 2px;
+}
+
+.icon-facebook span {
+    color: #3b5999;
+}
+
+.icon-twitter span {
+    color: #1da1f2;
+}
+
+.icon-slack span {
+    color: #3aaf85;
+}
+
+.icon-dribbble span {
+    color: #ea4c89;
+}
+
+.icon-google span {
+    color:#db4337;
+}

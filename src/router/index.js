@@ -38,6 +38,11 @@ export default new Router({
       component: () => import('@/views/Pages'),
     },
     {
+      path: '/pages/:name',
+      name: 'page-detail',
+      component: () => import('@/views/Page'),
+    },
+    {
       path: '/playlist',
       name: 'play-list',
       component: () => import('@/views/PlayList'),
