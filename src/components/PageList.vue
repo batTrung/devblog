@@ -51,6 +51,7 @@ import { truncatewords } from '@/common/filters'
 import { mapGetters } from "vuex"
 import { FETCH_PAGES } from "../store/actions.type"
 import VLoading from '@/components/VLoading'
+import { PagesService } from "@/common/api.service"
 
 export default {
     name: 'PageList',
@@ -98,17 +99,48 @@ export default {
         },
     },
     computed: {
+        getParams() {
+            return this.query
+        },
         ...mapGetters(["pages"])
     },
     mounted() {
         this.fetchPages()
+        this.scroll()
     },
     methods: {
         fetchPages() {
-            this.$store.dispatch(FETCH_PAGES, this.query)
+            this.$store.dispatch(FETCH_PAGES, this.getParams)
             this.page = 1
             this.hasNext = true
         },
+        scroll() {
+            window.onscroll = () => {
+                let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight + 200 > document.documentElement.offsetHeight;
+                if (bottomOfWindow && this.hasNext) {
+                    this.hasNext = false
+                    const params = Object.assign(
+                        { page: this.page + 1 },
+                        this.getParams,
+                    )
+                    PagesService.query(params)
+                        .then(({ data }) => {
+                            this.isLoading = true
+                            setTimeout(() => {
+                                this.isLoading = false
+                                this.pages.push(...data.results)
+                            }, 700)
+                            this.page++
+                            if (data.has_next) {
+                                setTimeout(() => {
+                                    this.hasNext = true
+                                }, 1000)
+                            }
+                        })
+                }
+            }
+        },
     },
+
 }
 </script>
