@@ -27,7 +27,9 @@
                         <b-dropdown-item
                             :class="getActiveClass(pagesQuery.ordering, '-subscribers')"
                             @click.prevent="pagesQuery.ordering = '-subscribers'">Phổ biến</b-dropdown-item>
-                        <b-dropdown-item>Xem nhiều</b-dropdown-item>
+                        <b-dropdown-item
+                            :class="getActiveClass(pagesQuery.ordering, '-views')"
+                            @click.prevent="pagesQuery.ordering = '-views'">Xem nhiều</b-dropdown-item>
                     </b-nav-item-dropdown>
                     <b-nav-item-dropdown right>
                         <template slot="button-content">

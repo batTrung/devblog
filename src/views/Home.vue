@@ -78,7 +78,10 @@
                     </a>
                 </li>
                 <li class="list-inline-item mr-3">
-                    <a href="">Xem nhiều</a>
+                    <a
+                        href=""
+                        :class="getActiveClass(pagesQuery.ordering, '-views')"
+                        @click.prevent="pagesQuery.ordering = '-views'">Xem nhiều</a>
                 </li>
             </ul>
             <PageList

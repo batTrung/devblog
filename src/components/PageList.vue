@@ -24,12 +24,12 @@
                             <div class="col pl-0">
                                 <span class="font-small d-block text-muted mb-2">Lượt xem</span>
                                 <span class="h5 text-dark">
-                                    3,3k
+                                    {{ page.countViews }}
                                 </span>
                             </div>
                             <div class="col">
                                 <span class="font-small d-block text-muted mb-2">Bài viết</span>
-                                <span class="h5 text-dark font-weight-bold">10</span>
+                                <span class="h5 text-dark font-weight-bold">{{ page.post_count }}</span>
                             </div>
                             <div class="col pr-0">
                                 <span class="font-small d-block text-muted mb-2">Đăng ký</span>
