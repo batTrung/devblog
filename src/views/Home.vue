@@ -7,13 +7,22 @@
                         <router-link :to="{ name: 'posts' }" class="h5">Bài viết</router-link>
                     </li>
                     <li class="list-inline-item mr-3 active">
-                        <a href="" class="active">Mới nhất</a>
+                        <a
+                            href=""
+                            :class="getActiveClass(postsOrder, 'created')"
+                            @click.prevent="postsOrder = 'created'">Mới nhất</a>
                     </li>
                     <li class="list-inline-item mr-3">
-                        <a href="">Xem nhiều</a>
+                        <a
+                            href=""
+                            :class="getActiveClass(postsOrder, '-views')"
+                            @click.prevent="postsOrder = '-views'">Xem nhiều</a>
                     </li>
                     <li class="list-inline-item mr-3">
-                        <a href="">Nhiều lượt thích</a>
+                        <a
+                            href=""
+                            :class="getActiveClass(postsOrder, '-users_saved')"
+                            @click.prevent="postsOrder = '-users_saved'">Nhiều lượt thích</a>
                     </li>
                 </ul>
                 <b-nav>
@@ -28,7 +37,9 @@
                     </b-nav-item-dropdown>
                 </b-nav>
             </div>
-            <PostList :num_post="8" />
+            <PostList
+                :num_post="8"
+                :ordering="postsOrder" />
         </div>
         <div class="page">
             <ul class="list-inline mb-2">
@@ -79,5 +90,15 @@ export default {
         PageList,
         PlayListList,
     },
+    data() {
+        return {
+            postsOrder: 'created',
+        }
+    },
+    methods: {
+        getActiveClass(a, b) {
+            return a == b ? 'active' : ''
+        },
+    }
 }
 </script>

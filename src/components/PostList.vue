@@ -1,19 +1,9 @@
 <template>
     <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6 my-2" v-for="(post, index) in posts.slice(0, num_post)" :key="index">
-            <div
-                class="card h-100 d-flex flex-column justify-content-between shadow-sm"
-                @mouseover="hoverPostId = index"
-                @mouseleave="hoverPostId = null">
-                <a
-                    :href="post.link"
-                    target="_blank"
-                    class="position-relative">
-                    <img
-                        :src="post.photo"
-                        class="card-img-top p-1"
-                        :alt="post.title"
-                        style="width: 100%; height: 169px">
+            <div class="card h-100 d-flex flex-column justify-content-between shadow-sm" @mouseover="hoverPostId = index" @mouseleave="hoverPostId = null">
+                <a :href="post.link" target="_blank" class="position-relative">
+                    <img :src="post.photo" class="card-img-top p-1" :alt="post.title" style="width: 100%; height: 169px">
                 </a>
                 <div class="v-add left" v-show="hoverPostId == index" v-tooltip="'Thích bài viết'"><i class="far fa-heart text-gray"></i></div>
                 <b-dropdown variant="link" class="v-add right" right v-show="hoverPostId == index">
@@ -40,9 +30,12 @@
                 </div>
             </div>
         </div>
-        <VLoading :show="isLoading" />
+        <div class="col-12" v-show="!num_post">
+            <VLoading :show="isLoading" v-show="!num_post" />
+        </div>
+        <b-overlay :show="isShowOverlay" opacity="0.6" no-wrap rounded="sm">
+        </b-overlay>
     </div>
-
 </template>
 <script>
 import { mapGetters } from "vuex"
@@ -58,6 +51,11 @@ export default {
             type: Number,
             required: false,
         },
+        ordering: {
+            type: String,
+            required: false,
+            default: 'created',
+        }
     },
     filters: {
         truncatechars,
@@ -70,42 +68,54 @@ export default {
             hoverPostId: null,
             page: 2,
             isLoading: false,
+            isShowOverlay: false,
+            loadMore: true,
+        }
+    },
+    watch: {
+        ordering() {
+            this.isShowOverlay = true
+            setTimeout(() => {
+                this.isShowOverlay = false
+            }, 300)
+            this.fetchPosts({ ordering: this.ordering })
         }
     },
     computed: {
         ...mapGetters(["posts"])
-
     },
     mounted() {
         this.fetchPosts()
         this.scroll()
     },
     methods: {
-        fetchPosts() {
-            this.$store.dispatch(FETCH_POSTS)
+        fetchPosts(params) {
+            console.log('fetachpost')
+            this.$store.dispatch(FETCH_POSTS, params)
+            this.page = 2
+            this.loadMore = true
         },
         scroll() {
-            let loadMore = true
-             window.onscroll = () => {
+            window.onscroll = () => {
                 let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight + 200 > document.documentElement.offsetHeight;
-                if (bottomOfWindow && loadMore) {
-                    loadMore = false
-                    PostsService.query({'page': this.page})
+                if (bottomOfWindow && this.loadMore) {
+                    this.loadMore = false
+                    PostsService.query({ 'page': this.page, 'ordering': this.ordering })
                         .then(({ data }) => {
                             this.isLoading = true
                             setTimeout(() => {
                                 this.isLoading = false
                                 this.posts.push(...data.results)
-                            }, 1000)
+                            }, 700)
                             this.page++
                             if (data.has_next) {
                                 setTimeout(() => {
-                                    loadMore = true
+                                    this.loadMore = true
                                 }, 1000)
                             }
                         })
                 }
-             }
+            }
         },
     },
 }

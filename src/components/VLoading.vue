@@ -1,5 +1,5 @@
 <template>
-    <div class="col-12 my-5" v-show="show">
+    <div class="my-5" v-show="show">
         <b-overlay :show="show" rounded="sm">
         </b-overlay>
     </div>
