@@ -60,7 +60,12 @@ export default {
             type: String,
             required: false,
             default: 'created',
-        }
+        },
+        website: {
+            type: String,
+            required: false,
+            default: '',
+        },
     },
     filters: {
         truncatechars,
@@ -83,10 +88,16 @@ export default {
             setTimeout(() => {
                 this.isShowOverlay = false
             }, 300)
-            this.fetchPosts({ ordering: this.ordering })
+            this.fetchPosts()
         }
     },
     computed: {
+        getParams() {
+            return {
+                website: this.website,
+                ordering: this.ordering,
+            }
+        },
         ...mapGetters(["posts"])
     },
     mounted() {
@@ -94,7 +105,8 @@ export default {
         this.scroll()
     },
     methods: {
-        fetchPosts(params) {
+        fetchPosts() {
+            const params = this.getParams
             this.$store.dispatch(FETCH_POSTS, params)
             this.page = 1
             this.hasNext = true
@@ -104,7 +116,11 @@ export default {
                 let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight + 200 > document.documentElement.offsetHeight;
                 if (bottomOfWindow && this.hasNext) {
                     this.hasNext = false
-                    PostsService.query({ 'page': this.page + 1, 'ordering': this.ordering })
+                    const params = Object.assign(
+                        { page: this.page + 1 },
+                        this.getParams,
+                    )
+                    PostsService.query(params)
                         .then(({ data }) => {
                             this.isLoading = true
                             setTimeout(() => {

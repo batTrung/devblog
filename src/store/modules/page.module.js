@@ -55,7 +55,6 @@ const mutations = {
       state.pages = data.results
   },
   [SET_PAGE](state, data) {
-    console.log(data)
     state.currentPage = data
   },
 }

@@ -9,16 +9,16 @@
         <div class="container">
             <div class="card border-light text-center mb-4">
                 <div class="profile-thumbnail mx-auto mt-n6">
-                    <img src="https://demo.themesberg.com/spaces/assets/img/team/profile-picture-1.jpg" class="card-img-top rounded-circle border-0" alt="Jose Avatar">
+                    <b-avatar :src="page.photo" size="8rem" class="card-img-top"></b-avatar>
                 </div>
-                <div class="card-body">
+                <div class="card-body pt-0">
                     <h2 class="h4 card-title mb-2">{{ page.name }}</h2>
                     <ul class="list-unstyled d-flex justify-content-center mt-3 mb-0">
-                        <li><a href="#" target="_blank" aria-label="facebook social link" class="icon-facebook mr-3"><span class="fab fa-facebook-f"></span></a></li>
-                        <li><a href="#" target="_blank" aria-label="twitter social link" class="icon-twitter mr-3"><span class="fab fa-twitter"></span></a></li>
-                        <li><a href="#" target="_blank" aria-label="dribbble social link" class="icon-google mr-3"><span class="fab fa-google"></span></a></li>
+                        <li><a href="#" aria-label="facebook social link" class="icon-facebook mr-3"><span class="fab fa-facebook-f"></span></a></li>
+                        <li><a href="#" aria-label="twitter social link" class="icon-twitter mr-3"><span class="fab fa-twitter"></span></a></li>
+                        <li><a href="#" aria-label="dribbble social link" class="icon-google mr-3"><span class="fab fa-google"></span></a></li>
                     </ul>
-                    <p class="my-2">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="my-2">{{ page.description }}</p>
                 </div>
             </div>
             <div class="d-flex justify-content-between">
@@ -47,7 +47,9 @@
                     </div>
                 </b-form>
             </div>
-            <PostList :ordering="postsOrder" />
+            <PostList
+                :ordering="postsOrder"
+                :website="page.name" />
         </div>
     </div>
 </template>
