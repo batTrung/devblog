@@ -12,7 +12,7 @@
                     <img src="https://demo.themesberg.com/spaces/assets/img/team/profile-picture-1.jpg" class="card-img-top rounded-circle border-0" alt="Jose Avatar">
                 </div>
                 <div class="card-body">
-                    <h2 class="h4 card-title mb-2">Jose Leos</h2>
+                    <h2 class="h4 card-title mb-2">{{ page.name }}</h2>
                     <ul class="list-unstyled d-flex justify-content-center mt-3 mb-0">
                         <li><a href="#" target="_blank" aria-label="facebook social link" class="icon-facebook mr-3"><span class="fab fa-facebook-f"></span></a></li>
                         <li><a href="#" target="_blank" aria-label="twitter social link" class="icon-twitter mr-3"><span class="fab fa-twitter"></span></a></li>
@@ -53,10 +53,14 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex"
+
 import PostList from '@/components/PostList'
 import {
-    SET_LAYOUT,
-} from '@/store/mutations.type'
+    CHANGE_LAYOUT,
+    FETCH_PAGE,
+} from '@/store/actions.type'
+
 import store from '@/store'
 
 export default {
@@ -65,11 +69,15 @@ export default {
         return this.$route.params.name
     },
     beforeRouteEnter(to, from, next) {
-        store.commit(SET_LAYOUT, 'nav-layout')
-        next()
+        Promise.all([
+            store.dispatch(FETCH_PAGE, to.params.name),
+            store.dispatch(CHANGE_LAYOUT, 'nav-layout'),
+        ]).then(() => {
+            next()
+        })
     },
     beforeRouteLeave(to, from, next) {
-        store.commit(SET_LAYOUT, 'base-layout')
+        store.dispatch(CHANGE_LAYOUT, 'base-layout')
         next()
     },
     components: {
@@ -79,6 +87,9 @@ export default {
         return {
             postsOrder: 'created',
         }
+    },
+    computed: {
+        ...mapGetters(['page'])
     },
     methods: {
         getActiveClass(a, b) {

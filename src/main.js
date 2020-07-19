@@ -3,6 +3,7 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '@icon/themify-icons/themify-icons.css'
+import 'nprogress/nprogress.css';
 import './assets/styles/index.css';
 import './assets/vendor/fontawesome-5.11.2/css/fontawesome.min.css';
 import VTooltip from 'v-tooltip'

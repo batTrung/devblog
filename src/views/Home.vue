@@ -2,7 +2,7 @@
     <div>
         <div class="page">
             <div class="d-flex justify-content-between">
-                <ul class="list-inline mb-2">
+                <ul class="list-inline mt-2">
                     <li class="list-inline-item mr-3">
                         <router-link :to="{ name: 'posts' }" class="h5">Bài viết</router-link>
                     </li>

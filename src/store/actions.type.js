@@ -1,3 +1,7 @@
+export const FETCH_START = 'fetchStart'
+export const FETCH_END = 'fetchEnd'
 export const FETCH_POSTS = 'fetchPosts'
 export const FETCH_POST = 'fetchPost'
 export const FETCH_PAGES = 'fetchPages'
+export const FETCH_PAGE = 'fetchPage'
+export const CHANGE_LAYOUT = 'changeLayout'

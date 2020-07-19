@@ -1,4 +1,8 @@
 import {
+    CHANGE_LAYOUT,
+} from '@/store/actions.type'
+
+import {
     SET_LAYOUT,
 } from '@/store/mutations.type'
 
@@ -12,14 +16,21 @@ const getters = {
     },
 }
 
+const actions = {
+    async [CHANGE_LAYOUT]({ commit }, nameLayout) {
+        commit(SET_LAYOUT, nameLayout)
+    },
+}
+
 const mutations = {
-    [SET_LAYOUT](state, payload) {
-        state.layout = payload
+    [SET_LAYOUT](state, nameLayout) {
+        state.layout = nameLayout
     },
 }
 
 export default {
   state,
   getters,
+  actions,
   mutations,
 }

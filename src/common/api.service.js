@@ -17,7 +17,7 @@ const ApiService = {
     })
   },
 
-  get(resource, slug = '') {
+  get(resource, slug) {
     return Vue.axios.get(`${resource}/${slug}`).catch(error => {
       throw new Error(`[RWV] ApiService ${error}`)
     })
@@ -57,5 +57,8 @@ export const PagesService = {
         return ApiService.query('websites', {
             params: params
         })
+    },
+    get(slug) {
+        return ApiService.get('websites', slug)
     },
 }
