@@ -10,7 +10,7 @@
                         <a
                             href=""
                             :class="getActiveClass(postsOrder, 'created')"
-                            @click.prevent="postsOrder = 'created'">Mới nhất</a>
+                            @click.prevent="postsOrder = 'created'">Mới cập nhật</a>
                     </li>
                     <li class="list-inline-item mr-3">
                         <a
@@ -50,7 +50,7 @@
                     <a href="" class="active">Phổ biến</a>
                 </li>
                 <li class="list-inline-item mr-3">
-                    <a href="">Mới nhất</a>
+                    <a href="">Mới cập nhật</a>
                 </li>
                 <li class="list-inline-item mr-3">
                     <a href="">Xem nhiều</a>
@@ -64,16 +64,26 @@
                     <router-link :to="{ name: 'pages' }" class="h5">Trang</router-link>
                 </li>
                 <li class="list-inline-item mr-3">
-                    <a href="" class="active">Phổ biến</a>
+                    <a
+                        href=""
+                        :class="getActiveClass(pagesOrder, '-subscribers')"
+                        @click.prevent="pagesOrder = '-subscribers'">Phổ biến
+                    </a>
                 </li>
                 <li class="list-inline-item mr-3">
-                    <a href="">Mới nhất</a>
+                    <a
+                        href=""
+                        :class="getActiveClass(pagesOrder, '-created')"
+                        @click.prevent="pagesOrder = '-created'">Mới cập nhật
+                    </a>
                 </li>
                 <li class="list-inline-item mr-3">
                     <a href="">Xem nhiều</a>
                 </li>
             </ul>
-            <PageList :num_page="3" />
+            <PageList
+                :num_page="3"
+                :ordering="pagesOrder" />
         </div>
     </div>
 </template>
@@ -93,6 +103,7 @@ export default {
     data() {
         return {
             postsOrder: 'created',
+            pagesOrder: '-subscribers',
         }
     },
     methods: {

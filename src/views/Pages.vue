@@ -6,10 +6,18 @@
                     <h5>Trang</h5>
                 </li>
                 <li class="list-inline-item mr-3">
-                    <a href="" class="active">Phổ biến</a>
+                    <a
+                        href=""
+                        :class="getActiveClass(pagesOrder, '-created')"
+                        @click.prevent="pagesOrder = '-created'">Mới cập nhật
+                    </a>
                 </li>
                 <li class="list-inline-item mr-3">
-                    <a href="">Mới nhất</a>
+                    <a
+                        href=""
+                        :class="getActiveClass(pagesOrder, '-subscribers')"
+                        @click.prevent="pagesOrder = '-subscribers'">Phổ biến
+                    </a>
                 </li>
                 <li class="list-inline-item mr-3">
                     <a href="">Xem nhiều</a>
@@ -28,7 +36,7 @@
                 </b-nav-item-dropdown>
             </b-nav>
         </div>
-        <PageList />
+        <PageList :ordering="pagesOrder" />
     </div>
 </template>
 
@@ -41,5 +49,15 @@ export default {
     components: {
         PageList,
     },
+    data() {
+        return {
+            pagesOrder: '-created',
+        }
+    },
+    methods: {
+        getActiveClass(a, b) {
+            return a == b ? 'active' : ''
+        },
+    }
 }
 </script>

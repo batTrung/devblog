@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="bg-main">
     <TheNav class="mb-6" />
-    <main class="container my-4">
+    <main class="container my-4" style="min-height: 100vh">
       <router-view />
     </main>
   </div>
