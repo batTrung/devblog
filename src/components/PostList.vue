@@ -69,7 +69,6 @@ export default {
                     ordering: 'created',
                     language: '',
                     search: '',
-                    website: '',
                 }
             },
         },
@@ -102,6 +101,9 @@ export default {
         },
     },
     computed: {
+        getParams() {
+            return Object.assign(this.query, { website: this.website })
+        },
         ...mapGetters(["posts"])
     },
     mounted() {
@@ -110,7 +112,7 @@ export default {
     },
     methods: {
         fetchPosts() {
-            this.$store.dispatch(FETCH_POSTS, this.query)
+            this.$store.dispatch(FETCH_POSTS, this.getParams)
             this.page = 1
             this.hasNext = true
         },
@@ -121,7 +123,7 @@ export default {
                     this.hasNext = false
                     const params = Object.assign(
                         { page: this.page + 1 },
-                        this.query,
+                        this.getParams,
                     )
                     PostsService.query(params)
                         .then(({ data }) => {

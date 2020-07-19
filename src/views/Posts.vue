@@ -77,7 +77,6 @@ export default {
                 ordering: 'created',
                 language: '',
                 search: '',
-                website: '',
             },
         }
     },

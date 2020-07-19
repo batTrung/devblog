@@ -27,13 +27,13 @@
                         <h5>Bài viết</h5>
                     </li>
                     <li class="list-inline-item mr-3 active">
-                        <a href="" :class="getActiveClass(postsOrder, 'created')" @click.prevent="postsOrder = 'created'">Mới cập nhật</a>
+                        <a href="" :class="getActiveClass(postsQuery.ordering, 'created')" @click.prevent="postsQuery.ordering = 'created'">Mới cập nhật</a>
                     </li>
                     <li class="list-inline-item mr-3">
-                        <a href="" :class="getActiveClass(postsOrder, '-views')" @click.prevent="postsOrder = '-views'">Xem nhiều</a>
+                        <a href="" :class="getActiveClass(postsQuery.ordering, '-views')" @click.prevent="postsQuery.ordering = '-views'">Xem nhiều</a>
                     </li>
                     <li class="list-inline-item mr-3">
-                        <a href="" :class="getActiveClass(postsOrder, '-users_saved')" @click.prevent="postsOrder = '-users_saved'">Nhiều lượt thích</a>
+                        <a href="" :class="getActiveClass(postsQuery.ordering, '-users_saved')" @click.prevent="postsQuery.ordering = '-users_saved'">Nhiều lượt thích</a>
                     </li>
                 </ul>
                 <b-form>
@@ -43,12 +43,15 @@
                                 <i class="ti ti-search"></i>
                             </span>
                         </div>
-                        <input type="text" class="form-control border-0 pb-2 mr-4 pl-0" placeholder="Tìm kiếm bài viết" required="">
+                        <input
+                            type="text"
+                            class="form-control border-0 pb-2 mr-4 pl-0"
+                            placeholder="Tìm kiếm bài viết" v-model="postsQuery.search">
                     </div>
                 </b-form>
             </div>
             <PostList
-                :ordering="postsOrder"
+                :query="postsQuery"
                 :website="page.name" />
         </div>
     </div>
@@ -87,7 +90,11 @@ export default {
     },
     data() {
         return {
-            postsOrder: 'created',
+            postsQuery: {
+                ordering: 'created',
+                language: '',
+                search: '',
+            },
         }
     },
     computed: {
@@ -95,7 +102,7 @@ export default {
     },
     methods: {
         getActiveClass(a, b) {
-            return a == b ? 'active' : ''
+            return a == b ? 'color-active' : ''
         },
     }
 }
