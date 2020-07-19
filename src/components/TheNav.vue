@@ -19,21 +19,11 @@
                             </div>
                             <input type="text" class="form-control border-0 pb-2 mr-4 pl-0" placeholder="Tìm kiếm" required="">
                         </div>
-                        <b-nav-item-dropdown right>
-                            <template slot="button-content">
-                                <i class="ti ti-world mr-1"></i>
-                            </template>
-                            <b-dropdown-item>Tiếng Việt</b-dropdown-item>
-                            <b-dropdown-item>Tiếng Anh</b-dropdown-item>
-                        </b-nav-item-dropdown>
                     </b-nav-form>
                     <b-nav-item-dropdown right>
                         <template slot="button-content">
                             <b-avatar size="2rem"></b-avatar>
                         </template>
-                        <b-dropdown-item>Trang cá nhân</b-dropdown-item>
-                        <b-dropdown-item>Cài đặt</b-dropdown-item>
-                        <div class="dropdown-divider"></div>
                         <b-dropdown-item>Đăng xuất</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>

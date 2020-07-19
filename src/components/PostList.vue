@@ -56,15 +56,22 @@ export default {
             type: Number,
             required: false,
         },
-        ordering: {
-            type: String,
-            required: false,
-            default: 'created',
-        },
         website: {
             type: String,
             required: false,
             default: '',
+        },
+        query: {
+            type: Object,
+            required: false,
+            default: () => {
+                return {
+                    ordering: 'created',
+                    language: '',
+                    search: '',
+                    website: '',
+                }
+            },
         },
     },
     filters: {
@@ -83,21 +90,18 @@ export default {
         }
     },
     watch: {
-        ordering() {
-            this.isShowOverlay = true
-            setTimeout(() => {
-                this.isShowOverlay = false
-            }, 300)
-            this.fetchPosts()
-        }
+        query: {
+            handler() {
+                this.isShowOverlay = true
+                setTimeout(() => {
+                    this.isShowOverlay = false
+                }, 300)
+                this.fetchPosts()
+            },
+            deep: true,
+        },
     },
     computed: {
-        getParams() {
-            return {
-                website: this.website,
-                ordering: this.ordering,
-            }
-        },
         ...mapGetters(["posts"])
     },
     mounted() {
@@ -106,8 +110,7 @@ export default {
     },
     methods: {
         fetchPosts() {
-            const params = this.getParams
-            this.$store.dispatch(FETCH_POSTS, params)
+            this.$store.dispatch(FETCH_POSTS, this.query)
             this.page = 1
             this.hasNext = true
         },
@@ -118,7 +121,7 @@ export default {
                     this.hasNext = false
                     const params = Object.assign(
                         { page: this.page + 1 },
-                        this.getParams,
+                        this.query,
                     )
                     PostsService.query(params)
                         .then(({ data }) => {

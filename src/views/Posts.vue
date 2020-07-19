@@ -1,41 +1,65 @@
 <template>
     <div class="page">
         <div class="d-flex justify-content-between">
-            <ul class="list-inline mt-2">
-                <li class="list-inline-item mr-3">
-                    <h5>Bài viết</h5>
-                </li>
-                <li class="list-inline-item mr-3 active">
-                    <a
-                        href=""
-                        :class="getActiveClass(postsOrder, 'created')"
-                        @click.prevent="postsOrder = 'created'">Mới cập nhật</a>
-                </li>
-                <li class="list-inline-item mr-3">
-                    <a
-                        href=""
-                        :class="getActiveClass(postsOrder, '-views')"
-                        @click.prevent="postsOrder = '-views'">Xem nhiều</a>
-                </li>
-                <li class="list-inline-item mr-3">
-                    <a
-                        href=""
-                        :class="getActiveClass(postsOrder, '-users_saved')"
-                        @click.prevent="postsOrder = '-users_saved'">Nhiều lượt thích</a>
-                </li>
-            </ul>
-            <b-form>
+            <div>
                 <div class="input-group bg-white rounded-pill border mr-2 mb-2">
                     <div class="input-group-prepend">
                         <span class="input-group-text bg-transparent border-0">
                             <i class="ti ti-search"></i>
                         </span>
                     </div>
-                    <input type="text" class="form-control border-0 pb-2 mr-4 pl-0" placeholder="Tìm kiếm bài viết" required="">
+                    <input
+                        type="text"
+                        class="form-control border-0 pb-2 mr-4 pl-0"
+                        placeholder="Tìm kiếm bài viết"
+                        v-model="postsQuery.search">
                 </div>
-            </b-form>
+            </div>
+            <div>
+                <b-nav>
+                    <b-nav-item-dropdown right>
+                        <template slot="button-content">
+                            Sắp xếp <i class="fas fa-sort-amount-up"></i>
+                        </template>
+                        <b-dropdown-item
+                            :class="getActiveClass(postsQuery.ordering, 'created')"
+                            @click.prevent="postsQuery.ordering = 'created'">Mới cập nhật</b-dropdown-item>
+                        <b-dropdown-item
+                            :class="getActiveClass(postsQuery.ordering, '-views')"
+                            @click.prevent="postsQuery.ordering = '-views'">Xem nhiều</b-dropdown-item>
+                        <b-dropdown-item
+                            :class="getActiveClass(postsQuery.ordering, '-users_saved')"
+                            @click.prevent="postsQuery.ordering = '-users_saved'">Nhiều lượt thích</b-dropdown-item>
+                    </b-nav-item-dropdown>
+                    <b-nav-item-dropdown right>
+                        <template slot="button-content">
+                            Ngôn ngữ <i class="ti ti-world "></i>
+                        </template>
+                        <b-dropdown-item
+                            :class="getActiveClass(postsQuery.language, '')"
+                            @click.prevent="postsQuery.language = ''">Tất cả</b-dropdown-item>
+                        <b-dropdown-item
+                            :class="getActiveClass(postsQuery.language, 'vi')"
+                            @click.prevent="postsQuery.language = 'vi'">Tiếng Việt</b-dropdown-item>
+                        <b-dropdown-item
+                            :class="getActiveClass(postsQuery.language, 'en')"
+                            @click.prevent="postsQuery.language = 'en'">Tiếng Anh</b-dropdown-item>
+                    </b-nav-item-dropdown>
+                    <b-nav-item-dropdown left>
+                        <template slot="button-content">
+                            Chủ đề
+                        </template>
+                        <b-dropdown-item>Tất cả</b-dropdown-item>
+                        <b-dropdown-item>Web Deveopment</b-dropdown-item>
+                        <b-dropdown-item>Deep Learning</b-dropdown-item>
+                        <b-dropdown-item>Machine Learning</b-dropdown-item>
+                        <b-dropdown-item>DevOps</b-dropdown-item>
+                    </b-nav-item-dropdown>
+                </b-nav>
+            </div>
         </div>
-        <PostList :ordering="postsOrder" />
+        <PostList 
+            :query="postsQuery" />
     </div>
 </template>
 <script>
@@ -49,12 +73,17 @@ export default {
     },
     data() {
         return {
-            postsOrder: 'created',
+            postsQuery: {
+                ordering: 'created',
+                language: '',
+                search: '',
+                website: '',
+            },
         }
     },
     methods: {
         getActiveClass(a, b) {
-            return a == b ? 'active' : ''
+            return a == b ? 'color-active' : ''
         },
     }
 }

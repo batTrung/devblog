@@ -33,7 +33,7 @@
                             </div>
                             <div class="col pr-0">
                                 <span class="font-small d-block text-muted mb-2">Đăng ký</span>
-                                <span class="h5 text-dark font-weight-bold">100</span>
+                                <span class="h5 text-dark font-weight-bold">{{ page.subscribers.length }}</span>
                             </div>
                         </div>
                     </div>
@@ -58,11 +58,17 @@ export default {
             type: Number,
             required: false,
         },
-        ordering: {
-            type: String,
+        query: {
+            type: Object,
             required: false,
-            default: '-subscribers',
-        }
+            default: () => {
+                return {
+                    ordering: '-subscribers',
+                    language: '',
+                    search: '',
+                }
+            },
+        },
     },
     components: {
         VLoading,
@@ -76,23 +82,26 @@ export default {
         }
     },
     watch: {
-        ordering() {
-            this.isShowOverlay = true
-            setTimeout(() => {
-                this.isShowOverlay = false
-            }, 300)
-            this.fetchPages({ ordering: this.ordering })
-        }
+        query: {
+            handler() {
+                this.isShowOverlay = true
+                setTimeout(() => {
+                    this.isShowOverlay = false
+                }, 300)
+                this.fetchPages()
+            },
+            deep: true,
+        },
     },
     computed: {
         ...mapGetters(["pages"])
     },
     mounted() {
-        this.fetchPages({ ordering: this.ordering })
+        this.fetchPages()
     },
     methods: {
-        fetchPages(params) {
-            this.$store.dispatch(FETCH_PAGES, params)
+        fetchPages() {
+            this.$store.dispatch(FETCH_PAGES, this.query)
             this.page = 1
             this.hasNext = true
         },

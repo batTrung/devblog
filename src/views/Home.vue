@@ -9,20 +9,20 @@
                     <li class="list-inline-item mr-3 active">
                         <a
                             href=""
-                            :class="getActiveClass(postsOrder, 'created')"
-                            @click.prevent="postsOrder = 'created'">Mới cập nhật</a>
+                            :class="getActiveClass(postsQuery.ordering, 'created')"
+                            @click.prevent="postsQuery.ordering = 'created'">Mới cập nhật</a>
                     </li>
                     <li class="list-inline-item mr-3">
                         <a
                             href=""
-                            :class="getActiveClass(postsOrder, '-views')"
-                            @click.prevent="postsOrder = '-views'">Xem nhiều</a>
+                            :class="getActiveClass(postsQuery.ordering, '-views')"
+                            @click.prevent="postsQuery.ordering = '-views'">Xem nhiều</a>
                     </li>
                     <li class="list-inline-item mr-3">
                         <a
                             href=""
-                            :class="getActiveClass(postsOrder, '-users_saved')"
-                            @click.prevent="postsOrder = '-users_saved'">Nhiều lượt thích</a>
+                            :class="getActiveClass(postsQuery.ordering, '-users_saved')"
+                            @click.prevent="postsQuery.ordering = '-users_saved'">Nhiều lượt thích</a>
                     </li>
                 </ul>
                 <b-nav>
@@ -39,7 +39,7 @@
             </div>
             <PostList
                 :num_post="8"
-                :ordering="postsOrder" />
+                :query="postsQuery" />
         </div>
         <div class="page">
             <ul class="list-inline mb-2">
@@ -66,15 +66,15 @@
                 <li class="list-inline-item mr-3">
                     <a
                         href=""
-                        :class="getActiveClass(pagesOrder, '-subscribers')"
-                        @click.prevent="pagesOrder = '-subscribers'">Phổ biến
+                        :class="getActiveClass(pagesQuery.ordering, '-subscribers')"
+                        @click.prevent="pagesQuery.ordering = '-subscribers'">Phổ biến
                     </a>
                 </li>
                 <li class="list-inline-item mr-3">
                     <a
                         href=""
-                        :class="getActiveClass(pagesOrder, '-created')"
-                        @click.prevent="pagesOrder = '-created'">Mới cập nhật
+                        :class="getActiveClass(pagesQuery.ordering, '-created')"
+                        @click.prevent="pagesQuery.ordering = '-created'">Mới cập nhật
                     </a>
                 </li>
                 <li class="list-inline-item mr-3">
@@ -83,7 +83,7 @@
             </ul>
             <PageList
                 :num_page="3"
-                :ordering="pagesOrder" />
+                :query="pagesQuery" />
         </div>
     </div>
 </template>
@@ -102,13 +102,22 @@ export default {
     },
     data() {
         return {
-            postsOrder: 'created',
-            pagesOrder: '-subscribers',
+            postsQuery: {
+                ordering: 'created',
+                language: '',
+                search: '',
+                website: '',
+            },
+            pagesQuery: {
+                ordering: '-subscribers',
+                language: '',
+                search: '',
+            },
         }
     },
     methods: {
         getActiveClass(a, b) {
-            return a == b ? 'active' : ''
+            return a == b ? 'color-active' : ''
         },
     }
 }
