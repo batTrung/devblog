@@ -54,12 +54,17 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class PostPhotoSerializer(serializers.ModelSerializer):
+    photo_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
         fields = (
-            'photo',
+            'photo_url',
         )
+
+    def get_photo_url(self, post):
+        request = self.context.get('request')
+        return request.build_absolute_uri(post.thumbnail_photo_obj().url)
 
 
 class PlayListSerializer(serializers.ModelSerializer):

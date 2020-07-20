@@ -6,11 +6,17 @@
                 :key="index">
                 <div class="card h-100 d-flex flex-column justify-content-between bg-transparent border-0">
                     <div class="b-playlist">
-                        <div class="v-img" @mouseover="hoverPlayListId = index" @mouseleave="hoverPlayListId = null">
-                            <img src="http://azyrusthemes.com/circlevideo/images/playlist-1.png" alt="" class="l-1">
-                            <img src="http://azyrusthemes.com/circlevideo/images/video1-2.png" alt="" class="l-2">
-                            <a href="">
-                                <img src="http://azyrusthemes.com/circlevideo/images/video1-2.png" alt="" class="l-3">
+                        <div
+                            class="v-img"
+                            @mouseover="hoverPlayListId = index"
+                            @mouseleave="hoverPlayListId = null">
+                            <img
+                                v-for="(post, index) in playlist.posts.slice(1, 3)"
+                                :key="index"
+                                :src="post.photo_url"
+                                :class="'l-' + (2 - index)">
+                            <a href="#">
+                                <img :src="playlist.posts[0].photo_url" class="l-3">
                             </a>
                             <div class="items">{{ playlist.posts.length }}</div>
                             <div class="v-add left" v-show="hoverPlayListId == index" v-tooltip="'Thêm sao cho danh sách'"><i class="fas fa-star text-warning"></i></div>

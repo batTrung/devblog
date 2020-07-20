@@ -68,7 +68,10 @@
                                 class="col-12 col-sm-10 col-md-6 col-lg-12 mb-2"
                                 v-for="(post, index) in posts"
                                 :key="index">
-                                <div class="card h-100 d-flex flex-column justify-content-between border-light bb-red">
+                                <div
+                                    class="card h-100 d-flex flex-column justify-content-between border-light bb-red"
+                                    @mouseover="hoverPostId = index"
+                                    @mouseleave="hoverPostId = null">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col-12 col-lg-6 col-xl-4 p-2">
                                             <a
@@ -81,6 +84,15 @@
                                                     class="card-img p-2"
                                                     style="max-height: 240px">
                                             </a>
+                                            <div class="v-add left" v-show="hoverPostId == index" v-tooltip="'Thích bài viết'"><i class="far fa-heart text-gray"></i></div>
+                                            <b-dropdown variant="link" class="v-add right" right v-show="hoverPostId == index">
+                                                <template v-slot:button-content>
+                                                    <i class="fas fa-plus"></i>
+                                                </template>
+                                                <b-dropdown-item href="#" class="py-2 p-0"><i class="ti ti-timer mr-2"></i> Xem sau</b-dropdown-item>
+                                                <div class="dropdown-divider"></div>
+                                                <b-dropdown-item href="#" class="py-2 p-0"><i class="ti ti-layers-alt mr-2"></i> Thêm vào danh sách</b-dropdown-item>
+                                            </b-dropdown>
                                         </div>
                                         <div class="col-12 col-lg-6 col-xl-8">
                                             <div class="card-body">
@@ -215,17 +227,24 @@
                                 class="col-12 col-sm-10 col-md-6 col-lg-12 mb-2"
                                 v-for="(playlist, index) in playLists"
                                 :key="index">
-                                <div class="card h-100 d-flex flex-column justify-content-between border-light bb-red">
+                                <div
+                                    class="card h-100 d-flex flex-column justify-content-between border-light bb-red"
+                                    @mouseover="hoverPlayListId = index"
+                                    @mouseleave="hoverPlayListId = null">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col-12 col-lg-6 col-xl-4 p-2">
                                             <div class="b-playlist">
                                                 <div class="v-img">
-                                                    <img src="http://azyrusthemes.com/circlevideo/images/playlist-1.png" alt="" class="l-1">
-                                                    <img src="http://azyrusthemes.com/circlevideo/images/video1-2.png" alt="" class="l-2">
-                                                    <a href="">
-                                                        <img src="http://azyrusthemes.com/circlevideo/images/video1-2.png" alt="" class="l-3">
+                                                    <img
+                                                        v-for="(post, index) in playlist.posts.slice(1, 3)"
+                                                        :key="index"
+                                                        :src="post.photo_url"
+                                                        :class="'l-' + (2 - index)">
+                                                    <a href="#">
+                                                        <img :src="playlist.posts[0].photo_url" class="l-3">
                                                     </a>
-                                                    <div class="items">3</div>
+                                                    <div class="items">{{ playlist.posts.length }}</div>
+                                                    <div class="v-add left" v-show="hoverPlayListId == index" v-tooltip="'Thêm sao cho danh sách'"><i class="fas fa-star text-warning"></i></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -305,6 +324,8 @@ export default {
     name: 'Search',
     data() {
       return {
+        hoverPostId: null,
+        hoverPlayListId: null,
         isPostLoading: false,
         isPageLoading: false,
         isPlayListLoading: false,
