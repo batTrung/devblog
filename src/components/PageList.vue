@@ -114,9 +114,9 @@ export default {
     },
     methods: {
         fetchPages() {
-            this.$store.dispatch(FETCH_PAGES, this.getParams)
             this.page = 1
-            this.hasNext = true
+            this.hasNext = true 
+            this.$store.dispatch(FETCH_PAGES, this.getParams)
         },
         scroll() {
             window.onscroll = () => {

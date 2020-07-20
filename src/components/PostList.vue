@@ -113,9 +113,9 @@ export default {
     },
     methods: {
         fetchPosts() {
-            this.$store.dispatch(FETCH_POSTS, this.getParams)
             this.page = 1
             this.hasNext = true
+            this.$store.dispatch(FETCH_POSTS, this.getParams)
         },
         scroll() {
             window.onscroll = () => {

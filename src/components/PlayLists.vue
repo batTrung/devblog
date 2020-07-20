@@ -98,9 +98,9 @@ export default {
     },
     methods: {
         fetchPlayLists() {
-            this.$store.dispatch(FETCH_PLAYLISTS, this.getParams)
             this.page = 1
             this.hasNext = true
+            this.$store.dispatch(FETCH_PLAYLISTS, this.getParams)
         },
         scroll() {
             window.onscroll = () => {
