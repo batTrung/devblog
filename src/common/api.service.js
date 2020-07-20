@@ -74,3 +74,12 @@ export const PlayListsService = {
         return ApiService.get('playlists', slug)
     },
 }
+
+
+export const TopicsService = {
+    query(params) {
+        return ApiService.query('topics', {
+            params: params
+        })
+    },
+}

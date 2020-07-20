@@ -3,104 +3,64 @@
         <div class="row">
             <aside class="col-12 col-lg-3 d-none d-lg-block order-2">
                 <div class="card border-light p-3 mb-3">
-                    <div>
+                    <div class="mb-2">
                       <span class="h6 font-weight-bold text-underline text-uppercase">Sắp xếp</span>
                     </div>
-                    <b-form-group>
-                      <b-form-radio v-model="selected" name="some-radios" value="A">Mới cập nhật</b-form-radio>
-                      <b-form-radio v-model="selected" name="some-radios" value="B">Lượt xem</b-form-radio>
-                      <b-form-radio v-model="selected" name="some-radios" value="B">Lượt thích</b-form-radio>
-                      <b-form-radio v-model="selected" name="some-radios" value="B">Lượt đăng ký</b-form-radio>
-                      <b-form-radio v-model="selected" name="some-radios" value="B">Nhiều sao</b-form-radio>
+                    <b-form-group class="ml-2">
+                      <b-form-radio-group
+                        v-model="searchQuery.ordering"
+                        name="ordering"
+                        :options="options.ordering"
+                        stacked>
+                      </b-form-radio-group>
                     </b-form-group>
                 </div>
                 <div class="card border-light p-3 mb-3">
-                    <div>
+                    <div class="mb-2">
                       <span class="h6 font-weight-bold text-underline text-uppercase">Loại tìm kiếm</span>
                     </div>
-                    <b-form-group>
-                      <b-form-radio v-model="selected" name="some-radios" value="A">Tất cả</b-form-radio>
-                      <b-form-radio v-model="selected" name="some-radios" value="A">Bài viết</b-form-radio>
-                      <b-form-radio v-model="selected" name="some-radios" value="B">Trang</b-form-radio>
-                      <b-form-radio v-model="selected" name="some-radios" value="B">Danh sách</b-form-radio>
+                    <b-form-group class="ml-2">
+                      <b-form-checkbox-group
+                        v-model="searchQuery.category"
+                        name="category"
+                        :options="options.category"
+                        stacked>
+                      </b-form-checkbox-group>
                     </b-form-group>
                 </div>
                 <div class="card border-light p-3 mb-3">
-                    <div>
-                      <span class="h6 font-weight-bold text-underline text-uppercase">Chủ đề</span>
-                    </div>
-                    <b-form-group>
-                        <b-form-checkbox
-                          id="checkbox-1"
-                          v-model="status"
-                          name="checkbox-1"
-                          value="accepted"
-                          unchecked-value="not_accepted"
-                        >
-                          Web Development
-                        </b-form-checkbox>
-                        <b-form-checkbox
-                          id="checkbox-2"
-                          v-model="status"
-                          name="checkbox-2"
-                          value="accepted"
-                          unchecked-value="not_accepted"
-                        >
-                          Machine Learning
-                        </b-form-checkbox>
-                        <b-form-checkbox
-                          id="checkbox-3"
-                          v-model="status"
-                          name="checkbox-3"
-                          value="accepted"
-                          unchecked-value="not_accepted"
-                        >
-                          Programming Languages
-                        </b-form-checkbox>
-                        <b-form-checkbox
-                          id="checkbox-3"
-                          v-model="status"
-                          name="checkbox-3"
-                          value="accepted"
-                          unchecked-value="not_accepted"
-                        >
-                          Software Engineering
-                        </b-form-checkbox>
-                        <b-form-checkbox
-                          id="checkbox-3"
-                          v-model="status"
-                          name="checkbox-3"
-                          value="accepted"
-                          unchecked-value="not_accepted"
-                        >
-                          Design and illustration
-                        </b-form-checkbox>
-                        <b-form-checkbox
-                          id="checkbox-3"
-                          v-model="status"
-                          name="checkbox-3"
-                          value="accepted"
-                          unchecked-value="not_accepted"
-                        >
-                          Computers & Technology
-                        </b-form-checkbox>
-                    </b-form-group>
-                </div>
-                <div class="card border-light p-3 mb-3">
-                    <div>
+                    <div class="mb-2">
                       <span class="h6 font-weight-bold text-underline text-uppercase">Ngôn ngữ</span>
                     </div>
                     <b-form-group class="ml-2">
-                      <b-form-radio v-model="selected" name="some-radios" value="A">Tất cả</b-form-radio>
-                      <b-form-radio v-model="selected" name="some-radios" value="B">Tiếng Việt</b-form-radio>
-                      <b-form-radio v-model="selected" name="some-radios" value="B">English</b-form-radio>
+                      <b-form-checkbox-group
+                        v-model="searchQuery.language"
+                        name="language"
+                        :options="options.language"
+                        stacked>
+                      </b-form-checkbox-group>
+                    </b-form-group>
+                </div>
+                <div class="card border-light p-3 mb-3">
+                    <div class="mb-2">
+                      <span class="h6 font-weight-bold text-underline text-uppercase">Chủ đề</span>
+                    </div>
+                    <b-form-group class="ml-2">
+                        <b-form-checkbox-group
+                          id="topic"
+                          v-model="searchQuery.topic"
+                          name="topic"
+                          :options="options.topic"
+                          stacked
+                        >
+                        </b-form-checkbox-group>
                     </b-form-group>
                 </div>
             </aside>
             <div class="col-12 col-lg-9">
                 <div class="row">
                     <div class="col-12 col-sm-10 col-md-6 col-lg-12 mb-2">
-                        <div class="card h-100 d-flex flex-column justify-content-between border-light">
+                        <div class="card h-100 d-flex flex-column justify-content-between border-light bb-red">
                             <div class="row no-gutters align-items-center">
                                 <div class="col-12 col-lg-6 col-xl-4 p-2">
                                     <a href="#">
@@ -123,7 +83,7 @@
                         </div>
                     </div>
                     <div class="col-12 col-sm-10 col-md-6 col-lg-12 mb-2">
-                        <div class="card h-100 d-flex flex-column justify-content-between border-light">
+                        <div class="card h-100 d-flex flex-column justify-content-between border-light bb-red">
                             <div class="row no-gutters align-items-center">
                                 <div class="col-12 col-lg-6 col-xl-4 text-center p-2">
                                     <a href="#">
@@ -161,7 +121,7 @@
                         </div>
                     </div>
                     <div class="col-12 col-sm-10 col-md-6 col-lg-12 mb-2">
-                        <div class="card h-100 d-flex flex-column justify-content-between border-light">
+                        <div class="card h-100 d-flex flex-column justify-content-between border-light bb-red">
                             <div class="row no-gutters align-items-center">
                                 <div class="col-12 col-lg-6 col-xl-4 p-2">
                                     <div class="b-playlist">
@@ -200,12 +160,48 @@ export default {
     name: 'Search',
     data() {
       return {
-        ordering: '-created',
-        type: '',
-        category: '',
-        language: '',
-        search: '',
+        searchQuery: {
+          search: '',
+          ordering: '-created',
+          category: [],
+          language: [],
+          topic: [],
+        },
+        options: {
+          ordering: [
+            { text: 'Mới cập nhật', value: '-created', disabled: false },
+            { text: 'Lượt xem', value: '-views', disabled: false },
+            { text: 'Lượt thích', value: '-users_saved', disabled: false },
+            { text: 'Lượt đăng ký', value: '-subscribers', disabled: false },
+            { text: 'Nhiều sao', value: '-users_like', disabled: false },
+          ],
+          category: [
+              { text: 'Bài viết', value: 'post', disabled: false },
+              { text: 'Trang', value: 'page', disabled: false },
+              { text: 'Danh sách', value: 'playlist', disabled: false },
+          ],
+          language: [
+            { text: 'Tiếng Việt', value: 'vi', disabled: false },
+            { text: 'English', value: 'en', disabled: false },
+          ],
+          topic: [
+              { text: 'Web Development', value: 'web-development', disabled: false },
+              { text: 'Machine Learning', value: 'machine-learning', disabled: false },
+              { text: 'Programming Languages', value: 'programming-languages', disabled: false },
+              { text: 'Software Engineering', value: 'software-engineering', disabled: false },
+              { text: 'Design & illustration', value: 'design-illustration', disabled: false },
+              { text: 'Computers & Technology', value: 'computers-technology', disabled: false },
+          ],
+        }
       }
+    },
+    watch: {
+      searchQuery: {
+        handler() {
+          console.log("change query: ", this.searchQuery)
+        },
+        deep: true,
+      },
     },
 }
 </script>

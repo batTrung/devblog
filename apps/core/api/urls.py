@@ -11,6 +11,11 @@ urlpatterns = [
         name=ApiRoot.name,
     ),
     path(
+        'topics/',
+        blog_views.TopicList.as_view(),
+        name=blog_views.TopicList.name,
+    ),
+    path(
         'posts/',
         blog_views.PostList.as_view(),
         name=blog_views.PostList.name,

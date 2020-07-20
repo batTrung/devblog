@@ -405,3 +405,12 @@ span.text-underline:after {
     bottom: 1px;
     border-bottom: 1px solid #b8b8b8;
 }
+
+.bb-red {
+    border-bottom: 3px solid;
+}
+
+.page-title {
+    color: #00c4ff !important;
+    text-decoration: underline;
+}

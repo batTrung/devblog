@@ -11,7 +11,7 @@ from .constants import Language
 from .managers import WebsiteManager
 
 
-class Category(TitleSlugable):
+class Topic(TitleSlugable):
     pass
 
 

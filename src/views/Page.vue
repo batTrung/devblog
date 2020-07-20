@@ -12,7 +12,12 @@
                     <b-avatar :src="page.photo" size="8rem" class="card-img-top"></b-avatar>
                 </div>
                 <div class="card-body pt-0">
-                    <h2 class="h4 card-title mb-2">{{ page.name }}</h2>
+                    <a
+                        :href="page.root_url"
+                        target="_blank"
+                        class="h4 card-title mb-2 page-title">
+                        {{ page.name }}
+                    </a>
                     <ul class="list-unstyled d-flex justify-content-center mt-3 mb-0">
                         <li><a href="#" aria-label="facebook social link" class="icon-facebook mr-3"><span class="fab fa-facebook-f"></span></a></li>
                         <li><a href="#" aria-label="twitter social link" class="icon-twitter mr-3"><span class="fab fa-twitter"></span></a></li>
@@ -75,8 +80,8 @@ export default {
     },
     beforeRouteEnter(to, from, next) {
         Promise.all([
-            store.dispatch(FETCH_PAGE, to.params.name),
             store.dispatch(CHANGE_LAYOUT, 'nav-layout'),
+            store.dispatch(FETCH_PAGE, to.params.name),
         ]).then(() => {
             next()
         })

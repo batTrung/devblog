@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import Post, Website, PlayList
+from .models import Topic, Post, Website, PlayList
 
 
 @admin.register(Website)
@@ -28,3 +28,8 @@ class PostAdmin(admin.ModelAdmin):
 @admin.register(PlayList)
 class PlayListAdmin(admin.ModelAdmin):
     list_display = ('user', 'title',)
+
+
+@admin.register(Topic)
+class TopicAdmin(admin.ModelAdmin):
+    list_display = ('title', 'slug',)
