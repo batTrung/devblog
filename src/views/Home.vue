@@ -128,6 +128,7 @@ export default {
                 ordering: '-subscribers',
                 language: '',
                 search: '',
+                topic: '',
             },
             playlistsQuery: {
                 ordering: '-users_like',

@@ -50,8 +50,8 @@
 </template>
 
 <script>
-import { truncatewords } from '@/common/filters'
 import { mapGetters } from "vuex"
+import { truncatewords } from '@/common/filters'
 import { FETCH_PAGES } from "../store/actions.type"
 import VLoading from '@/components/VLoading'
 import { PagesService } from "@/common/api.service"
@@ -71,6 +71,7 @@ export default {
                     ordering: '-subscribers',
                     language: '',
                     search: '',
+                    topic: '',
                 }
             },
         },

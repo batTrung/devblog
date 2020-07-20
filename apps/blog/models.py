@@ -36,6 +36,13 @@ class Website(models.Model):
         related_name='subscribes',
         blank=True,
     )
+    topic = models.ForeignKey(
+        'Topic',
+        on_delete=models.SET_NULL,
+        related_name='websites',
+        null=True,
+        blank=True,
+    )
     max_post = models.PositiveIntegerField(default=5)
     tags = TaggableManager(blank=True, related_name='websites')
     is_active = models.BooleanField(default=False)

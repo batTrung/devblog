@@ -49,11 +49,16 @@
                         <template slot="button-content">
                             Chủ đề
                         </template>
-                        <b-dropdown-item>Tất cả</b-dropdown-item>
-                        <b-dropdown-item>Web Deveopment</b-dropdown-item>
-                        <b-dropdown-item>Deep Learning</b-dropdown-item>
-                        <b-dropdown-item>Machine Learning</b-dropdown-item>
-                        <b-dropdown-item>DevOps</b-dropdown-item>
+                        <b-dropdown-item
+                            :class="getActiveClass(pagesQuery.topic, '')"
+                            @click.prevent="pagesQuery.topic = ''">Tất cả</b-dropdown-item>
+                        <b-dropdown-item
+                            v-for="(topic, index) in topics"
+                            :key="index"
+                            :class="getActiveClass(pagesQuery.topic, topic.title)"
+                            @click.prevent="pagesQuery.topic = topic.title">
+                            {{ topic.title }}
+                        </b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-nav>
             </div>
@@ -64,7 +69,11 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex"
 import PageList from '@/components/PageList'
+import {
+    FETCH_TOPICS,
+} from '@/store/actions.type'
 
 export default {
     name: 'Pages',
@@ -78,13 +87,20 @@ export default {
                 ordering: '-created',
                 language: '',
                 search: '',
+                topic: '',
             },
         }
+    },
+    computed: {
+        ...mapGetters(['topics'])
     },
     methods: {
         getActiveClass(a, b) {
             return a == b ? 'color-active' : ''
         },
-    }
+    },
+    mounted() {
+        this.$store.dispatch(FETCH_TOPICS)
+    },
 }
 </script>

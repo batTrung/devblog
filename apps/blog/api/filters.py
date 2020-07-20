@@ -32,11 +32,12 @@ class WebsiteFilter(FilterSet):
     language = django_filters.ChoiceFilter(
         choices=Language.choices,
     )
+    topic = django_filters.AllValuesFilter(field_name='topic__title')
     ordering = django_filters.CharFilter(method='order_views')
 
     class Meta:
         model = Website
-        fields = ('language', 'ordering',)
+        fields = ('language', 'ordering', 'topic',)
 
     @staticmethod
     def order_views(queryset, name, value):
