@@ -48,6 +48,11 @@ export default new Router({
       component: () => import('@/views/PlayList'),
     },
     {
+      path: '/search',
+      name: 'search',
+      component: () => import('@/views/Search'),
+    },
+    {
       path: '*',
       name: '404',
       component: () => import('@/views/404'),

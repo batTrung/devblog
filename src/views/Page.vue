@@ -27,7 +27,7 @@
                         <h5>Bài viết</h5>
                     </li>
                     <li class="list-inline-item mr-3 active">
-                        <a href="" :class="getActiveClass(postsQuery.ordering, 'created')" @click.prevent="postsQuery.ordering = 'created'">Mới cập nhật</a>
+                        <a href="" :class="getActiveClass(postsQuery.ordering, '-created')" @click.prevent="postsQuery.ordering = '-created'">Mới cập nhật</a>
                     </li>
                     <li class="list-inline-item mr-3">
                         <a href="" :class="getActiveClass(postsQuery.ordering, '-views')" @click.prevent="postsQuery.ordering = '-views'">Xem nhiều</a>
@@ -91,7 +91,7 @@ export default {
     data() {
         return {
             postsQuery: {
-                ordering: 'created',
+                ordering: '-created',
                 language: '',
                 search: '',
             },

@@ -20,4 +20,14 @@ urlpatterns = [
         blog_views.WebsiteList.as_view(),
         name=blog_views.WebsiteList.name,
     ),
+    path(
+        'websites/<str:name>/',
+        blog_views.WebsiteDetail.as_view(),
+        name=blog_views.WebsiteDetail.name,
+    ),
+    path(
+        'playlists/',
+        blog_views.PlaylistSerializer.as_view(),
+        name=blog_views.PlaylistSerializer.name,
+    ),
 ]

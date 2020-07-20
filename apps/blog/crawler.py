@@ -1,6 +1,7 @@
 import asyncio
 import re
 from urllib.parse import urlparse
+from urllib.parse import urljoin
 
 from django.core.files.base import ContentFile
 from django.utils.text import slugify
@@ -15,8 +16,8 @@ class Crawler():
 
     def get_req(self, url):
         my_headers = {
-            'User-Agent': '''Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
-                        (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'''
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 \
+                        (KHTML, like Gecko)Chrome/61.0.3163.100 Safari/537.36'
         }
         try:
             req = requests.get(url, headers=my_headers)
@@ -43,19 +44,23 @@ class Crawler():
             return self.get_image(web, elements)
 
     def safe_get(self, element, web, selector, type_content):
-        children = element.select(selector)
-        if children is not None and len(children) > 0:
-            return self.get_content(web, children, type_content)
+        if selector:
+            children = element.select(selector)
+            if children is not None and len(children) > 0:
+                return self.get_content(web, children, type_content)
         return ''
 
     def start_crawl(self, web_id):
         web = Website.objects.get(id=web_id)
         bs = self.get_req(web.posts_url)
+        print("Start with ", web)
         count = 0
         if bs:
-            posts = bs.select(web.post_tag)
+            posts = bs.select(web.post_tag)[::-1]
+            print("-> Tim thay posts: ")
             for result in posts:
                 if count >= int(web.max_post):
+                    print('Count > max_post')
                     return
                 try:
                     link_post = result.select(web.link_tag)[0].attrs['href']
@@ -66,16 +71,16 @@ class Crawler():
                 bs_detail = self.get_req(full_link_post)
                 if bs_detail:
                     title = self.safe_get(bs_detail, web, web.title_tag, 'text')
-                    if not self.post_exists(title):
+                    if title and not self.post_exists(title):
                         image = self.safe_get(bs_detail, web, web.image_tag, 'image')
                         if not image:
                             image = self.safe_get(bs_detail, web, web.content_image_tag, 'image')
                         post_saved = self.save_post(web, full_link_post, title, image)
                         if post_saved:
                             count += 1
-                        #     print('LINK DETAIL: ', full_link_post)
-                        #     print('TITLE: ', title)
-                        #     print('IMAGE: ', image)
+                            print('LINK DETAIL: ', full_link_post)
+                            print('TITLE: ', title)
+                            print('IMAGE: ', image)
                     else:
                         return
 
@@ -116,6 +121,7 @@ class Crawler():
     def run(self):
         website_ids = Website.objects.actived().values_list('id', flat=True)
         website_ids = list(website_ids)
+        print('Danh sach crawl: ', website_ids)
         loop = asyncio.new_event_loop()
         loop.run_until_complete(self.async_crawl(loop, website_ids))
         loop.close()
@@ -132,7 +138,7 @@ class Crawler():
 
     def get_absolute_url(self, web, url):
         is_absolute = bool(urlparse(url).netloc)
-        return url if is_absolute else web.get_url() + url
+        return url if is_absolute else urljoin(web.get_url(), url)
 
 
 blog_crawler = Crawler()

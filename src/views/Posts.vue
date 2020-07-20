@@ -22,8 +22,8 @@
                             Sắp xếp <i class="fas fa-sort-amount-up"></i>
                         </template>
                         <b-dropdown-item
-                            :class="getActiveClass(postsQuery.ordering, 'created')"
-                            @click.prevent="postsQuery.ordering = 'created'">Mới cập nhật</b-dropdown-item>
+                            :class="getActiveClass(postsQuery.ordering, '-created')"
+                            @click.prevent="postsQuery.ordering = '-created'">Mới cập nhật</b-dropdown-item>
                         <b-dropdown-item
                             :class="getActiveClass(postsQuery.ordering, '-views')"
                             @click.prevent="postsQuery.ordering = '-views'">Xem nhiều</b-dropdown-item>
@@ -74,7 +74,7 @@ export default {
     data() {
         return {
             postsQuery: {
-                ordering: 'created',
+                ordering: '-created',
                 language: '',
                 search: '',
             },

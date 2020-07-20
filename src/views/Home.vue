@@ -9,8 +9,8 @@
                     <li class="list-inline-item mr-3 active">
                         <a
                             href=""
-                            :class="getActiveClass(postsQuery.ordering, 'created')"
-                            @click.prevent="postsQuery.ordering = 'created'">Mới cập nhật</a>
+                            :class="getActiveClass(postsQuery.ordering, '-created')"
+                            @click.prevent="postsQuery.ordering = '-created'">Mới cập nhật</a>
                     </li>
                     <li class="list-inline-item mr-3">
                         <a
@@ -120,7 +120,7 @@ export default {
     data() {
         return {
             postsQuery: {
-                ordering: 'created',
+                ordering: '-created',
                 language: '',
                 search: '',
             },

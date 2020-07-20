@@ -10,7 +10,7 @@
                     <b-nav-item :to="{ name: 'play-list' }">Danh sách</b-nav-item>
                 </b-navbar-nav>
                 <b-navbar-nav class="ml-auto">
-                    <b-nav-form>
+                    <b-nav-form @submit.prevent="onSubmit()">
                         <div class="input-group bg-white rounded-pill mr-2">
                             <div class="input-group-prepend">
                                 <span class="input-group-text bg-transparent border-0">
@@ -38,6 +38,11 @@
 </template>
 <script>
 export default {
-    name: 'TheNav'
+    name: 'TheNav',
+    methods: {
+        onSubmit() {
+            this.$router.push({ name: 'search' })
+        },
+    }
 }
 </script>

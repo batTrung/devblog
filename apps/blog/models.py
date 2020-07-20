@@ -2,6 +2,7 @@ from urllib.parse import urlparse
 
 from django.conf import settings
 from django.db import models
+from django.utils.timesince import timesince
 
 from apps.common.behaviors import TitleSlugable
 from taggit.managers import TaggableManager
@@ -10,7 +11,12 @@ from .constants import Language
 from .managers import WebsiteManager
 
 
+class Category(TitleSlugable):
+    pass
+
+
 class Website(models.Model):
+    name = models.CharField(max_length=200, blank=True, null=True)
     posts_url = models.URLField(unique=True)
     post_tag = models.CharField(max_length=200)
     link_tag = models.CharField(max_length=200)
@@ -25,7 +31,7 @@ class Website(models.Model):
         default=Language.VIETNAM,
     )
     created = models.DateTimeField(auto_now_add=True)
-    subscribe = models.ManyToManyField(
+    subscribers = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         related_name='subscribes',
         blank=True,
@@ -36,12 +42,17 @@ class Website(models.Model):
 
     objects = WebsiteManager()
 
-    def __str__(self):
-        return self.get_name()
+    class Meta:
+        ordering = ('-created',)
 
-    def get_name(self):
-        netloc = urlparse(self.get_url()).netloc
-        return netloc
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.name:
+            name = urlparse(self.get_url()).netloc
+            self.name = name
+        super(Website, self).save(*args, **kwargs)
 
     def get_url(self):
         parse_url = urlparse(self.posts_url)._replace(
@@ -51,6 +62,12 @@ class Website(models.Model):
         )
         return str(parse_url.geturl())
 
+    def timeago(self):
+        return timesince(self.created)
+
+    def count_views(self):
+        return sum(post.views for post in self.posts.all())
+
 
 class Post(TitleSlugable):
     website = models.ForeignKey(Website, on_delete=models.CASCADE, related_name='posts')
@@ -58,10 +75,35 @@ class Post(TitleSlugable):
     views = models.PositiveIntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     photo = models.ImageField(upload_to='posts/', blank=True, null=True)
-    users_saved = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='posts_saved')
+    users_saved = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='posts_saved', blank=True)
 
     class Meta:
-        ordering = ('created',)
+        ordering = ('-created',)
 
-    def get_photo_obj(self):
-        return self.photo if self.photo else self.website.photo
+    def get_photo_url(self):
+        return self.photo.url if self.photo else self.website.photo.url
+
+    def timeago(self):
+        return timesince(self.created)
+
+
+class PlayList(TitleSlugable):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='playlist_created',
+    )
+    posts = models.ManyToManyField(Post, blank=True)
+    views = models.PositiveIntegerField(default=0)
+    users_like = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+    )
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('-updated',)
+
+    def timeago(self):
+        return timesince(self.updated)

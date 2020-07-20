@@ -17,6 +17,7 @@ class TitleSlugable(models.Model):
         max_length=250,
         db_index=True,
         blank=True,
+        unique=True,
     )
 
     class Meta:
