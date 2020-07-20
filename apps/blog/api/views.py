@@ -52,7 +52,7 @@ class PlaylistSerializer(ListAPIView):
     ordering_fields = (
         'updated',
         'views',
-        'users_like',
+        'users_star',
     )
     name = 'playlist-list'
 

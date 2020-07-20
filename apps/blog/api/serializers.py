@@ -50,8 +50,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     def get_photo_url(self, post):
         request = self.context.get('request')
-        photo_url = post.get_photo_url()
-        return request.build_absolute_uri(photo_url)
+        return request.build_absolute_uri(post.thumbnail_photo_obj().url)
 
 
 class PostPhotoSerializer(serializers.ModelSerializer):
@@ -76,7 +75,7 @@ class PlayListSerializer(serializers.ModelSerializer):
             'slug',
             'posts',
             'views',
-            'users_like',
+            'users_star',
             'created',
             'updated',
             'timesince',

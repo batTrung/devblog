@@ -1,3 +1,4 @@
+from PIL import Image
 from urllib.parse import urlparse
 
 from django.conf import settings
@@ -6,6 +7,7 @@ from django.utils.timesince import timesince
 
 from apps.common.behaviors import TitleSlugable
 from taggit.managers import TaggableManager
+from sorl.thumbnail import get_thumbnail
 
 from .constants import Language
 from .managers import WebsiteManager
@@ -87,11 +89,21 @@ class Post(TitleSlugable):
     class Meta:
         ordering = ('-created',)
 
-    def get_photo_url(self):
-        return self.photo.url if self.photo else self.website.photo.url
+    def get_photo_obj(self):
+        return self.photo if self.photo else self.website.photo
 
     def timeago(self):
         return timesince(self.created)
+
+    def thumbnail_photo_obj(self):
+        photo_obj = self.get_photo_obj()
+        image_obj = Image.open(photo_obj)
+        if image_obj.mode == 'RGB':
+            print('YES: ', image_obj.mode)
+            return get_thumbnail(photo_obj, '245x161', quality=90)
+        else:
+            print('NO: ', image_obj.mode)
+            return photo_obj
 
 
 class PlayList(TitleSlugable):
@@ -102,7 +114,7 @@ class PlayList(TitleSlugable):
     )
     posts = models.ManyToManyField(Post, blank=True)
     views = models.PositiveIntegerField(default=0)
-    users_like = models.ManyToManyField(
+    users_star = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         blank=True,
     )

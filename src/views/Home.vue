@@ -55,8 +55,8 @@
                 <li class="list-inline-item mr-3">
                     <a 
                         href=""
-                        :class="getActiveClass(playlistsQuery.ordering, '-users_like')"
-                        @click.prevent="playlistsQuery.ordering = '-users_like'">Nhiều sao
+                        :class="getActiveClass(playlistsQuery.ordering, '-users_star')"
+                        @click.prevent="playlistsQuery.ordering = '-users_star'">Nhiều sao
                     </a>
                 </li>
                 <li class="list-inline-item mr-3">
@@ -161,7 +161,7 @@ export default {
                 topic: '',
             },
             playlistsQuery: {
-                ordering: '-users_like',
+                ordering: '-users_star',
                 search: '',
             },
         }

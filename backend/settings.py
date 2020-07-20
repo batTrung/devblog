@@ -33,6 +33,7 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'corsheaders',
     'django_filters',
+    'sorl.thumbnail',
 ]
 
 LOCAL_APPS = [
@@ -204,3 +205,7 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:8080',
 ]
+
+#  ignore error OSError: cannot write mode RGBA as JPEG
+
+THUMBNAIL_PRESERVE_FORMAT = True

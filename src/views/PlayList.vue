@@ -15,8 +15,8 @@
                 <li class="list-inline-item mr-3">
                     <a 
                         href=""
-                        :class="getActiveClass(playlistsQuery.ordering, '-users_like')"
-                        @click.prevent="playlistsQuery.ordering = '-users_like'">Nhiều sao
+                        :class="getActiveClass(playlistsQuery.ordering, '-users_star')"
+                        @click.prevent="playlistsQuery.ordering = '-users_star'">Nhiều sao
                     </a>
                 </li>
                 <li class="list-inline-item mr-3">
@@ -38,7 +38,8 @@
                         type="text"
                         class="form-control border-0 pb-2 mr-4 pl-0"
                         placeholder="Tìm kiếm danh sách"
-                        v-model="playlistsQuery.search">
+                        v-model.lazy="playlistsQuery.search"
+                        @keyup="playlistsQuery.search = $event.target.value">
                 </div>
             </b-form>
         </div>

@@ -19,7 +19,7 @@
                     <div class="card-body bg-white shadow-sm">
                         <div class="post-meta mb-2 small text-gray">
                             <span class="mr-3"><i class="ti ti-eye text-dark mr-1"></i>{{ playlist.views }}</span>
-                            <span class="mr-3"><i class="fas fa-star text-warning mr-1"></i>{{ playlist.users_like.length }}</span>
+                            <span class="mr-3"><i class="fas fa-star text-warning mr-1"></i>{{ playlist.users_star.length }}</span>
                             <span class=""><i class="ti ti-timer text-primary mr-1"></i>{{ playlist.timesince }} trước</span>
                         </div>
                         <a href="">
@@ -56,7 +56,7 @@ export default {
             required: false,
             default: () => {
                 return {
-                    ordering: '-users_like',
+                    ordering: '-users_star',
                     search: '',
                 }
             },

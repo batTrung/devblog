@@ -20,7 +20,7 @@ class WebsiteAdmin(admin.ModelAdmin):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     def photo_display(self, obj):
-        return format_html(f'<img src="{obj.get_photo_url()}" style="width: 50px; height:50px;" />')
+        return format_html(f'<img src="{obj.get_photo_obj().url}" style="width: 50px; height:50px;" />')
 
     list_display = ('title', 'link', 'photo_display',)
 
