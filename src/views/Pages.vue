@@ -26,7 +26,7 @@
                             @click.prevent="pagesQuery.ordering = '-created'">Mới cập nhật</b-dropdown-item>
                         <b-dropdown-item
                             :class="getActiveClass(pagesQuery.ordering, '-subscribers')"
-                            @click.prevent="pagesQuery.ordering = '-subscribers'">Phổ biến</b-dropdown-item>
+                            @click.prevent="pagesQuery.ordering = '-subscribers'">Nhiều lượt đăng ký</b-dropdown-item>
                         <b-dropdown-item
                             :class="getActiveClass(pagesQuery.ordering, '-views')"
                             @click.prevent="pagesQuery.ordering = '-views'">Xem nhiều</b-dropdown-item>

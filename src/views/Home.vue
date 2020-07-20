@@ -50,7 +50,7 @@
                     <a 
                         href=""
                         :class="getActiveClass(playlistsQuery.ordering, '-users_like')"
-                        @click.prevent="playlistsQuery.ordering = '-users_like'">Phổ biến
+                        @click.prevent="playlistsQuery.ordering = '-users_like'">Nhiều sao
                     </a>
                 </li>
                 <li class="list-inline-item mr-3">
@@ -81,7 +81,7 @@
                     <a
                         href=""
                         :class="getActiveClass(pagesQuery.ordering, '-subscribers')"
-                        @click.prevent="pagesQuery.ordering = '-subscribers'">Phổ biến
+                        @click.prevent="pagesQuery.ordering = '-subscribers'">Nhiều lượt đăng ký
                     </a>
                 </li>
                 <li class="list-inline-item mr-3">

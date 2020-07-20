@@ -1,56 +1,211 @@
 <template>
     <div>
         <div class="row">
-             <div class="col-12 col-sm-10 col-md-6 col-lg-12">
-    <div class="card border-light mb-4 animate-up-5">
-        <div class="row no-gutters align-items-center">
-            <div class="col-12 col-lg-6 col-xl-5">
-                <a href="#">
-                    <img src="https://themesberg.com/docs/spaces/assets/img/private-office.jpg" alt="private office" class="card-img p-2 rounded-xl">
-                </a>
-            </div>
-            <div class="col-12 col-lg-6 col-xl-7">
-                <div class="card-body">
-                    <a href="#">
-                        <h4 class="h5">Collaborative Workspace</h4>
-                    </a>
-                    <div class="d-flex my-4">
-                        <span class="star fas fa-star text-warning"></span> 
-                        <span class="star fas fa-star text-warning"></span> 
-                        <span class="star fas fa-star text-warning"></span> 
-                        <span class="star fas fa-star text-warning"></span> 
-                        <span class="star fas fa-star text-warning"></span>
-                        <span class="badge badge-pill badge-primary ml-2">5.0</span>
-                    </div> 
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item small p-0"><span class="fas fa-map-marker-alt mr-2"></span>New York, Manhattan, USA</li>
-                        <li class="list-group-item small p-0"><span class="fas fa-bullseye mr-2"></span>Old Street (2 mins walk)</li>
-                    </ul>
-                    <div class="d-flex justify-content-between">
-                        <div class="col pl-0">
-                            <span class="text-muted font-small d-block mb-2">Monthly</span>
-                            <span class="h5 text-dark font-weight-bold">500$</span>
+            <aside class="col-12 col-lg-3 d-none d-lg-block order-2">
+                <div class="card border-light p-3 mb-3">
+                    <div>
+                      <span class="h6 font-weight-bold text-underline text-uppercase">Sắp xếp</span>
+                    </div>
+                    <b-form-group>
+                      <b-form-radio v-model="selected" name="some-radios" value="A">Mới cập nhật</b-form-radio>
+                      <b-form-radio v-model="selected" name="some-radios" value="B">Lượt xem</b-form-radio>
+                      <b-form-radio v-model="selected" name="some-radios" value="B">Lượt thích</b-form-radio>
+                      <b-form-radio v-model="selected" name="some-radios" value="B">Lượt đăng ký</b-form-radio>
+                      <b-form-radio v-model="selected" name="some-radios" value="B">Nhiều sao</b-form-radio>
+                    </b-form-group>
+                </div>
+                <div class="card border-light p-3 mb-3">
+                    <div>
+                      <span class="h6 font-weight-bold text-underline text-uppercase">Loại tìm kiếm</span>
+                    </div>
+                    <b-form-group>
+                      <b-form-radio v-model="selected" name="some-radios" value="A">Tất cả</b-form-radio>
+                      <b-form-radio v-model="selected" name="some-radios" value="A">Bài viết</b-form-radio>
+                      <b-form-radio v-model="selected" name="some-radios" value="B">Trang</b-form-radio>
+                      <b-form-radio v-model="selected" name="some-radios" value="B">Danh sách</b-form-radio>
+                    </b-form-group>
+                </div>
+                <div class="card border-light p-3 mb-3">
+                    <div>
+                      <span class="h6 font-weight-bold text-underline text-uppercase">Chủ đề</span>
+                    </div>
+                    <b-form-group>
+                        <b-form-checkbox
+                          id="checkbox-1"
+                          v-model="status"
+                          name="checkbox-1"
+                          value="accepted"
+                          unchecked-value="not_accepted"
+                        >
+                          Web Development
+                        </b-form-checkbox>
+                        <b-form-checkbox
+                          id="checkbox-2"
+                          v-model="status"
+                          name="checkbox-2"
+                          value="accepted"
+                          unchecked-value="not_accepted"
+                        >
+                          Machine Learning
+                        </b-form-checkbox>
+                        <b-form-checkbox
+                          id="checkbox-3"
+                          v-model="status"
+                          name="checkbox-3"
+                          value="accepted"
+                          unchecked-value="not_accepted"
+                        >
+                          Programming Languages
+                        </b-form-checkbox>
+                        <b-form-checkbox
+                          id="checkbox-3"
+                          v-model="status"
+                          name="checkbox-3"
+                          value="accepted"
+                          unchecked-value="not_accepted"
+                        >
+                          Software Engineering
+                        </b-form-checkbox>
+                        <b-form-checkbox
+                          id="checkbox-3"
+                          v-model="status"
+                          name="checkbox-3"
+                          value="accepted"
+                          unchecked-value="not_accepted"
+                        >
+                          Design and illustration
+                        </b-form-checkbox>
+                        <b-form-checkbox
+                          id="checkbox-3"
+                          v-model="status"
+                          name="checkbox-3"
+                          value="accepted"
+                          unchecked-value="not_accepted"
+                        >
+                          Computers & Technology
+                        </b-form-checkbox>
+                    </b-form-group>
+                </div>
+                <div class="card border-light p-3 mb-3">
+                    <div>
+                      <span class="h6 font-weight-bold text-underline text-uppercase">Ngôn ngữ</span>
+                    </div>
+                    <b-form-group class="ml-2">
+                      <b-form-radio v-model="selected" name="some-radios" value="A">Tất cả</b-form-radio>
+                      <b-form-radio v-model="selected" name="some-radios" value="B">Tiếng Việt</b-form-radio>
+                      <b-form-radio v-model="selected" name="some-radios" value="B">English</b-form-radio>
+                    </b-form-group>
+                </div>
+            </aside>
+            <div class="col-12 col-lg-9">
+                <div class="row">
+                    <div class="col-12 col-sm-10 col-md-6 col-lg-12 mb-2">
+                        <div class="card h-100 d-flex flex-column justify-content-between border-light">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col-12 col-lg-6 col-xl-4 p-2">
+                                    <a href="#">
+                                        <img src="https://themesberg.com/docs/spaces/assets/img/private-office.jpg" alt="private office" class="card-img p-2">
+                                    </a>
+                                </div>
+                                <div class="col-12 col-lg-6 col-xl-8">
+                                    <div class="card-body">
+                                       <a href="#">
+                                            <h4 class="h5">Giới thiệu về React Spectrum, design system của Adobe</h4>
+                                        </a>
+                                        <div class="d-flex my-3">
+                                            <div class="post-meta mb-2 small text-gray"><span class="mr-3"><i class="ti ti-eye text-dark mr-1"></i>0</span><span class="mr-3"><i class="far fa-heart text-danger mr-1"></i>0</span><span><i class="ti ti-timer text-primary mr-1"></i>18&nbsp;phút trước</span></div>
+                                        </div>
+                                        <a href="/pages/viblo.asia" class="small"><span class="b-avatar mr-1 badge-secondary rounded-circle" style="width: 2.5em; height: 2.5em;"><span class="b-avatar-img"><img src="http://localhost:8000/media/websites/filters.png" alt="avatar"></span>
+                                            </span> viblo.asia </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col">
-                            <span class="text-muted font-small d-block mb-2">People</span>
-                            <span class="h5 text-dark font-weight-bold">12</span>
+                    </div>
+                    <div class="col-12 col-sm-10 col-md-6 col-lg-12 mb-2">
+                        <div class="card h-100 d-flex flex-column justify-content-between border-light">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col-12 col-lg-6 col-xl-4 text-center p-2">
+                                    <a href="#">
+                                        <b-avatar src="https://themesberg.com/docs/spaces/assets/img/private-office.jpg" size="10rem"></b-avatar>
+                                    </a>
+                                </div>
+                                <div class="col-12 col-lg-6 col-xl-8">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <a href="#">
+                                                <h4 class="h5">Dev.tube</h4>
+                                            </a>
+                                            <button class="btn btn-danger btn-sm">Đăng ký</button>
+                                        </div>
+                                        <p class="my-3">
+                                            I kinda love this github new feature about readme profile files. So i decided to create profile views counter, but then
+                                        </p>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="col pl-0">
+                                                <span class="text-muted font-small d-block mb-2">Lượt xem</span>
+                                                <span class="h5 text-dark font-weight-bold">500$</span>
+                                            </div>
+                                            <div class="col">
+                                                <span class="text-muted font-small d-block mb-2">Bài viết</span>
+                                                <span class="h5 text-dark font-weight-bold">12</span>
+                                            </div>
+                                            <div class="col pr-0">
+                                                <span class="text-muted font-small d-block mb-2">Đăng ký</span>
+                                                <span class="h5 text-dark font-weight-bold">1200</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col pr-0">
-                            <span class="text-muted font-small d-block mb-2">Sq.Ft</span>
-                            <span class="h5 text-dark font-weight-bold">1200</span>
+                    </div>
+                    <div class="col-12 col-sm-10 col-md-6 col-lg-12 mb-2">
+                        <div class="card h-100 d-flex flex-column justify-content-between border-light">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col-12 col-lg-6 col-xl-4 p-2">
+                                    <div class="b-playlist">
+                                        <div class="v-img">
+                                            <img src="http://azyrusthemes.com/circlevideo/images/playlist-1.png" alt="" class="l-1">
+                                            <img src="http://azyrusthemes.com/circlevideo/images/video1-2.png" alt="" class="l-2">
+                                            <a href="">
+                                                <img src="http://azyrusthemes.com/circlevideo/images/video1-2.png" alt="" class="l-3">
+                                            </a>
+                                            <div class="items">3</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 col-xl-8">
+                                    <div class="card-body">
+                                        <a href="#">
+                                                <h4 class="h5">Dev.tube</h4>
+                                            </a>
+                                        <div class="d-flex my-3">
+                                            <div class="post-meta mb-2 small text-gray"><span class="mr-3"><i class="ti ti-eye text-dark mr-1"></i>3</span><span class="mr-3"><i class="fas fa-star text-warning mr-1"></i>0</span><span><i class="ti ti-timer text-primary mr-1"></i>10&nbsp;giờ, 28&nbsp;phút trước</span></div>
+                                        </div>
+                                        <a href="/pages/viblo.asia" class="small"><span class="b-avatar mr-1 badge-secondary rounded-circle" style="width: 2.5em; height: 2.5em;"><span class="b-avatar-img"><img src="http://localhost:8000/media/websites/filters.png" alt="avatar"></span>
+                                            </span> viblo.asia </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-        </div>
-    </div>
 </template>
-
 <script>
 export default {
     name: 'Search',
+    data() {
+      return {
+        ordering: '-created',
+        type: '',
+        category: '',
+        language: '',
+        search: '',
+      }
+    },
 }
 </script>

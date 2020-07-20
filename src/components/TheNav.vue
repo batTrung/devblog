@@ -17,7 +17,7 @@
                                     <i class="ti ti-search"></i>
                                 </span>
                             </div>
-                            <input type="text" class="form-control border-0 pb-2 mr-4 pl-0" placeholder="Tìm kiếm" required="">
+                            <input type="text" class="form-control border-0 pb-2 mr-4 pl-0" placeholder="Tìm kiếm">
                             <span style="margin-top: 3.5px; margin-right: 5px;">
                                 <b-button type="submit" pill variant="primary" size="sm">Search</b-button>
                             </span>

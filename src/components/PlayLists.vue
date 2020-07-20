@@ -13,7 +13,7 @@
                                 <img src="http://azyrusthemes.com/circlevideo/images/video1-2.png" alt="" class="l-3">
                             </a>
                             <div class="items">{{ playlist.posts.length }}</div>
-                            <div class="v-add left" v-show="hoverPlayListId == index" v-tooltip="'Thích danh sách'"><i class="fas fa-star text-warning"></i></div>
+                            <div class="v-add left" v-show="hoverPlayListId == index" v-tooltip="'Thêm sao cho danh sách'"><i class="fas fa-star text-warning"></i></div>
                         </div>
                     </div>
                     <div class="card-body bg-white shadow-sm">

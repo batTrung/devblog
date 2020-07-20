@@ -379,3 +379,29 @@ ul li>a.color-active {
 li.color-active a {
     color: #ea2c5a !important;
 }
+
+.order-2 {
+    order: 2;
+}
+
+.mh-10 {
+    max-height: 10rem;
+}
+
+.text-heart {
+    color: #f6659a !important
+}
+
+span.text-underline {
+    text-decoration: none;
+    position: relative;
+}
+
+span.text-underline:after {
+    content: '';
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 1px;
+    border-bottom: 1px solid #b8b8b8;
+}
