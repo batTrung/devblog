@@ -33,12 +33,12 @@
                       <span class="h6 font-weight-bold text-underline text-uppercase">Ngôn ngữ</span>
                     </div>
                     <b-form-group class="ml-2">
-                      <b-form-checkbox-group
+                      <b-form-radio-group
                         v-model="searchQuery.language"
                         name="language"
                         :options="options.language"
                         stacked>
-                      </b-form-checkbox-group>
+                      </b-form-radio-group>
                     </b-form-group>
                 </div>
                 <div class="card border-light p-3 mb-3">
@@ -46,20 +46,22 @@
                       <span class="h6 font-weight-bold text-underline text-uppercase">Chủ đề</span>
                     </div>
                     <b-form-group class="ml-2">
-                        <b-form-checkbox-group
+                        <b-form-radio-group
                           id="topic"
                           v-model="searchQuery.topic"
                           name="topic"
                           :options="getTopicOptions"
                           stacked
                         >
-                        </b-form-checkbox-group>
+                        </b-form-radio-group>
                     </b-form-group>
                 </div>
             </aside>
             <div class="col-12 col-lg-9">
                 <b-overlay :show="isShowOverlay" opacity="0.7" rounded="sm">
-                    <div class="post" v-show="posts.length">
+                    <div
+                        class="post"
+                        v-show="posts.length && checkCategory('post')">
                         <h6>{{ countPost }} <span class="font-weight-bold">Bài viết</span></h6>
                         <div class="row">
                             <div
@@ -131,7 +133,9 @@
                         </div>
                         <hr>
                     </div>
-                    <div class="website" v-show="pages.length">
+                    <div
+                        class="website"
+                        v-show="pages.length && checkCategory('page')">
                         <h6>{{ countPage }} <span class="font-weight-bold">Trang</span></h6>
                         <div class="row">
                             <div
@@ -202,7 +206,9 @@
                         </div>
                         <hr>
                     </div>
-                    <div class="playlist" v-show="playLists.length">
+                    <div
+                        class="playlist"
+                        v-show="playLists.length && checkCategory('playlist')">
                         <h6>{{ countPlayList }} <span class="font-weight-bold">Danh sách</span></h6>
                         <div class="row">
                             <div
@@ -304,8 +310,8 @@ export default {
         isPlayListLoading: false,
         isShowOverlay: false,
         num_post_each_page: 4,
-        num_web_each_page: 2,
-        num_playlist_each_page: 1,
+        num_web_each_page: 3,
+        num_playlist_each_page: 3,
         postsQuery: {
             search: '',
             ordering: '-created',
@@ -326,8 +332,8 @@ export default {
           search: '',
           ordering: '-created',
           category: [],
-          language: [],
-          topic: [],
+          language: '',
+          topic: '',
         },
         options: {
           ordering: [
@@ -454,6 +460,12 @@ export default {
             this.$store.dispatch(FETCH_POSTS, this.getPostsQuery)
             this.$store.dispatch(FETCH_PAGES, this.getPagesQuery)
             this.$store.dispatch(FETCH_PLAYLISTS, this.getPlayListsQuery)
+        },
+        checkCategory(value) {
+            const categories = this.searchQuery.category
+            return categories.length === 3
+                || categories.length === 0
+                || categories.includes(value)
         },
         loadPost() {
             const params = Object.assign(
