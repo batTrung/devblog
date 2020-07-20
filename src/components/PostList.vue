@@ -69,6 +69,7 @@ export default {
                     ordering: '-created',
                     language: '',
                     search: '',
+                    topic: '',
                 }
             },
         },

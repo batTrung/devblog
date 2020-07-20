@@ -3,7 +3,7 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from ..models import Topic, Website, Post, PlayList
 from .serializers import WebsiteSerializer, PostSerializer, PlayListSerializer, TopicSerializer
 from .paginations import WebsitePagination, PostPagination, PlayListPagination
-from .filters import PostFilter, WebsiteFilter
+from .filters import PostFilter, WebsiteFilter, TopicFilter
 
 
 class WebsiteList(ListAPIView):
@@ -60,4 +60,5 @@ class PlaylistSerializer(ListAPIView):
 class TopicList(ListAPIView):
     queryset = Topic.objects.all()
     serializer_class = TopicSerializer
+    filterset_class = TopicFilter
     name = 'topic-list'

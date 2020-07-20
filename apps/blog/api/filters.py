@@ -3,7 +3,7 @@ from django.db.models import Sum
 import django_filters
 from django_filters.rest_framework import FilterSet
 
-from ..models import Post, Website
+from ..models import Topic, Post, Website
 from ..constants import Language
 
 
@@ -14,6 +14,7 @@ class PostFilter(FilterSet):
         method="filter_language",
     )
     search = django_filters.CharFilter(field_name="title", lookup_expr='icontains')
+    topic = django_filters.AllValuesFilter(field_name="website__topic__title")
 
     class Meta:
         model = Post
@@ -21,6 +22,14 @@ class PostFilter(FilterSet):
 
     @staticmethod
     def filter_language(queryset, name, value):
+        if value:
+            return queryset.filter(
+                website__language=value
+            )
+        return queryset
+
+    @staticmethod
+    def filter_topic(queryset, name, value):
         if value:
             return queryset.filter(
                 website__language=value
@@ -49,3 +58,17 @@ class WebsiteFilter(FilterSet):
         elif value == '-views':
             queryset = queryset.order_by('-count_views')
         return queryset
+
+
+class TopicFilter(FilterSet):
+    website = django_filters.BooleanFilter(method="filter_website")
+
+    class Meta:
+        model = Topic
+        fields = ('website',)
+
+    @staticmethod
+    def filter_website(queryset, name, value):
+        if value:
+            queryset = queryset.filter(websites__isnull=False)
+        return queryset.distinct()

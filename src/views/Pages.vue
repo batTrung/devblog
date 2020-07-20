@@ -100,7 +100,7 @@ export default {
         },
     },
     mounted() {
-        this.$store.dispatch(FETCH_TOPICS)
+        this.$store.dispatch(FETCH_TOPICS, { website: true })
     },
 }
 </script>

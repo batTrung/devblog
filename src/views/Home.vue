@@ -30,10 +30,16 @@
                         <template slot="button-content">
                             Chủ đề
                         </template>
-                        <b-dropdown-item>Web Deveopment</b-dropdown-item>
-                        <b-dropdown-item>Deep Learning</b-dropdown-item>
-                        <b-dropdown-item>Machine Learning</b-dropdown-item>
-                        <b-dropdown-item>DevOps</b-dropdown-item>
+                        <b-dropdown-item
+                            :class="getActiveClass(postsQuery.topic, '')"
+                            @click.prevent="postsQuery.topic = ''">Tất cả</b-dropdown-item>
+                        <b-dropdown-item
+                            v-for="(topic, index) in topics"
+                            :key="index"
+                            :class="getActiveClass(postsQuery.topic, topic.title)"
+                            @click.prevent="postsQuery.topic = topic.title">
+                            {{ topic.title }}
+                        </b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-nav>
             </div>
@@ -73,31 +79,50 @@
                 :query="playlistsQuery" />
         </div>
         <div class="page">
-            <ul class="list-inline mb-2">
-                <li class="list-inline-item mr-3">
-                    <router-link :to="{ name: 'pages' }" class="h5">Trang</router-link>
-                </li>
-                <li class="list-inline-item mr-3">
-                    <a
-                        href=""
-                        :class="getActiveClass(pagesQuery.ordering, '-subscribers')"
-                        @click.prevent="pagesQuery.ordering = '-subscribers'">Nhiều lượt đăng ký
-                    </a>
-                </li>
-                <li class="list-inline-item mr-3">
-                    <a
-                        href=""
-                        :class="getActiveClass(pagesQuery.ordering, '-created')"
-                        @click.prevent="pagesQuery.ordering = '-created'">Mới cập nhật
-                    </a>
-                </li>
-                <li class="list-inline-item mr-3">
-                    <a
-                        href=""
-                        :class="getActiveClass(pagesQuery.ordering, '-views')"
-                        @click.prevent="pagesQuery.ordering = '-views'">Xem nhiều</a>
-                </li>
-            </ul>
+            <div class="d-flex justify-content-between">
+                <ul class="list-inline mb-2">
+                    <li class="list-inline-item mr-3">
+                        <router-link :to="{ name: 'pages' }" class="h5">Trang</router-link>
+                    </li>
+                    <li class="list-inline-item mr-3">
+                        <a
+                            href=""
+                            :class="getActiveClass(pagesQuery.ordering, '-subscribers')"
+                            @click.prevent="pagesQuery.ordering = '-subscribers'">Nhiều lượt đăng ký
+                        </a>
+                    </li>
+                    <li class="list-inline-item mr-3">
+                        <a
+                            href=""
+                            :class="getActiveClass(pagesQuery.ordering, '-created')"
+                            @click.prevent="pagesQuery.ordering = '-created'">Mới cập nhật
+                        </a>
+                    </li>
+                    <li class="list-inline-item mr-3">
+                        <a
+                            href=""
+                            :class="getActiveClass(pagesQuery.ordering, '-views')"
+                            @click.prevent="pagesQuery.ordering = '-views'">Xem nhiều</a>
+                    </li>
+                </ul>
+                <b-nav>
+                    <b-nav-item-dropdown right>
+                        <template slot="button-content">
+                            Chủ đề
+                        </template>
+                        <b-dropdown-item
+                            :class="getActiveClass(pagesQuery.topic, '')"
+                            @click.prevent="pagesQuery.topic = ''">Tất cả</b-dropdown-item>
+                        <b-dropdown-item
+                            v-for="(topic, index) in topics"
+                            :key="index"
+                            :class="getActiveClass(pagesQuery.topic, topic.title)"
+                            @click.prevent="pagesQuery.topic = topic.title">
+                            {{ topic.title }}
+                        </b-dropdown-item>
+                    </b-nav-item-dropdown>
+                </b-nav>
+            </div>
             <PageList
                 :num_page="3"
                 :query="pagesQuery" />
@@ -105,9 +130,13 @@
     </div>
 </template>
 <script>
+import { mapGetters } from "vuex"
 import PostList from '@/components/PostList';
 import PageList from '@/components/PageList'
 import PlayLists from '@/components/PlayLists'
+import {
+    FETCH_TOPICS,
+} from '@/store/actions.type'
 
 export default {
     name: 'Home',
@@ -123,6 +152,7 @@ export default {
                 ordering: '-created',
                 language: '',
                 search: '',
+                topic: '',
             },
             pagesQuery: {
                 ordering: '-subscribers',
@@ -136,10 +166,16 @@ export default {
             },
         }
     },
+    computed: {
+        ...mapGetters(['topics'])
+    },
     methods: {
         getActiveClass(a, b) {
             return a == b ? 'color-active' : ''
         },
-    }
+    },
+    mounted() {
+        this.$store.dispatch(FETCH_TOPICS, { website: true })
+    },
 }
 </script>

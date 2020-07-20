@@ -49,11 +49,16 @@
                         <template slot="button-content">
                             Chủ đề
                         </template>
-                        <b-dropdown-item>Tất cả</b-dropdown-item>
-                        <b-dropdown-item>Web Deveopment</b-dropdown-item>
-                        <b-dropdown-item>Deep Learning</b-dropdown-item>
-                        <b-dropdown-item>Machine Learning</b-dropdown-item>
-                        <b-dropdown-item>DevOps</b-dropdown-item>
+                        <b-dropdown-item
+                            :class="getActiveClass(postsQuery.topic, '')"
+                            @click.prevent="postsQuery.topic = ''">Tất cả</b-dropdown-item>
+                        <b-dropdown-item
+                            v-for="(topic, index) in topics"
+                            :key="index"
+                            :class="getActiveClass(postsQuery.topic, topic.title)"
+                            @click.prevent="postsQuery.topic = topic.title">
+                            {{ topic.title }}
+                        </b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-nav>
             </div>
@@ -63,7 +68,11 @@
     </div>
 </template>
 <script>
+import { mapGetters } from "vuex"
 import PostList from '@/components/PostList'
+import {
+    FETCH_TOPICS,
+} from '@/store/actions.type'
 
 export default {
     name: 'Posts',
@@ -71,12 +80,16 @@ export default {
     components: {
         PostList,
     },
+    computed: {
+        ...mapGetters(['topics'])
+    },
     data() {
         return {
             postsQuery: {
                 ordering: '-created',
                 language: '',
                 search: '',
+                topic: '',
             },
         }
     },
@@ -84,6 +97,9 @@ export default {
         getActiveClass(a, b) {
             return a == b ? 'color-active' : ''
         },
+    },
+    mounted() {
+        this.$store.dispatch(FETCH_TOPICS, { website: true })
     },
 }
 </script>
