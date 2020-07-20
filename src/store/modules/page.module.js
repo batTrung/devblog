@@ -12,10 +12,15 @@ import {
 import {
     SET_PAGES,
     SET_PAGE,
+    SET_INFO_PAGE,
 } from '@/store/mutations.type'
 
 const state = {
     pages: [],
+    pageWeb: 1,
+    numPageWeb: 0,
+    countPage: 0,
+    hasNextPage: false,
     currentPage: {},
 }
 
@@ -25,6 +30,18 @@ const getters = {
     },
     page(state) {
       return state.currentPage
+    },
+    pageWeb(state) {
+      return state.pageWeb
+    },
+    numPageWeb(state) {
+      return state.numPageWeb
+    },
+    countPage(state) {
+      return state.countPage
+    },
+    hasNextPage(state) {
+      return state.hasNextPage
     },
 }
 
@@ -39,6 +56,7 @@ const actions = {
       return PagesService.query(params)
           .then(({ data }) => {
               commit(SET_PAGES, data)
+              commit(SET_INFO_PAGE, data)
           })
   },
   async [FETCH_PAGE]({ commit }, slug) {
@@ -56,6 +74,12 @@ const mutations = {
   },
   [SET_PAGE](state, data) {
     state.currentPage = data
+  },
+  [SET_INFO_PAGE](state, data) {
+      state.pageWeb = data.page
+      state.numPageWeb = data.num_page
+      state.countPage = data.count
+      state.hasNextPage = data.has_next
   },
 }
 

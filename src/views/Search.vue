@@ -59,8 +59,8 @@
             </aside>
             <div class="col-12 col-lg-9">
                 <b-overlay :show="isShowOverlay" opacity="0.7" rounded="sm">
-                    <div class="post">
-                        <h6>{{ posts.length }} <span class="font-weight-bold">Bài viết</span></h6>
+                    <div class="post" v-show="posts.length">
+                        <h6>{{ countPost }} <span class="font-weight-bold">Bài viết</span></h6>
                         <div class="row">
                             <div
                                 class="col-12 col-sm-10 col-md-6 col-lg-12 mb-2"
@@ -69,7 +69,10 @@
                                 <div class="card h-100 d-flex flex-column justify-content-between border-light bb-red">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col-12 col-lg-6 col-xl-4 p-2">
-                                            <a :href="post.link" class="position-relative">
+                                            <a
+                                                target="_blank"
+                                                :href="post.link"
+                                                class="position-relative">
                                                 <img 
                                                     :src="post.photo_url"
                                                     :alt="post.title"
@@ -79,7 +82,7 @@
                                         </div>
                                         <div class="col-12 col-lg-6 col-xl-8">
                                             <div class="card-body">
-                                               <a :href="post.link">
+                                               <a :href="post.link" target="_blank">
                                                     <h4 class="h5">{{ post.title }}</h4>
                                                 </a>
                                                 <div class="d-flex my-3">
@@ -113,45 +116,69 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-center mb-3">
-                            <button class="btn-custom btn-success-custom"><i class="fas fa-arrow-down"></i> +5 More</button>
+                        <div v-if="isPostLoading">
+                            <VLoading :show="isPostLoading" class='pb-4' />
+                        </div>
+                        <div v-show="hasNextPost" v-else>
+                            <div class="d-flex justify-content-center mb-3">
+                                <button
+                                    class="btn-custom btn-success-custom"
+                                    @click="loadPost()">
+                                    <i class="fas fa-arrow-down"></i>
+                                    +{{ numRestPost }} More
+                                </button>
+                            </div>
                         </div>
                         <hr>
                     </div>
-                    <div class="website">
-                        <h6>20 <span class="font-weight-bold">Trang</span></h6>
+                    <div class="website" v-show="pages.length">
+                        <h6>{{ countPage }} <span class="font-weight-bold">Trang</span></h6>
                         <div class="row">
-                            <div class="col-12 col-sm-10 col-md-6 col-lg-12 mb-2">
+                            <div
+                                class="col-12 col-sm-10 col-md-6 col-lg-12 mb-2"
+                                v-for="(page, index) in pages"
+                                :key="index">
                                 <div class="card h-100 d-flex flex-column justify-content-between border-light bb-red">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col-12 col-lg-6 col-xl-4 text-center p-2">
-                                            <a href="#">
-                                                <b-avatar src="https://themesberg.com/docs/spaces/assets/img/private-office.jpg" size="10rem"></b-avatar>
-                                            </a>
+                                            <router-link
+                                                :to="{ name: 'page-detail', params: { name: page.name }}">
+                                                <b-avatar
+                                                    size="10rem" 
+                                                    :src="page.photo"
+                                                    class="mr-2">   
+                                                </b-avatar>
+                                            </router-link>
                                         </div>
                                         <div class="col-12 col-lg-6 col-xl-8">
                                             <div class="card-body">
                                                 <div class="d-flex justify-content-between">
                                                     <a href="#">
-                                                        <h4 class="h5">Dev.tube</h4>
+                                                        <h4 class="h5">{{ page.name }}</h4>
                                                     </a>
                                                     <button class="btn-custom btn-danger-custom btn-sm">Đăng ký</button>
                                                 </div>
                                                 <p class="my-3">
-                                                    I kinda love this github new feature about readme profile files. So i decided to create profile views counter, but then
+                                                    {{ page.description|truncatewords(20) }}
                                                 </p>
                                                 <div class="d-flex justify-content-between">
                                                     <div class="col pl-0">
                                                         <span class="text-muted font-small d-block mb-2">Lượt xem</span>
-                                                        <span class="h5 text-dark font-weight-bold">500$</span>
+                                                        <span class="h5 text-dark font-weight-bold">
+                                                            {{ page.countViews }}
+                                                        </span>
                                                     </div>
                                                     <div class="col">
                                                         <span class="text-muted font-small d-block mb-2">Bài viết</span>
-                                                        <span class="h5 text-dark font-weight-bold">12</span>
+                                                        <span class="h5 text-dark font-weight-bold">
+                                                            {{ page.post_count }}
+                                                        </span>
                                                     </div>
                                                     <div class="col pr-0">
                                                         <span class="text-muted font-small d-block mb-2">Đăng ký</span>
-                                                        <span class="h5 text-dark font-weight-bold">1200</span>
+                                                        <span class="h5 text-dark font-weight-bold">
+                                                            {{ page.subscribers.length }}
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -160,15 +187,28 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-center mb-3">
-                            <button class="btn-custom btn-success-custom"><i class="fas fa-arrow-down"></i> +5 More</button>
+                        <div v-if="isPageLoading">
+                            <VLoading :show="isPageLoading" class='pb-4' />
+                        </div>
+                        <div v-show="hasNextPage" v-else>
+                            <div class="d-flex justify-content-center mb-3">
+                                <button
+                                    class="btn-custom btn-success-custom"
+                                    @click="loadPage()">
+                                    <i class="fas fa-arrow-down"></i>
+                                    +{{ numRestPage }} More
+                                </button>
+                            </div>
                         </div>
                         <hr>
                     </div>
-                    <div class="playlist">
-                        <h6>3 <span class="font-weight-bold">Danh sách</span></h6>
+                    <div class="playlist" v-show="playLists.length">
+                        <h6>{{ countPlayList }} <span class="font-weight-bold">Danh sách</span></h6>
                         <div class="row">
-                            <div class="col-12 col-sm-10 col-md-6 col-lg-12 mb-2">
+                            <div
+                                class="col-12 col-sm-10 col-md-6 col-lg-12 mb-2"
+                                v-for="(playlist, index) in playLists"
+                                :key="index">
                                 <div class="card h-100 d-flex flex-column justify-content-between border-light bb-red">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col-12 col-lg-6 col-xl-4 p-2">
@@ -185,22 +225,47 @@
                                         </div>
                                         <div class="col-12 col-lg-6 col-xl-8">
                                             <div class="card-body">
-                                                <a href="#">
-                                                        <h4 class="h5">Dev.tube</h4>
-                                                    </a>
+                                                <a href="">
+                                                    <h4 class="h5">{{ playlist.title }}</h4>
+                                                </a>
                                                 <div class="d-flex my-3">
-                                                    <div class="post-meta mb-2 small text-gray"><span class="mr-3"><i class="ti ti-eye text-dark mr-1"></i>3</span><span class="mr-3"><i class="fas fa-star text-warning mr-1"></i>0</span><span><i class="ti ti-timer text-primary mr-1"></i>10&nbsp;giờ, 28&nbsp;phút trước</span></div>
+                                                    <div class="post-meta mb-2 small text-gray">
+                                                        <span class="mr-3">
+                                                            <i class="ti ti-eye text-dark mr-1"></i>
+                                                            {{ playlist.views }}
+                                                        </span>
+                                                        <span class="mr-3">
+                                                            <i class="fas fa-star text-warning mr-1"></i>
+                                                            {{ playlist.users_star.length }}
+                                                        </span>
+                                                        <span>
+                                                            <i class="ti ti-timer text-primary mr-1"></i>
+                                                            {{ playlist.timesince }} trước
+                                                        </span>
+                                                    </div>
                                                 </div>
-                                                <a href="/pages/viblo.asia" class="small"><span class="b-avatar mr-1 badge-secondary rounded-circle" style="width: 2.5em; height: 2.5em;"><span class="b-avatar-img"><img src="http://localhost:8000/media/websites/filters.png" alt="avatar"></span>
-                                                    </span> viblo.asia </a>
+                                                <a href="" class="small">
+                                                    <span class="b-avatar mr-1 badge-secondary rounded-circle" style="width: 2.5em; height: 2.5em;"><span class="b-avatar-img"><img src="http://localhost:8000/media/websites/filters.png" alt="avatar"></span>
+                                                    </span> {{ playlist.user }}
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-center mb-3">
-                            <button class="btn-custom btn-success-custom"><i class="fas fa-arrow-down"></i> +5 More</button>
+                        <div v-if="isPlayListLoading">
+                            <VLoading :show="isPlayListLoading" class='pb-4' />
+                        </div>
+                        <div v-show="hasNextPlayList" v-else>
+                            <div class="d-flex justify-content-center mb-3">
+                                <button
+                                    class="btn-custom btn-success-custom"
+                                    @click="loadPlayList()">
+                                    <i class="fas fa-arrow-down"></i>
+                                    +{{ numRestPlayList }} More
+                                </button>
+                            </div>
                         </div>
                         <hr>
                     </div>
@@ -211,18 +276,36 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import { truncatewords } from '@/common/filters'
+import {
+    PostsService,
+    PagesService,
+    PlayListsService,
+} from "@/common/api.service"
+import VLoading from '@/components/VLoading'
 import {
     FETCH_TOPICS,
     FETCH_POSTS,
     FETCH_PAGES,
     FETCH_PLAYLISTS,
 } from "../store/actions.type"
+import {
+    SET_INFO_POST,
+    SET_INFO_PAGE,
+    SET_INFO_PLAYLIST,
+} from '@/store/mutations.type'
 
 export default {
     name: 'Search',
     data() {
       return {
+        isPostLoading: false,
+        isPageLoading: false,
+        isPlayListLoading: false,
         isShowOverlay: false,
+        num_post_each_page: 4,
+        num_web_each_page: 2,
+        num_playlist_each_page: 1,
         postsQuery: {
             search: '',
             ordering: '-created',
@@ -266,6 +349,12 @@ export default {
         }
       }
     },
+    components: {
+        VLoading,
+    },
+    filters: {
+        truncatewords,
+    },
     computed: {
         getPostsQuery() {
             const ordering = this.searchQuery.ordering
@@ -276,7 +365,7 @@ export default {
                 ordering: setOrdering ? ordering : '-created',
                 language: this.searchQuery.language,
                 topic: this.searchQuery.topic,
-                size: '4',
+                size: this.num_post_each_page,
             }
         },
         getPagesQuery() {
@@ -288,7 +377,7 @@ export default {
                 ordering: setOrdering ? ordering : '-subscribers',
                 language: this.searchQuery.language,
                 topic: this.searchQuery.topic,
-                size: '4'
+                size: this.num_web_each_page,
             }
         },
         getPlayListsQuery() {
@@ -298,7 +387,7 @@ export default {
             return {
                 search: this.search,
                 ordering: setOrdering ? ordering : '-users_star',
-                size: '4'
+                size: this.num_playlist_each_page,
             }
         },
         getTopicOptions() {
@@ -309,7 +398,37 @@ export default {
                 })
             )
         },
-        ...mapGetters(['search', 'topics', 'posts', 'pages', 'playLists'])
+        numRestPost() {
+            const isLast = this.pagePost === this.numPagePost - 1
+            return isLast ? this.countPost - this.pagePost*this.num_post_each_page : this.num_post_each_page
+        },
+        numRestPage() {
+            const isLast = this.pageWeb === this.numPageWeb - 1
+            return isLast ? this.countPage - this.pageWeb*this.num_web_each_page : this.num_web_each_page
+        },
+        numRestPlayList() {
+            const isLast = this.pagePlayList === this.numPagePlayList - 1
+            return isLast ? this.countPlayList - this.pagePlayList*this.num_playlist_each_page : this.num_playlist_each_page
+        },
+        ...mapGetters([
+            'search',
+            'topics',
+            'posts',
+            'pagePost',
+            'numPagePost',
+            'countPost',
+            'hasNextPost',
+            'pages',
+            'pageWeb',
+            'numPageWeb',
+            'countPage',
+            'hasNextPage',
+            'playLists',
+            'pagePlayList',
+            'numPagePlayList',
+            'countPlayList',
+            'hasNextPlayList',
+        ])
     },
     watch: {
       searchQuery: {
@@ -335,6 +454,51 @@ export default {
             this.$store.dispatch(FETCH_POSTS, this.getPostsQuery)
             this.$store.dispatch(FETCH_PAGES, this.getPagesQuery)
             this.$store.dispatch(FETCH_PLAYLISTS, this.getPlayListsQuery)
+        },
+        loadPost() {
+            const params = Object.assign(
+                { page: this.pagePost + 1 },
+                this.getPostsQuery
+            )
+            PostsService.query(params)
+                .then(({ data }) => {
+                    this.isPostLoading = true
+                    setTimeout(() => {
+                        this.isPostLoading = false
+                        this.posts.push(...data.results)
+                        this.$store.commit(SET_INFO_POST, data)
+                    }, 700)
+                })
+        },
+        loadPage() {
+            const params = Object.assign(
+                { page: this.pageWeb + 1 },
+                this.getPagesQuery
+            )
+            PagesService.query(params)
+                .then(({ data }) => {
+                    this.isPageLoading = true
+                    setTimeout(() => {
+                        this.isPageLoading = false
+                        this.pages.push(...data.results)
+                        this.$store.commit(SET_INFO_PAGE, data)
+                    }, 700)
+                })
+        },
+        loadPlayList() {
+            const params = Object.assign(
+                { page: this.pagePlayList + 1 },
+                this.getPlayListsQuery
+            )
+            PlayListsService.query(params)
+                .then(({ data }) => {
+                    this.isPlayListLoading = true
+                    setTimeout(() => {
+                        this.isPlayListLoading = false
+                        this.playLists.push(...data.results)
+                        this.$store.commit(SET_INFO_PLAYLIST, data)
+                    }, 700)
+                })
         },
     },
 }

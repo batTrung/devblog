@@ -459,3 +459,7 @@ span.text-underline:after {
     color: #fff;
     background-color: #1b4699;
 }
+
+.btn-light-custom:hover {
+    background-color: #cacaca;
+}
