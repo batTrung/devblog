@@ -28,8 +28,8 @@
                             :class="getActiveClass(postsQuery.ordering, '-views')"
                             @click.prevent="postsQuery.ordering = '-views'">Xem nhiều</b-dropdown-item>
                         <b-dropdown-item
-                            :class="getActiveClass(postsQuery.ordering, '-users_saved')"
-                            @click.prevent="postsQuery.ordering = '-users_saved'">Nhiều lượt thích</b-dropdown-item>
+                            :class="getActiveClass(postsQuery.ordering, '-users_like')"
+                            @click.prevent="postsQuery.ordering = '-users_like'">Nhiều lượt thích</b-dropdown-item>
                     </b-nav-item-dropdown>
                     <b-nav-item-dropdown right>
                         <template slot="button-content">

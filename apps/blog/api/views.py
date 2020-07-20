@@ -37,7 +37,7 @@ class PostList(ListAPIView):
     ordering_fields = (
         'created',
         'views',
-        'users_saved',
+        'users_like',
     )
     name = 'post-list'
 

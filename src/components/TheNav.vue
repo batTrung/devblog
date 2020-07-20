@@ -10,14 +10,18 @@
                     <b-nav-item :to="{ name: 'play-list' }">Danh sách</b-nav-item>
                 </b-navbar-nav>
                 <b-navbar-nav class="ml-auto">
-                    <b-nav-form @submit.prevent="onSubmit()">
+                    <b-nav-form @submit.prevent="onSubmit($event)">
                         <div class="input-group bg-white rounded-pill mr-2">
                             <div class="input-group-prepend">
                                 <span class="input-group-text bg-transparent border-0">
                                     <i class="ti ti-search"></i>
                                 </span>
                             </div>
-                            <input type="text" class="form-control border-0 pb-2 mr-4 pl-0" placeholder="Tìm kiếm">
+                            <input
+                                type="text"
+                                class="form-control border-0 pb-2 mr-4 pl-0"
+                                name="search"
+                                placeholder="Tìm kiếm">
                             <span style="margin-top: 3.5px; margin-right: 5px;">
                                 <b-button type="submit" pill variant="primary" size="sm">Search</b-button>
                             </span>
@@ -30,18 +34,27 @@
                         <b-dropdown-item>Đăng xuất</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
-                <b-button variant="primary" size="sm" class="mr-2">Đăng ký</b-button>
-                <b-button variant="outline-success" size="sm">Đăng nhập</b-button>
+                <b-button variant="x" class="btn-custom btn-primary-custom mr-2" size="sm">Đăng ký</b-button>
+                <b-button variant="x" class="btn-custom btn-success-custom" size="sm">Đăng nhập</b-button>
             </b-collapse>
         </div>
     </b-navbar>
 </template>
+
 <script>
+import {
+    SET_SEARCH,
+} from '@/store/mutations.type'
+
 export default {
     name: 'TheNav',
     methods: {
-        onSubmit() {
-            this.$router.push({ name: 'search' })
+        onSubmit(event) {
+            let textSearch = event.target.search.value
+            this.$store.commit(SET_SEARCH, textSearch)
+            if (this.$route.name !== 'search') {
+                this.$router.replace({ name: 'search' })
+            }
         },
     }
 }

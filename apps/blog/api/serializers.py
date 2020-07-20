@@ -45,7 +45,7 @@ class PostSerializer(serializers.ModelSerializer):
             'created',
             'timesince',
             'photo_url',
-            'users_saved',
+            'users_like',
         )
 
     def get_photo_url(self, post):

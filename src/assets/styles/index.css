@@ -414,3 +414,48 @@ span.text-underline:after {
     color: #00c4ff !important;
     text-decoration: underline;
 }
+
+.btn-custom {
+    border: 0px solid transparent;
+    border-radius: .25rem;
+    border-bottom: 3px solid;
+}
+
+.btn-danger-custom {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #be0f0f;
+}
+
+.btn-primary-custom {
+    color: #fff;
+    background-color: #387bfe;
+    border-color: #1962f1;
+}
+
+.btn-success-custom {
+    color: #fff;
+    background-color: #50c675;
+    border-color: #48a942;
+}
+
+.btn-light-custom {
+    color: #212529;
+    background-color: #e1e1e1;
+    border-color: #c1c5c8;
+}
+
+.btn-danger-custom:hover {
+    color: #fff;
+    background-color: #ac1624;
+}
+
+.btn-success-custom:hover {
+    color: #fff;
+    background-color: #1c9943;
+}
+
+.btn-primary-custom:hover {
+    color: #fff;
+    background-color: #1b4699;
+}

@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <div class="post-meta mb-2 small text-gray">
                             <span class="mr-3"><i class="ti ti-eye text-dark mr-1"></i>{{ post.views }}</span>
-                            <span class="mr-3"><i class="far fa-heart text-danger mr-1"></i>{{ post.users_saved.length }}</span>
+                            <span class="mr-3"><i class="far fa-heart text-danger mr-1"></i>{{ post.users_like.length }}</span>
                             <span class=""><i class="ti ti-timer text-primary mr-1"></i>{{ post.timesince }} trước</span>
                         </div>
                         <a :href="post.link" target="_blank">

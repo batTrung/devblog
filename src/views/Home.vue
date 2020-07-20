@@ -21,8 +21,8 @@
                     <li class="list-inline-item mr-3">
                         <a
                             href=""
-                            :class="getActiveClass(postsQuery.ordering, '-users_saved')"
-                            @click.prevent="postsQuery.ordering = '-users_saved'">Nhiều lượt thích</a>
+                            :class="getActiveClass(postsQuery.ordering, '-users_like')"
+                            @click.prevent="postsQuery.ordering = '-users_like'">Nhiều lượt thích</a>
                     </li>
                 </ul>
                 <b-nav>
