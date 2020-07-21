@@ -26,11 +26,17 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 ]
 
 THIRD_PARTY_APPS = [
     'taggit',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'rest_framework',
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
     'corsheaders',
     'django_filters',
     'sorl.thumbnail',
@@ -127,6 +133,21 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+ACCOUNT_USERNAME_REQUIRED = False
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+ACCOUNT_EMAIL_REQUIRED = True
+
+ACCOUNT_UNIQUE_EMAIL = True
+
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
 
 # ==============================================================================
 # INTERNATIONALIZATION AND LOCALIZATION SETTINGS
@@ -194,6 +215,10 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+    ],
     'DEFAULT_PAGINATION_CLASS': 'apps.common.pagination.CustomPageNumberPagination',
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend',
@@ -207,5 +232,6 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 #  ignore error OSError: cannot write mode RGBA as JPEG
-
 THUMBNAIL_PRESERVE_FORMAT = True
+
+REST_USE_JWT = True

@@ -115,11 +115,13 @@
     </div>
 </template>
 <script>
+import { mapState } from "vuex";
 import { required, email } from 'vuelidate/lib/validators'
 import store from '@/store'
 import VErrors from '@/components/VErrors'
 import {
     CHANGE_LAYOUT,
+    LOGIN,
 } from '@/store/actions.type'
 
 export default {
@@ -134,8 +136,6 @@ export default {
                 email: null,
                 password: null,
             },
-            submitted: false,
-            errors: [],
         }
     },
     validations: {
@@ -149,16 +149,19 @@ export default {
             }
         },
     },
+    computed: {
+        ...mapState({
+            errors: state => state.auth.errors
+        })
+    },
     methods: {
         onSubmit() {
-            this.submitted = true
-            this.errors.push('Loi roif')
-            console.log('LOGIN: ', this.user)
+            this.$store.dispatch(LOGIN, this.user)
         },
     },
     beforeRouteEnter(to, from, next) {
         Promise.all([
-            store.dispatch(CHANGE_LAYOUT, 'full-layout'),
+            store.dispatch(CHANGE_LAYOUT, 'full-layout')
         ]).then(() => {
             next()
         })

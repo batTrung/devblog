@@ -9,7 +9,6 @@ export default {
         window.localStorage.setItem('access_token', access_token)
         window.localStorage.setItem('refresh_token', refresh_token)
     },
-
     updateAccess(access_token) {
         window.localStorage.setItem('access_token', access_token)
     },

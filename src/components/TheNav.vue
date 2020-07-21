@@ -33,7 +33,7 @@
                         <template slot="button-content">
                             <b-avatar size="2rem"></b-avatar>
                         </template>
-                        <b-dropdown-item>Đăng xuất</b-dropdown-item>
+                        <b-dropdown-item @click="logout()">Đăng xuất</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
                 <div class="py-2">
@@ -60,7 +60,7 @@
 
 <script>
 import { mapGetters } from "vuex"
-
+import { LOGOUT } from '@/store/actions.type'
 import {
     SET_SEARCH,
 } from '@/store/mutations.type'
@@ -77,6 +77,14 @@ export default {
             if (this.$route.name !== 'search') {
                 this.$router.replace({ name: 'search' })
             }
+        },
+        logout() {
+            this.$store.dispatch(LOGOUT)
+                .then(() => {
+                    if (this.$route.name !== 'home') {
+                        this.$router.replace({ name: 'home' })
+                    }
+                })
         },
     },
 }

@@ -1,4 +1,6 @@
-from django.urls import path
+from django.urls import path, include
+
+from rest_framework_simplejwt import views as jwt_views
 
 from apps.blog.api import views as blog_views
 
@@ -10,6 +12,12 @@ urlpatterns = [
         ApiRoot.as_view(),
         name=ApiRoot.name,
     ),
+
+    #  Authentication
+    path('rest-auth/', include('dj_rest_auth.urls')),
+    path('rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+
+    #  Blog
     path(
         'topics/',
         blog_views.TopicList.as_view(),
