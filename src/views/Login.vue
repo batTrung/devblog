@@ -115,7 +115,7 @@
     </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState } from "vuex"
 import { required, email } from 'vuelidate/lib/validators'
 import store from '@/store'
 import VMessages from '@/components/VMessages'
@@ -158,9 +158,7 @@ export default {
         onSubmit() {
             this.$store.dispatch(LOGIN, this.user)
                 .then(() => {
-                    if (this.$route.name !== 'home') {
-                        this.$router.replace({ name: 'home' })
-                    }
+                    this.$router.replace({ name: 'home' })
                 })
                 .catch(() => {
                   this.user.password = null

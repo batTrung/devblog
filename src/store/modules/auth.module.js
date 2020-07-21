@@ -32,7 +32,6 @@ const getters = {
 
 const actions = {
   [LOGIN]({ commit }, credentials) {
-    console.log('LOGIN')
     return new Promise((resolve, reject) => {
       ApiService.post('rest-auth/login', credentials)
         .then(({ data }) => {
@@ -51,8 +50,23 @@ const actions = {
   [LOGOUT]({ commit }) {
     commit(PURGE_AUTH);
   },
-  [REGISTER]() {
+  [REGISTER]({ commit }, credentials) {
     console.log('REGISTER')
+    return new Promise((resolve, reject) => {
+      ApiService.post('rest-auth/registration', credentials)
+        .then(({ data }) => {
+          console.log("okeeee", data)
+          commit(SET_AUTH, data)
+          resolve(data)
+        })
+        .catch(() => {
+          commit(
+            SET_ERRORS,
+            ['Thông tin tài khoản đăng ký không hợp lệ'],
+           )
+          reject()
+        })
+    })
   },
 }
 

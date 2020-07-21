@@ -25,7 +25,8 @@
                                             autofocus
                                             v-model.trim="$v.user.email.$model"
                                             placeholder="email"
-                                            type="text">
+                                            type="text"
+                                            @keyup="emailChecker($event.target.value)">
                                         </b-input>
                                     </b-input-group>
                                     <div v-show="$v.user.email.$anyDirty">
@@ -36,6 +37,10 @@
                                         <b-form-invalid-feedback
                                         :state="$v.user.email.email">
                                             Địa chỉ email không hợp lệ
+                                        </b-form-invalid-feedback>
+                                        <b-form-invalid-feedback
+                                        :state="!emailExists">
+                                            Địa chỉ email đã được sử dụng. Vui lòng chọn email khác.
                                         </b-form-invalid-feedback>
                                     </div>
                                 </b-form-group>
@@ -91,7 +96,7 @@
                                     block
                                     type="submit"
                                     variant="primary"
-                                    :disabled="$v.user.$invalid">
+                                    :disabled="$v.user.$invalid || emailExists">
                                     Đăng ký
                                 </b-button>
                             </b-form>
@@ -131,11 +136,14 @@
     </div>
 </template>
 <script>
+import { mapState } from "vuex";
 import { required, sameAs, email } from 'vuelidate/lib/validators'
+import ApiService from '@/common/api.service'
 import store from '@/store'
 import VMessages from '@/components/VMessages'
 import {
     CHANGE_LAYOUT,
+    REGISTER,
 } from '@/store/actions.type'
 
 export default {
@@ -162,8 +170,7 @@ export default {
                 password1: null,
                 password2: null,
             },
-            submitted: false,
-            errors: [],
+            emailExists: false,
         }
     },
     validations: {
@@ -181,11 +188,29 @@ export default {
             }
         },
     },
+    computed: {
+        ...mapState({
+            errors: state => state.auth.errors
+        })
+    },
     methods: {
         onSubmit() {
-            this.submitted = true
-            this.errors.push('Loi roif')
-            console.log('LOGIN: ', this.user)
+            this.$store.dispatch(REGISTER, this.user)
+                .then(() => {
+                    this.$router.replace({ name: 'home' })
+                })
+                .catch(() => {
+                    this.user.password1 = ''
+                    this.user.password2 = ''
+                })
+        },
+        emailChecker(email) {
+            ApiService.get(
+                'check/account/email/checker',
+                email,
+            ).then(({ data }) => {
+                this.emailExists = data.invalid
+            })
         },
     },
 }

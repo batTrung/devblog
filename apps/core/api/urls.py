@@ -2,6 +2,7 @@ from django.urls import path, include
 
 from rest_framework_simplejwt import views as jwt_views
 
+from apps.accounts.api import views as accounts_views
 from apps.blog.api import views as blog_views
 
 from .views import ApiRoot
@@ -42,5 +43,12 @@ urlpatterns = [
         'playlists/',
         blog_views.PlaylistSerializer.as_view(),
         name=blog_views.PlaylistSerializer.name,
+    ),
+
+    #  Check Views
+    path(
+        'check/account/email/checker/<str:email>/',
+        accounts_views.EmailChecker.as_view(),
+        name=accounts_views.EmailChecker.name,
     ),
 ]
