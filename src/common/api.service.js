@@ -15,7 +15,7 @@ const ApiService = {
   setHeader() {
     Vue.axios.defaults.headers.common[
       "Authorization"
-    ] = `Bearer ${JwtService.getAccessToken()}`;
+    ] = `Bearer ${ JwtService.getAccessToken() }`;
   },
 
   query(resource, params) {

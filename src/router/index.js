@@ -55,7 +55,7 @@ export default new Router({
     {
       path: '*',
       name: '404',
-      component: () => import('@/views/404'),
+      component: () => import('@/views/NotFound'),
     },
   ]
 })

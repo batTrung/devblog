@@ -4,6 +4,7 @@ import {
     LOGIN,
     LOGOUT,
     REGISTER,
+    CHECK_AUTH,
 } from '@/store/actions.type'
 import {
   SET_ERRORS,
@@ -18,7 +19,7 @@ const state = {
     content: [],
   },
   user: {},
-  isAuthenticated: false,
+  isAuthenticated: !!JwtService.getAccessToken(),
 }
 
 const getters = {
@@ -51,7 +52,6 @@ const actions = {
     commit(PURGE_AUTH);
   },
   [REGISTER]({ commit }, credentials) {
-    console.log('REGISTER')
     return new Promise((resolve, reject) => {
       ApiService.post('rest-auth/registration', credentials)
         .then(({ data }) => {
@@ -67,6 +67,14 @@ const actions = {
           reject()
         })
     })
+  },
+  [CHECK_AUTH]({ commit }) {
+    if (JwtService.getAccessToken()) {
+      console.log('localStore -> token')
+      console.log(JwtService.getRefreshToken())
+    } else {
+      commit(PURGE_AUTH)
+    }
   },
 }
 
