@@ -36,21 +36,20 @@
                         <b-dropdown-item @click="logout()">Đăng xuất</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
-                <div class="py-2">
-                    <b-button
-                        v-show="!isAuthenticated"
-                        :to="{ name: 'register' }"
-                        variant="link"
-                        class="btn-custom btn-primary mr-2 animate-up-1"
-                        size="sm">
-                        Đăng ký
-                    </b-button>
+                <div class="py-2" v-show="!isAuthenticated">
                     <b-button
                         :to="{ name: 'login' }"
                         variant="link"
-                        class="btn-custom btn-success animate-up-1"
+                        class="btn-custom btn-success mr-2 animate-up-1"
                         size="sm">
                         Đăng nhập
+                    </b-button>
+                    <b-button
+                        :to="{ name: 'register' }"
+                        variant="link"
+                        class="btn-custom btn-primary animate-up-1"
+                        size="sm">
+                        Đăng ký
                     </b-button>
                 </div>
             </b-collapse>

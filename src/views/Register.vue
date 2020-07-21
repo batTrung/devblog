@@ -12,7 +12,7 @@
                         <div class="mt-3 mt-lg-0 bg-white border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
                             <b-form
                                 @submit.prevent="onSubmit()">
-                                <VErrors :errors="errors" />
+                                <VMessages :messages="errors" />
                                 <b-form-group>
                                     <label for="email">Địa chỉ email</label>
                                     <b-input-group class="mb-2">
@@ -133,7 +133,7 @@
 <script>
 import { required, sameAs, email } from 'vuelidate/lib/validators'
 import store from '@/store'
-import VErrors from '@/components/VErrors'
+import VMessages from '@/components/VMessages'
 import {
     CHANGE_LAYOUT,
 } from '@/store/actions.type'
@@ -153,7 +153,7 @@ export default {
         next()
     },
     components: {
-        VErrors,
+        VMessages,
     },
     data() {
         return {

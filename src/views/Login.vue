@@ -12,7 +12,7 @@
                         <div class="mt-3 mt-lg-0 bg-white border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
                             <b-form
                                 @submit.prevent="onSubmit()">
-                                <VErrors :errors="errors" />
+                                <VMessages :messages="errors" />
                                 <b-form-group>
                                     <label for="email">Địa chỉ email</label>
                                     <b-input-group>
@@ -118,7 +118,7 @@
 import { mapState } from "vuex";
 import { required, email } from 'vuelidate/lib/validators'
 import store from '@/store'
-import VErrors from '@/components/VErrors'
+import VMessages from '@/components/VMessages'
 import {
     CHANGE_LAYOUT,
     LOGIN,
@@ -128,7 +128,7 @@ export default {
     name: 'Login',
     title: 'Đăng nhập',
     components: {
-        VErrors,
+        VMessages,
     },
     data() {
         return {
@@ -157,6 +157,14 @@ export default {
     methods: {
         onSubmit() {
             this.$store.dispatch(LOGIN, this.user)
+                .then(() => {
+                    if (this.$route.name !== 'home') {
+                        this.$router.replace({ name: 'home' })
+                    }
+                })
+                .catch(() => {
+                  this.user.password = null
+                })
         },
     },
     beforeRouteEnter(to, from, next) {
