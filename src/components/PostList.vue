@@ -28,7 +28,7 @@
                             class="small"
                             :to="{ name: 'page-detail', params: { name: post.website.name }}">
                             <b-avatar
-                                :src="post.website.photo"
+                                :src="post.website.photo_url"
                                 class="mr-1">   
                             </b-avatar>
                             {{ post.website.name|truncatechars(25) }}

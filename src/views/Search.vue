@@ -119,7 +119,7 @@
                                                     class="small"
                                                     :to="{ name: 'page-detail', params: { name: post.website.name }}">
                                                     <b-avatar
-                                                        :src="post.website.photo"
+                                                        :src="post.website.photo_url"
                                                         class="mr-1">   
                                                     </b-avatar>
                                                     {{ post.website.name }}
@@ -161,7 +161,7 @@
                                                 :to="{ name: 'page-detail', params: { name: page.name }}">
                                                 <b-avatar
                                                     size="10rem" 
-                                                    :src="page.photo"
+                                                    :src="page.photo_url"
                                                     class="mr-2">   
                                                 </b-avatar>
                                             </router-link>
@@ -169,9 +169,10 @@
                                         <div class="col-12 col-lg-6 col-xl-8">
                                             <div class="card-body">
                                                 <div class="d-flex justify-content-between">
-                                                    <a href="#">
+                                                    <router-link
+                                                        :to="{ name: 'page-detail', params: { name: page.name }}">
                                                         <h4 class="h5">{{ page.name }}</h4>
-                                                    </a>
+                                                    </router-link>
                                                     <button class="btn-custom btn-danger btn-sm animate-up-2">Đăng ký</button>
                                                 </div>
                                                 <p class="my-3">

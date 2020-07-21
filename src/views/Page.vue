@@ -9,7 +9,7 @@
         <div class="container">
             <div class="card border-light text-center mb-4">
                 <div class="profile-thumbnail mx-auto mt-n6">
-                    <b-avatar :src="page.photo" size="8rem" class="card-img-top"></b-avatar>
+                    <b-avatar :src="page.photo_url" size="8rem" class="card-img-top"></b-avatar>
                 </div>
                 <div class="card-body pt-0">
                     <a

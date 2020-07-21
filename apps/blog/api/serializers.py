@@ -9,6 +9,7 @@ class WebsiteSerializer(serializers.ModelSerializer):
     post_count = serializers.CharField(source='posts.count', read_only=True)
     countViews = serializers.CharField(source='count_views', read_only=True)
     root_url = serializers.CharField(source='get_url', read_only=True)
+    photo_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Website
@@ -18,7 +19,7 @@ class WebsiteSerializer(serializers.ModelSerializer):
             'root_url',
             'post_count',
             'countViews',
-            'photo',
+            'photo_url',
             'language',
             'language_description',
             'description',
@@ -28,6 +29,10 @@ class WebsiteSerializer(serializers.ModelSerializer):
             'max_post',
             'is_active',
         )
+
+    def get_photo_url(self, web):
+        request = self.context.get('request')
+        return request.build_absolute_uri(web.thumbnail_photo_obj().url)
 
 
 class PostSerializer(serializers.ModelSerializer):
