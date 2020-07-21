@@ -593,3 +593,7 @@ span.text-underline:after {
     font-size: .875rem;
     padding-top: 5px;
 }
+
+.bb-green {
+    border-bottom: 2px solid #0c9177 !important;
+}

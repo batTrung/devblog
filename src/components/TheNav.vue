@@ -1,7 +1,9 @@
 <template>
-    <b-navbar toggleable="lg" type="dark" class="border-bottom bg-nav-green">
+    <b-navbar toggleable="lg" type="dark" class="border-bottom bg-nav-green bb-green">
         <div class="container">
-            <b-navbar-brand :to="{name: 'home'}">DevBlog</b-navbar-brand>
+            <b-navbar-brand :to="{name: 'home'}">
+                <img src="../assets/logo-1.png" alt="Logo">
+            </b-navbar-brand>
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
             <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav>
@@ -19,47 +21,55 @@
                             </div>
                             <input
                                 type="text"
-                                class="form-control border-0 pb-2 mr-4 pl-0"
+                                class="form-control border-0 pl-0"
                                 name="search"
                                 placeholder="Tìm kiếm">
-                            <span style="margin-right: 5px; margin-top: 6px;">
+                            <span style="margin-right: 5px; margin-top: 4px;">
                                 <b-button type="submit" pill variant="primary" size="sm">Search</b-button>
                             </span>
                         </div>
                     </b-nav-form>
-                    <b-nav-item-dropdown right>
+                    <b-nav-item-dropdown right v-show="isAuthenticated">
                         <template slot="button-content">
                             <b-avatar size="2rem"></b-avatar>
                         </template>
                         <b-dropdown-item>Đăng xuất</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
-                <b-button
-                    :to="{ name: 'register' }"
-                    variant="link"
-                    class="btn-custom btn-primary mr-2 animate-up-1"
-                    size="sm">
-                    Đăng ký
-                </b-button>
-                <b-button
-                    :to="{ name: 'login' }"
-                    variant="link"
-                    class="btn-custom btn-success animate-up-1"
-                    size="sm">
-                    Đăng nhập
-                </b-button>
+                <div class="py-2">
+                    <b-button
+                        v-show="!isAuthenticated"
+                        :to="{ name: 'register' }"
+                        variant="link"
+                        class="btn-custom btn-primary mr-2 animate-up-1"
+                        size="sm">
+                        Đăng ký
+                    </b-button>
+                    <b-button
+                        :to="{ name: 'login' }"
+                        variant="link"
+                        class="btn-custom btn-success animate-up-1"
+                        size="sm">
+                        Đăng nhập
+                    </b-button>
+                </div>
             </b-collapse>
         </div>
     </b-navbar>
 </template>
 
 <script>
+import { mapGetters } from "vuex"
+
 import {
     SET_SEARCH,
 } from '@/store/mutations.type'
 
 export default {
     name: 'TheNav',
+    computed: {
+        ...mapGetters(['currentUser', 'isAuthenticated'])
+    },
     methods: {
         onSubmit(event) {
             let textSearch = event.target.search.value
@@ -68,6 +78,6 @@ export default {
                 this.$router.replace({ name: 'search' })
             }
         },
-    }
+    },
 }
 </script>

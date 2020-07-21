@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="page">
         <div class="row">
             <aside class="col-12 col-lg-3 d-none d-lg-block order-2">
                 <div class="card border-light p-3 mb-3">

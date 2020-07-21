@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="container-fluid bg-green">
+        <div class="container-fluid" style="background-color: #758AA2">
             <div class="row pb-5">
                 <div class="container my-5 text-center">
                 </div>

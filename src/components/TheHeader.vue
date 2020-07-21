@@ -30,7 +30,12 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex"
+
 export default {
     name: 'TheHeader',
+    computed: {
+      ...mapGetters(['currentUser'])
+    },
 }
 </script>

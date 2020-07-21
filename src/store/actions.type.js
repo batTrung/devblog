@@ -8,3 +8,7 @@ export const FETCH_PLAYLISTS = 'fetchPlayLists'
 export const FETCH_PLAYLIST = 'fetchPlayList'
 export const FETCH_TOPICS = 'fetchTopics'
 export const CHANGE_LAYOUT = 'changeLayout'
+export const LOGIN = 'login'
+export const REGISTER = 'register'
+export const LOGOUT = 'logout'
+
