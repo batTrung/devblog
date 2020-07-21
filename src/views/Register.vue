@@ -10,33 +10,91 @@
                     </div>
                     <div class="col-12 d-flex align-items-center justify-content-center">
                         <div class="mt-3 mt-lg-0 bg-white border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
-                            <form action="#">
-                                <div class="form-group"><label for="email">Địa chỉ email</label>
-                                    <div class="input-group mb-4">
+                            <b-form
+                                @submit.prevent="onSubmit()">
+                                <VErrors :errors="errors" />
+                                <b-form-group>
+                                    <label for="email">Địa chỉ email</label>
+                                    <b-input-group class="mb-2">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">
                                                 <span class="fas fa-envelope"></span>
                                             </span>
                                         </div>
-                                        <input id="email" placeholder="email" type="text" class="form-control">
+                                        <b-input
+                                            autofocus
+                                            v-model.trim="$v.user.email.$model"
+                                            placeholder="email"
+                                            type="text">
+                                        </b-input>
+                                    </b-input-group>
+                                    <div v-show="$v.user.email.$anyDirty">
+                                        <b-form-invalid-feedback
+                                        :state="$v.user.email.required">
+                                            Hãy nhập địa chỉ email
+                                        </b-form-invalid-feedback>
+                                        <b-form-invalid-feedback
+                                        :state="$v.user.email.email">
+                                            Địa chỉ email không hợp lệ
+                                        </b-form-invalid-feedback>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-group"><label for="password">Mật khẩu</label>
-                                        <div class="input-group mb-4">
-                                            <div class="input-group-prepend"><span class="input-group-text"><span class="fas fa-unlock-alt"></span></span></div><input id="password" placeholder="Password" type="password" aria-label="Password" required="required" class="form-control">
+                                </b-form-group>
+                                <b-form-group>
+                                    <label for="password1">Mật khẩu</label>
+                                    <b-input-group class="mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fas fa-unlock-alt"></span>
+                                            </span>
                                         </div>
+                                        <b-input
+                                            id="password1"
+                                            v-model.trim="$v.user.password1.$model"
+                                            placeholder="password"
+                                            type="password">
+                                        </b-input>
+                                    </b-input-group>
+                                    <div v-show="$v.user.password1.$anyDirty">
+                                        <b-form-invalid-feedback
+                                        :state="$v.user.password1.required">
+                                            Hãy nhập mật khẩu
+                                        </b-form-invalid-feedback>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-group"><label for="password">Nhập lại mật khẩu</label>
-                                        <div class="input-group mb-4">
-                                            <div class="input-group-prepend"><span class="input-group-text"><span class="fas fa-unlock-alt"></span></span></div><input id="password" placeholder="Password" type="password" aria-label="Password" required="required" class="form-control">
+                                </b-form-group>
+                                <b-form-group>
+                                    <label for="password2">Nhập lại mật khẩu</label>
+                                    <b-input-group class="mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fas fa-unlock-alt"></span>
+                                            </span>
                                         </div>
+                                        <b-input
+                                            v-model.trim="$v.user.password2.$model"
+                                            placeholder="password"
+                                            id="password2"
+                                            type="password">
+                                        </b-input>
+                                    </b-input-group>
+                                    <div v-show="$v.user.password2.$anyDirty">
+                                        <b-form-invalid-feedback
+                                        :state="$v.user.password2.required">
+                                            Nhập lại mật khẩu của bạn
+                                        </b-form-invalid-feedback>
+                                        <b-form-invalid-feedback
+                                        :state="$v.user.password2.sameAsPassword1">
+                                            Mật khẩu không khớp
+                                        </b-form-invalid-feedback>
                                     </div>
-                                </div>
-                                <button type="submit" class="btn btn-block btn-primary">Đăng ký</button>
-                            </form>
+                                </b-form-group>
+                                <b-button
+                                    block
+                                    type="submit"
+                                    variant="primary"
+                                    :disabled="$v.user.$invalid">
+                                    Đăng ký
+                                </b-button>
+                            </b-form>
                             <div class="mt-3 mb-4 text-center"><span class="font-weight-normal">hoặc</span></div>
                             <div class="btn-wrapper my-4 text-center">
                                 <b-avatar variant="facebook" class="mr-3">
@@ -73,7 +131,9 @@
     </div>
 </template>
 <script>
+import { required, sameAs, email } from 'vuelidate/lib/validators'
 import store from '@/store'
+import VErrors from '@/components/VErrors'
 import {
     CHANGE_LAYOUT,
 } from '@/store/actions.type'
@@ -91,6 +151,42 @@ export default {
     beforeRouteLeave(to, from, next) {
         store.dispatch(CHANGE_LAYOUT, 'base-layout')
         next()
+    },
+    components: {
+        VErrors,
+    },
+    data() {
+        return {
+            user: {
+                email: null,
+                password1: null,
+                password2: null,
+            },
+            submitted: false,
+            errors: [],
+        }
+    },
+    validations: {
+        user: {
+            email: {
+                required,
+                email,
+            },
+            password1: {
+                required,
+            },
+            password2: {
+                required,
+                sameAsPassword1: sameAs('password1'),
+            }
+        },
+    },
+    methods: {
+        onSubmit() {
+            this.submitted = true
+            this.errors.push('Loi roif')
+            console.log('LOGIN: ', this.user)
+        },
     },
 }
 </script>

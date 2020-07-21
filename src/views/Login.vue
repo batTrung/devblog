@@ -10,24 +10,58 @@
                     </div>
                     <div class="col-12 d-flex align-items-center justify-content-center">
                         <div class="mt-3 mt-lg-0 bg-white border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
-                            <form action="#">
-                                <div class="form-group"><label for="email">Your email</label>
-                                    <div class="input-group mb-4">
+                            <b-form
+                                @submit.prevent="onSubmit()">
+                                <VErrors :errors="errors" />
+                                <b-form-group>
+                                    <label for="email">Địa chỉ email</label>
+                                    <b-input-group>
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">
                                                 <span class="fas fa-envelope"></span>
                                             </span>
                                         </div>
-                                        <input id="email" placeholder="email" type="text" class="form-control">
+                                        <b-input
+                                            autofocus
+                                            v-model.lazy="$v.user.email.$model"
+                                            placeholder="email"
+                                            type="text">
+                                        </b-input>
+                                    </b-input-group>
+                                    <div v-show="$v.user.email.$anyDirty">
+                                        <b-form-invalid-feedback
+                                        :state="$v.user.email.required">
+                                            Hãy nhập địa chỉ email
+                                        </b-form-invalid-feedback>
+                                        <b-form-invalid-feedback
+                                        :state="$v.user.email.email">
+                                            Địa chỉ email không hợp lệ
+                                        </b-form-invalid-feedback>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-group"><label for="password">Password</label>
-                                        <div class="input-group mb-4">
-                                            <div class="input-group-prepend"><span class="input-group-text"><span class="fas fa-unlock-alt"></span></span></div><input id="password" placeholder="Password" type="password" aria-label="Password" required="required" class="form-control">
+                                </b-form-group>
+                                <b-form-group>
+                                    <label for="password">Mật khẩu</label>
+                                    <b-input-group>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fas fa-unlock-alt"></span>
+                                            </span>
                                         </div>
+                                        <b-input
+                                            v-model.trim="$v.user.password.$model"
+                                            placeholder="password"
+                                            type="password">
+                                        </b-input>
+                                    </b-input-group>
+                                    <div v-show="$v.user.password.$anyDirty">
+                                        <b-form-invalid-feedback
+                                        :state="$v.user.password.required">
+                                            Hãy nhập mật khẩu
+                                        </b-form-invalid-feedback>
                                     </div>
-                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                </b-form-group>
+                                <b-form-group>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
                                         <b-form-checkbox
                                             name="checkbox-1"
                                             value="accepted"
@@ -36,8 +70,15 @@
                                         </b-form-checkbox>
                                         <div><a href="" class="small text-right">Quên mật khẩu?</a></div>
                                     </div>
-                                </div><button type="submit" class="btn btn-block btn-primary">Đăng nhập</button>
-                            </form>
+                                </b-form-group>
+                                <b-button
+                                    block
+                                    type="submit"
+                                    variant="success"
+                                    :disabled="$v.user.$invalid">
+                                    Đăng nhập
+                                </b-button>
+                            </b-form>
                             <div class="mt-3 mb-4 text-center"><span class="font-weight-normal">hoặc đăng nhập với</span></div>
                             <div class="btn-wrapper my-4 text-center">
                                 <b-avatar variant="facebook" class="mr-3">
@@ -47,7 +88,7 @@
                                 </b-avatar>
                                 <b-avatar variant="google" class="mr-3">
                                     <custom-icon>
-                                        <span aria-hidden="true" class="fab fa-facebook-f"></span>
+                                        <span aria-hidden="true" class="fab fa-google"></span>
                                     </custom-icon>
                                 </b-avatar>
                                 <b-avatar variant="github" class="mr-3">
@@ -74,7 +115,9 @@
     </div>
 </template>
 <script>
+import { required, email } from 'vuelidate/lib/validators'
 import store from '@/store'
+import VErrors from '@/components/VErrors'
 import {
     CHANGE_LAYOUT,
 } from '@/store/actions.type'
@@ -82,6 +125,37 @@ import {
 export default {
     name: 'Login',
     title: 'Đăng nhập',
+    components: {
+        VErrors,
+    },
+    data() {
+        return {
+            user: {
+                email: null,
+                password: null,
+            },
+            submitted: false,
+            errors: [],
+        }
+    },
+    validations: {
+        user: {
+            email: {
+                required,
+                email,
+            },
+            password: {
+                required,
+            }
+        },
+    },
+    methods: {
+        onSubmit() {
+            this.submitted = true
+            this.errors.push('Loi roif')
+            console.log('LOGIN: ', this.user)
+        },
+    },
     beforeRouteEnter(to, from, next) {
         Promise.all([
             store.dispatch(CHANGE_LAYOUT, 'full-layout'),

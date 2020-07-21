@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import Vuelidate from 'vuelidate'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -14,6 +15,7 @@ import { titleMixin } from '@/common/mixins'
 import ApiService from '@/common/api.service'
 
 [
+  Vuelidate,
   BootstrapVue,
   VTooltip,
 ].forEach((x) => Vue.use(x))
