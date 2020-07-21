@@ -21,7 +21,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="d-flex justify-content-end">
-                            <button class="btn-custom btn-danger-custom btn-sm mb-3 d-inline">Đăng ký</button>
+                            <button class="btn-custom btn-danger btn-sm mb-3 d-inline animate-up-2">Đăng ký</button>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="col pl-0">

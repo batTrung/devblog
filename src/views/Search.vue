@@ -136,7 +136,7 @@
                         <div v-show="hasNextPost" v-else>
                             <div class="d-flex justify-content-center mb-3">
                                 <button
-                                    class="btn-custom btn-success-custom"
+                                    class="btn-custom btn-success"
                                     @click="loadPost()">
                                     <i class="fas fa-arrow-down"></i>
                                     +{{ numRestPost }} More
@@ -172,7 +172,7 @@
                                                     <a href="#">
                                                         <h4 class="h5">{{ page.name }}</h4>
                                                     </a>
-                                                    <button class="btn-custom btn-danger-custom btn-sm">Đăng ký</button>
+                                                    <button class="btn-custom btn-danger btn-sm animate-up-2">Đăng ký</button>
                                                 </div>
                                                 <p class="my-3">
                                                     {{ page.description|truncatewords(20) }}
@@ -209,7 +209,7 @@
                         <div v-show="hasNextPage" v-else>
                             <div class="d-flex justify-content-center mb-3">
                                 <button
-                                    class="btn-custom btn-success-custom"
+                                    class="btn-custom btn-success"
                                     @click="loadPage()">
                                     <i class="fas fa-arrow-down"></i>
                                     +{{ numRestPage }} More
@@ -285,7 +285,7 @@
                         <div v-show="hasNextPlayList" v-else>
                             <div class="d-flex justify-content-center mb-3">
                                 <button
-                                    class="btn-custom btn-success-custom"
+                                    class="btn-custom btn-success"
                                     @click="loadPlayList()">
                                     <i class="fas fa-arrow-down"></i>
                                     +{{ numRestPlayList }} More

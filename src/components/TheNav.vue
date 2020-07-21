@@ -1,5 +1,5 @@
 <template>
-    <b-navbar toggleable="lg" type="light" style="background-color: #e3f2fd;" class="border-bottom">
+    <b-navbar toggleable="lg" type="dark" class="border-bottom bg-nav-green">
         <div class="container">
             <b-navbar-brand :to="{name: 'home'}">DevBlog</b-navbar-brand>
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -22,7 +22,7 @@
                                 class="form-control border-0 pb-2 mr-4 pl-0"
                                 name="search"
                                 placeholder="Tìm kiếm">
-                            <span style="margin-top: 3.5px; margin-right: 5px;">
+                            <span style="margin-right: 5px; margin-top: 6px;">
                                 <b-button type="submit" pill variant="primary" size="sm">Search</b-button>
                             </span>
                         </div>
@@ -34,8 +34,20 @@
                         <b-dropdown-item>Đăng xuất</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
-                <b-button variant="x" class="btn-custom btn-primary-custom mr-2" size="sm">Đăng ký</b-button>
-                <b-button variant="x" class="btn-custom btn-success-custom" size="sm">Đăng nhập</b-button>
+                <b-button
+                    :to="{ name: 'register' }"
+                    variant="link"
+                    class="btn-custom btn-primary mr-2 animate-up-1"
+                    size="sm">
+                    Đăng ký
+                </b-button>
+                <b-button
+                    :to="{ name: 'login' }"
+                    variant="link"
+                    class="btn-custom btn-success animate-up-1"
+                    size="sm">
+                    Đăng nhập
+                </b-button>
             </b-collapse>
         </div>
     </b-navbar>
