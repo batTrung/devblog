@@ -11,7 +11,7 @@ import VTooltip from 'v-tooltip'
 import App from './App.vue'
 import router from '@/router'
 import store from '@/store'
-import { titleMixin } from '@/common/mixins'
+import { titleMixin, doLogin } from '@/common/mixins'
 import ApiService from '@/common/api.service'
 import { CHECK_AUTH } from "@/store/actions.type";
 
@@ -27,7 +27,10 @@ router.beforeEach((to, from, next) =>
   Promise.all([store.dispatch(CHECK_AUTH)]).then(next)
 );
 
-Vue.mixin(titleMixin)
+[
+    doLogin,
+    titleMixin,
+].forEach((x) => Vue.mixin(x))
 
 Vue.config.productionTip = false
 

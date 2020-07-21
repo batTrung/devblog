@@ -1,3 +1,7 @@
+import {
+  SET_ERRORS,
+} from '@/store/mutations.type'
+
 function getTitle(vm) {
   const { title } = vm.$options
   if (title) {
@@ -14,3 +18,19 @@ export const titleMixin = {
   }
 }
 
+export const doLogin = {
+  methods: {
+    gotoLogin() {
+      this.$router.push(
+          {
+              name: 'login',
+              query: { redirect: this.$route.path },
+          }
+      ),
+      this.$store.commit(
+        SET_ERRORS,
+        ['Bạn phải đăng nhập để tiếp tục'],
+      )
+    }
+  }
+}

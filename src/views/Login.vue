@@ -158,7 +158,9 @@ export default {
         onSubmit() {
             this.$store.dispatch(LOGIN, this.user)
                 .then(() => {
-                    this.$router.replace({ name: 'home' })
+                    this.$router.push(
+                        this.$route.query.redirect || { name: 'home' }
+                    )
                 })
                 .catch(() => {
                   this.user.password = null

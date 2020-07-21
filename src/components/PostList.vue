@@ -6,7 +6,12 @@
                     <a :href="post.link" target="_blank" class="position-relative">
                         <img :src="post.photo_url" class="card-img-top p-1" :alt="post.title" style="width: 100%; height: 169px">
                     </a>
-                    <div class="v-add left" v-show="hoverPostId == index" v-tooltip="'Thích bài viết'"><i class="far fa-heart text-gray"></i></div>
+                    <div
+                        @click="onLikePost()"
+                        class="v-add left"
+                        v-show="hoverPostId == index" v-tooltip="'Thích bài viết'">
+                        <i class="far fa-heart text-gray"></i>
+                    </div>
                     <b-dropdown variant="link" class="v-add right" right v-show="hoverPostId == index">
                         <template v-slot:button-content>
                             <i class="fas fa-plus"></i>
@@ -105,7 +110,7 @@ export default {
         getParams() {
             return Object.assign(this.query, { website: this.website })
         },
-        ...mapGetters(["posts"])
+        ...mapGetters(['posts', 'currentUser', 'isAuthenticated'])
     },
     mounted() {
         this.fetchPosts()
@@ -116,6 +121,13 @@ export default {
             this.page = 1
             this.hasNext = true
             this.$store.dispatch(FETCH_POSTS, this.getParams)
+        },
+        onLikePost() {
+            if (this.isAuthenticated) {
+                console.log("okkkkkkkkkkkkkkk")
+            } else {
+                this.gotoLogin()
+            }
         },
         scroll() {
             window.onscroll = () => {

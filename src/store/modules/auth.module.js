@@ -14,10 +14,7 @@ import {
 
 
 const state = {
-  errors: {
-    name: 'danger',
-    content: [],
-  },
+  errors: [],
   user: {},
   isAuthenticated: !!JwtService.getAccessToken(),
 }
@@ -36,7 +33,8 @@ const actions = {
     return new Promise((resolve, reject) => {
       ApiService.post('rest-auth/login', credentials)
         .then(({ data }) => {
-          commit(SET_AUTH, data)
+          commit(SET_AUTH, data.user)
+          JwtService.saveToken(data)
           resolve(data)
         })
         .catch(() => {
@@ -56,7 +54,8 @@ const actions = {
       ApiService.post('rest-auth/registration', credentials)
         .then(({ data }) => {
           console.log("okeeee", data)
-          commit(SET_AUTH, data)
+          commit(SET_AUTH, data.user)
+          JwtService.saveToken(data)
           resolve(data)
         })
         .catch(() => {
@@ -68,10 +67,24 @@ const actions = {
         })
     })
   },
-  [CHECK_AUTH]({ commit }) {
+  [CHECK_AUTH]({ commit, dispatch }) {
     if (JwtService.getAccessToken()) {
-      console.log('localStore -> token')
-      console.log(JwtService.getRefreshToken())
+      ApiService.setHeader()
+      ApiService.get("rest-auth/user")
+        .then(({ data }) => {
+          commit(SET_AUTH, data)
+        })
+        .catch(() => {
+          ApiService.post(
+            'rest-auth/token/refresh',
+            { refresh: JwtService.getRefreshToken() },
+           ).then(({ data }) => {
+             JwtService.saveToken(data.access)
+             dispatch(CHECK_AUTH)
+           }).catch(() => {
+             commit(PURGE_AUTH)
+           })
+        })
     } else {
       commit(PURGE_AUTH)
     }
@@ -80,18 +93,17 @@ const actions = {
 
 const mutations = {
   [SET_ERRORS](state, errors) {
-    state.errors.content = errors
+    state.errors = errors
   },
-  [SET_AUTH](state, data) {
+  [SET_AUTH](state, user) {
     state.isAuthenticated = true
-    state.user = data.user
-    state.errors = {}
-    JwtService.saveToken(data)
+    state.user = user.user
+    state.errors = []
   },
   [PURGE_AUTH](state) {
     state.isAuthenticated = false
     state.user = {}
-    state.errors = {}
+    state.errors = []
     JwtService.destroyToken()
   },
 }

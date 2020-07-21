@@ -1,11 +1,11 @@
 <template>
   <div>
     <div
-      :class="'alert alert-block alert-' + messages.name"
-      v-if="messages.content.length">
+      :class="'alert alert-block alert-' + name"
+      v-if="messages.length">
       <ul class="m-0">
         <li
-          v-for="(message, index) in messages.content"
+          v-for="(message, index) in messages"
           :key="index">
           {{ message }}
         </li>
@@ -18,14 +18,16 @@ export default {
   name: 'VMessages',
   props: {
     messages: {
-      type: Object,
+      type: Array,
       default: () => {
-        return {
-          name: 'danger',
-          content: [],
-        }
-      }
+        return []
+      },
     },
+    name: {
+      type: String,
+      required: false,
+      default: 'danger',
+    }
   },
 }
 </script>
