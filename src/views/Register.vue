@@ -64,6 +64,10 @@
                                         :state="$v.user.password1.required">
                                             Hãy nhập mật khẩu
                                         </b-form-invalid-feedback>
+                                        <b-form-invalid-feedback
+                                        :state="$v.user.password1.minLength">
+                                            Mật khẩu quá ngắn, tối thiểu là {{ $v.user.password1.$params.minLength.min }} từ
+                                        </b-form-invalid-feedback>
                                     </div>
                                 </b-form-group>
                                 <b-form-group>
@@ -85,6 +89,10 @@
                                         <b-form-invalid-feedback
                                         :state="$v.user.password2.required">
                                             Nhập lại mật khẩu của bạn
+                                        </b-form-invalid-feedback>
+                                        <b-form-invalid-feedback
+                                        :state="$v.user.password2.minLength">
+                                            Mật khẩu quá ngắn, tối thiểu là {{ $v.user.password2.$params.minLength.min }} từ
                                         </b-form-invalid-feedback>
                                         <b-form-invalid-feedback
                                         :state="$v.user.password2.sameAsPassword1">
@@ -137,7 +145,7 @@
 </template>
 <script>
 import { mapState } from "vuex";
-import { required, sameAs, email } from 'vuelidate/lib/validators'
+import { required, sameAs, minLength, email } from 'vuelidate/lib/validators'
 import ApiService from '@/common/api.service'
 import store from '@/store'
 import VMessages from '@/components/VMessages'
@@ -181,9 +189,11 @@ export default {
             },
             password1: {
                 required,
+                minLength: minLength(8),
             },
             password2: {
                 required,
+                minLength: minLength(8),
                 sameAsPassword1: sameAs('password1'),
             }
         },
