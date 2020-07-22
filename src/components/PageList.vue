@@ -21,7 +21,18 @@
                     </div>
                     <div class="card-footer">
                         <div class="d-flex justify-content-end">
-                            <button class="btn-custom btn-danger btn-sm mb-3 d-inline animate-up-2">Đăng ký</button>
+                            <button
+                                v-if="page.subscribers.includes(currentUser.username)"
+                                class="btn-custom btn-light btn-sm mb-3 d-inline animate-up-2"
+                                @click="onSubscribe()">
+                                <i class="fas fa-check"></i> Đã đăng ký
+                            </button>
+                            <button
+                                v-else
+                                class="btn-custom btn-danger btn-sm mb-3 d-inline animate-up-2"
+                                @click="onSubscribe()">
+                                Đăng ký <i class="far fa-bell"></i>
+                            </button>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="col pl-0">
@@ -106,7 +117,7 @@ export default {
         getParams() {
             return this.query
         },
-        ...mapGetters(["pages"])
+        ...mapGetters(['pages', 'isAuthenticated', 'currentUser'])
     },
     mounted() {
         this.fetchPages()
@@ -117,6 +128,13 @@ export default {
             this.page = 1
             this.hasNext = true 
             this.$store.dispatch(FETCH_PAGES, this.getParams)
+        },
+        onSubscribe() {
+            if (this.isAuthenticated) {
+                console.log('onSubscribe')
+            } else {
+                this.gotoLogin()
+            }
         },
         scroll() {
             window.onscroll = () => {

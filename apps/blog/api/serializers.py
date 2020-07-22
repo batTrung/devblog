@@ -1,34 +1,41 @@
+from django.contrib.auth import get_user_model
+
 from rest_framework import serializers
 
 from ..models import Topic, Website, Post, PlayList
 
 
-class WebsiteSerializer(serializers.ModelSerializer):
-    language_description = serializers.CharField(source='get_language_display', read_only=True)
+class WebsiteSerializer(serializers.HyperlinkedModelSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name='website-detail',
+        lookup_field='name',
+    )
     timesince = serializers.CharField(source='timeago', read_only=True)
     post_count = serializers.CharField(source='posts.count', read_only=True)
     countViews = serializers.CharField(source='count_views', read_only=True)
     root_url = serializers.CharField(source='get_url', read_only=True)
     photo_url = serializers.SerializerMethodField()
+    subscribers = serializers.SlugRelatedField(
+        queryset=get_user_model().objects.all(),
+        many=True,
+        slug_field='username',
+    )
 
     class Meta:
         model = Website
         fields = (
+            'url',
             'name',
             'posts_url',
             'root_url',
             'post_count',
             'countViews',
             'photo_url',
-            'language',
-            'language_description',
             'description',
-            'created',
             'timesince',
             'subscribers',
-            'max_post',
-            'is_active',
         )
+        lookup_field = 'name'
 
     def get_photo_url(self, web):
         request = self.context.get('request')
@@ -39,6 +46,11 @@ class PostSerializer(serializers.ModelSerializer):
     website = WebsiteSerializer(many=False, read_only=True)
     timesince = serializers.CharField(source='timeago', read_only=True)
     photo_url = serializers.SerializerMethodField()
+    users_like = serializers.SlugRelatedField(
+        queryset = get_user_model().objects.all(),
+        many=True,
+        slug_field='username',
+    )
 
     class Meta:
         model = Post

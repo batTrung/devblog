@@ -9,10 +9,10 @@
                     <div
                         @click="onLikePost()"
                         class="v-add left"
-                        v-show="hoverPostId == index" v-tooltip="'Thích bài viết'">
+                        v-show="hoverPostId == index && isAuthenticated" v-tooltip="'Thích bài viết'">
                         <i class="far fa-heart text-gray"></i>
                     </div>
-                    <b-dropdown variant="link" class="v-add right" right v-show="hoverPostId == index">
+                    <b-dropdown variant="link" class="v-add right" right v-show="hoverPostId == index && isAuthenticated">
                         <template v-slot:button-content>
                             <i class="fas fa-plus"></i>
                         </template>

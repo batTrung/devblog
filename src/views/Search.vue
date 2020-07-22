@@ -84,8 +84,8 @@
                                                     class="card-img p-2"
                                                     style="max-height: 240px">
                                             </a>
-                                            <div class="v-add left" v-show="hoverPostId == index" v-tooltip="'Thích bài viết'"><i class="far fa-heart text-gray"></i></div>
-                                            <b-dropdown variant="link" class="v-add right" right v-show="hoverPostId == index">
+                                            <div class="v-add left" v-show="hoverPostId == index && isAuthenticated" v-tooltip="'Thích bài viết'"><i class="far fa-heart text-gray"></i></div>
+                                            <b-dropdown variant="link" class="v-add right" right v-show="hoverPostId == index && isAuthenticated">
                                                 <template v-slot:button-content>
                                                     <i class="fas fa-plus"></i>
                                                 </template>
@@ -173,7 +173,11 @@
                                                         :to="{ name: 'page-detail', params: { name: page.name }}">
                                                         <h4 class="h5">{{ page.name }}</h4>
                                                     </router-link>
-                                                    <button class="btn-custom btn-danger btn-sm animate-up-2">Đăng ký</button>
+                                                    <button
+                                                        class="btn-custom btn-danger btn-sm animate-up-2"
+                                                        >
+                                                        Đăng ký <i class="far fa-bell"></i>
+                                                    </button>
                                                 </div>
                                                 <p class="my-3">
                                                     {{ page.description|truncatewords(20) }}
@@ -245,7 +249,7 @@
                                                         <img :src="playlist.posts[0].photo_url" class="l-3">
                                                     </a>
                                                     <div class="items">{{ playlist.posts.length }}</div>
-                                                    <div class="v-add left" v-show="hoverPlayListId == index" v-tooltip="'Thêm sao cho danh sách'"><i class="fas fa-star text-warning"></i></div>
+                                                    <div class="v-add left" v-show="hoverPlayListId == index && isAuthenticated" v-tooltip="'Thêm sao cho danh sách'"><i class="fas fa-star text-warning"></i></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -439,6 +443,8 @@ export default {
             return isLast ? this.countPlayList - this.pagePlayList*this.num_playlist_each_page : this.num_playlist_each_page
         },
         ...mapGetters([
+            'isAuthenticated',
+            'currentUser',
             'search',
             'topics',
             'posts',

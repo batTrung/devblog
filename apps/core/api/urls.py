@@ -1,11 +1,16 @@
 from django.urls import path, include
 
 from rest_framework_simplejwt import views as jwt_views
+from rest_framework import routers
 
 from apps.accounts.api import views as accounts_views
 from apps.blog.api import views as blog_views
+from apps.blog.api import viewsets as blog_viewsets
 
 from .views import ApiRoot
+
+router = routers.DefaultRouter()
+router.register('websites', blog_viewsets.WebsiteViewSet)
 
 urlpatterns = [
     path(
@@ -13,6 +18,8 @@ urlpatterns = [
         ApiRoot.as_view(),
         name=ApiRoot.name,
     ),
+
+    path('', include(router.urls)),
 
     #  Authentication
     path('rest-auth/', include('dj_rest_auth.urls')),
@@ -28,16 +35,6 @@ urlpatterns = [
         'posts/',
         blog_views.PostList.as_view(),
         name=blog_views.PostList.name,
-    ),
-    path(
-        'websites/',
-        blog_views.WebsiteList.as_view(),
-        name=blog_views.WebsiteList.name,
-    ),
-    path(
-        'websites/<str:name>/',
-        blog_views.WebsiteDetail.as_view(),
-        name=blog_views.WebsiteDetail.name,
     ),
     path(
         'playlists/',

@@ -1,32 +1,9 @@
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView
 
-from ..models import Topic, Website, Post, PlayList
-from .serializers import WebsiteSerializer, PostSerializer, PlayListSerializer, TopicSerializer
-from .paginations import WebsitePagination, PostPagination, PlayListPagination
-from .filters import PostFilter, WebsiteFilter, TopicFilter
-
-
-class WebsiteList(ListAPIView):
-    queryset = Website.objects.all()
-    serializer_class = WebsiteSerializer
-    pagination_class = WebsitePagination
-    filterset_class = WebsiteFilter
-    search_fields = (
-        'name',
-        'description',
-    )
-    ordering_fields = (
-        'subscribers',
-        'created',
-    )
-    name = 'website-list'
-
-
-class WebsiteDetail(RetrieveAPIView):
-    queryset = Website.objects.all()
-    serializer_class = WebsiteSerializer
-    lookup_field = 'name'
-    name = 'website-detail'
+from ..models import Topic, Post, PlayList
+from .serializers import PostSerializer, PlayListSerializer, TopicSerializer
+from .paginations import PostPagination, PlayListPagination
+from .filters import PostFilter, TopicFilter
 
 
 class PostList(ListAPIView):

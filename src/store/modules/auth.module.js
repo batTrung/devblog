@@ -53,7 +53,6 @@ const actions = {
     return new Promise((resolve, reject) => {
       ApiService.post('rest-auth/registration', credentials)
         .then(({ data }) => {
-          console.log("okeeee", data)
           commit(SET_AUTH, data.user)
           JwtService.saveToken(data)
           resolve(data)
@@ -97,7 +96,7 @@ const mutations = {
   },
   [SET_AUTH](state, user) {
     state.isAuthenticated = true
-    state.user = user.user
+    state.user = user
     state.errors = []
   },
   [PURGE_AUTH](state) {

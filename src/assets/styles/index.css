@@ -154,12 +154,8 @@ h6,
     transition: opacity .15s;
 }
 
-a:not(.color-active) {
-    color: #7e7e7e;
-}
-
 a, a:hover {
-    color: #2e2e2e;
+    color: #4a6f8a;
     text-decoration: none;
 }
 
@@ -596,4 +592,8 @@ span.text-underline:after {
 
 .bb-green {
     border-bottom: 2px solid #0c9177 !important;
+}
+
+p {
+    color: #4a6f8a;
 }
