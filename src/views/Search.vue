@@ -84,7 +84,17 @@
                                                     class="card-img p-2"
                                                     style="max-height: 240px">
                                             </a>
-                                            <div class="v-add left" v-show="hoverPostId == index && isAuthenticated" v-tooltip="'Thích bài viết'"><i class="far fa-heart text-gray"></i></div>
+                                            <div
+                                                @click="onLikePost(post.slug)"
+                                                class="v-add left"
+                                                v-show="hoverPostId == index && isAuthenticated" v-tooltip="'Thích bài viết'">
+                                                <i
+                                                    v-if="post.users_like.includes(currentUser.username)"
+                                                    class="fas fa-heart text-danger"
+                                                    >
+                                                </i>
+                                                <i class="far fa-heart text-gray" v-else></i>
+                                            </div>
                                             <b-dropdown variant="link" class="v-add right" right v-show="hoverPostId == index && isAuthenticated">
                                                 <template v-slot:button-content>
                                                     <i class="fas fa-plus"></i>
@@ -337,6 +347,7 @@ import {
     FETCH_PLAYLISTS,
     PAGE_SUBSCRIBE,
     PLAYLIST_STAR,
+    POST_LIKE,
 } from "../store/actions.type"
 import {
     SET_INFO_POST,
@@ -569,6 +580,13 @@ export default {
         onStar(username, slug) {
             if (this.isAuthenticated) {
                 this.$store.dispatch(PLAYLIST_STAR, `${username}/${slug}/star`)
+            } else {
+                this.gotoLogin()
+            }
+        },
+        onLikePost(slug) {
+            if (this.isAuthenticated) {
+                this.$store.dispatch(POST_LIKE, `${slug}/like`)
             } else {
                 this.gotoLogin()
             }

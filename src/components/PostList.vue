@@ -7,10 +7,15 @@
                         <img :src="post.photo_url" class="card-img-top p-1" :alt="post.title" style="width: 100%; height: 169px">
                     </a>
                     <div
-                        @click="onLikePost()"
+                        @click="onLikePost(post.slug)"
                         class="v-add left"
                         v-show="hoverPostId == index && isAuthenticated" v-tooltip="'Thích bài viết'">
-                        <i class="far fa-heart text-gray"></i>
+                        <i
+                            v-if="post.users_like.includes(currentUser.username)"
+                            class="fas fa-heart text-danger"
+                            >
+                        </i>
+                        <i class="far fa-heart text-gray" v-else></i>
                     </div>
                     <b-dropdown variant="link" class="v-add right" right v-show="hoverPostId == index && isAuthenticated">
                         <template v-slot:button-content>
@@ -49,7 +54,10 @@
 </template>
 <script>
 import { mapGetters } from "vuex"
-import { FETCH_POSTS } from "../store/actions.type"
+import {
+    FETCH_POSTS,
+    POST_LIKE,
+} from "../store/actions.type"
 import { PostsService } from "@/common/api.service"
 import { truncatechars } from '@/common/filters'
 import VLoading from '@/components/VLoading'
@@ -122,9 +130,9 @@ export default {
             this.hasNext = true
             this.$store.dispatch(FETCH_POSTS, this.getParams)
         },
-        onLikePost() {
+        onLikePost(slug) {
             if (this.isAuthenticated) {
-                console.log("okkkkkkkkkkkkkkk")
+                this.$store.dispatch(POST_LIKE, `${slug}/like`)
             } else {
                 this.gotoLogin()
             }

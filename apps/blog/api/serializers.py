@@ -57,6 +57,7 @@ class PostSerializer(serializers.ModelSerializer):
         fields = (
             'website',
             'title',
+            'slug',
             'link',
             'views',
             'created',

@@ -90,3 +90,26 @@ class PlayListStar(APIView):
                 },
                 status = status.HTTP_401_UNAUTHORIZED,
             )
+
+
+class PostLike(APIView):
+    name = 'post-like'
+
+    def patch(self, request, post_slug):
+        user = request.user
+        if user.is_authenticated:
+            post = get_object_or_404(Post, slug=post_slug)
+            if user not in post.users_like.all():
+                post.users_like.add(user)
+            else:
+                post.users_like.remove(user)
+            return Response(
+                status = status.HTTP_200_OK,
+            )
+        else:
+            return Response(
+                {
+                    'detail': 'User is unauthorized'
+                },
+                status = status.HTTP_401_UNAUTHORIZED,
+            )

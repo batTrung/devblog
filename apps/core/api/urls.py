@@ -51,6 +51,11 @@ urlpatterns = [
         blog_views.PlayListStar.as_view(),
         name=blog_views.PlayListStar.name,
     ),
+    path(
+        'posts/<slug:post_slug>/like/',
+        blog_views.PostLike.as_view(),
+        name=blog_views.PostLike.name,
+    ),
     #  Check Views
     path(
         'check/account/email/checker/<str:email>/',

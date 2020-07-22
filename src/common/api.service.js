@@ -59,6 +59,9 @@ export const PostsService = {
             params: params
         })
     },
+    update(slug) {
+      return ApiService.update('posts', slug)
+    },
 }
 
 export const PagesService = {
