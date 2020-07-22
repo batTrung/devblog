@@ -25,7 +25,8 @@ const ApiService = {
   },
 
   get(resource, slug='') {
-    return Vue.axios.get(`${resource}/${slug}/`).catch(error => {
+    const vslug = slug ? `${slug}}/` : slug
+    return Vue.axios.get(`${resource}/${vslug}`).catch(error => {
       throw new Error(`[RWV] ApiService ${error}`)
     })
   },
@@ -35,7 +36,8 @@ const ApiService = {
   },
 
   update(resource, slug, params) {
-    return Vue.axios.put(`${resource}/${slug}/`, params)
+    const vslug = slug ? `${slug}}/` : slug
+    return Vue.axios.put(`${resource}/${vslug}`, params)
   },
 
   put(resource, params) {
