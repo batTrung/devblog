@@ -67,3 +67,26 @@ class WebsiteSubscribe(APIView):
                 },
                 status = status.HTTP_401_UNAUTHORIZED,
             )
+
+
+class PlayListStar(APIView):
+    name = 'playlist-star'
+
+    def patch(self, request, username_owner, slug):
+        user = request.user
+        if user.is_authenticated:
+            playlist = get_object_or_404(PlayList, user__username=username_owner, slug=slug)
+            if user not in playlist.users_star.all():
+                playlist.users_star.add(user)
+            else:
+                playlist.users_star.remove(user)
+            return Response(
+                status = status.HTTP_200_OK,
+            )
+        else:
+            return Response(
+                {
+                    'detail': 'User is unauthorized'
+                },
+                status = status.HTTP_401_UNAUTHORIZED,
+            )

@@ -256,7 +256,17 @@
                                                         <img :src="playlist.posts[0].photo_url" class="l-3">
                                                     </a>
                                                     <div class="items">{{ playlist.posts.length }}</div>
-                                                    <div class="v-add left" v-show="hoverPlayListId == index && isAuthenticated" v-tooltip="'Thêm sao cho danh sách'"><i class="fas fa-star text-warning"></i></div>
+                                                    <div
+                                                        class="v-add left"
+                                                        @click="onStar(playlist.user, playlist.slug)"
+                                                        v-show="hoverPlayListId == index"
+                                                        v-tooltip="'Thêm sao cho danh sách'">
+                                                        <i
+                                                            class="fas fa-star text-warning"
+                                                            v-if="playlist.users_star.includes(currentUser.username)">
+                                                        </i>
+                                                        <i class="far fa-star text-gray" v-else></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -326,6 +336,7 @@ import {
     FETCH_PAGES,
     FETCH_PLAYLISTS,
     PAGE_SUBSCRIBE,
+    PLAYLIST_STAR,
 } from "../store/actions.type"
 import {
     SET_INFO_POST,
@@ -551,6 +562,13 @@ export default {
         onSubscribe(pageName) {
             if (this.isAuthenticated) {
                 this.$store.dispatch(PAGE_SUBSCRIBE, `${pageName}/subscribe`)
+            } else {
+                this.gotoLogin()
+            }
+        },
+        onStar(username, slug) {
+            if (this.isAuthenticated) {
+                this.$store.dispatch(PLAYLIST_STAR, `${username}/${slug}/star`)
             } else {
                 this.gotoLogin()
             }

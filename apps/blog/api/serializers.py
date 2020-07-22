@@ -88,7 +88,11 @@ class PlayListSerializer(serializers.ModelSerializer):
     user = serializers.CharField(source='user.username', read_only=True)
     posts = PostPhotoSerializer(many=True, read_only=True)
     timesince = serializers.CharField(source='timeago', read_only=True)
-
+    users_star = serializers.SlugRelatedField(
+        queryset = get_user_model().objects.all(),
+        many=True,
+        slug_field='username',
+    )
     class Meta:
         model = PlayList
         fields = (

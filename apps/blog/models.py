@@ -18,7 +18,12 @@ class Topic(TitleSlugable):
 
 
 class Website(models.Model):
-    name = models.CharField(max_length=200, blank=True, null=True)
+    name = models.CharField(
+        max_length=200, 
+        blank=True, 
+        null=True, 
+        unique=True,
+    )
     posts_url = models.URLField(unique=True)
     post_tag = models.CharField(max_length=200)
     link_tag = models.CharField(max_length=200)

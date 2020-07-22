@@ -46,6 +46,11 @@ urlpatterns = [
         blog_views.WebsiteSubscribe.as_view(),
         name=blog_views.WebsiteSubscribe.name,
     ),
+    path(
+        'playlists/<str:username_owner>/<slug:slug>/star/',
+        blog_views.PlayListStar.as_view(),
+        name=blog_views.PlayListStar.name,
+    ),
     #  Check Views
     path(
         'check/account/email/checker/<str:email>/',

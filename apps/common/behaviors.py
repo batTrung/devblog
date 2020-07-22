@@ -11,6 +11,7 @@ class UUIDable(models.Model):
         abstract = True
 
 
+
 class TitleSlugable(models.Model):
     title = models.CharField('Tiêu đề', max_length=250)
     slug = models.SlugField(

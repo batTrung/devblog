@@ -85,6 +85,9 @@ export const PlayListsService = {
     get(slug) {
         return ApiService.get('playlists', slug)
     },
+    update(slug) {
+      return ApiService.update('playlists', slug)
+    },
 }
 
 
