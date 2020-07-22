@@ -174,8 +174,15 @@
                                                         <h4 class="h5">{{ page.name }}</h4>
                                                     </router-link>
                                                     <button
-                                                        class="btn-custom btn-danger btn-sm animate-up-2"
-                                                        >
+                                                        v-if="page.subscribers.includes(currentUser.username)"
+                                                        class="btn-custom btn-light btn-sm mb-3 d-inline animate-up-2"
+                                                        @click="onSubscribe(page.name)">
+                                                        <i class="fas fa-check"></i> Đã đăng ký
+                                                    </button>
+                                                    <button
+                                                        v-else
+                                                        class="btn-custom btn-danger btn-sm mb-3 d-inline animate-up-2"
+                                                        @click="onSubscribe(page.name)">
                                                         Đăng ký <i class="far fa-bell"></i>
                                                     </button>
                                                 </div>
@@ -318,6 +325,7 @@ import {
     FETCH_POSTS,
     FETCH_PAGES,
     FETCH_PLAYLISTS,
+    PAGE_SUBSCRIBE,
 } from "../store/actions.type"
 import {
     SET_INFO_POST,
@@ -539,6 +547,13 @@ export default {
                         this.$store.commit(SET_INFO_PLAYLIST, data)
                     }, 700)
                 })
+        },
+        onSubscribe(pageName) {
+            if (this.isAuthenticated) {
+                this.$store.dispatch(PAGE_SUBSCRIBE, `${pageName}/subscribe`)
+            } else {
+                this.gotoLogin()
+            }
         },
     },
 }
