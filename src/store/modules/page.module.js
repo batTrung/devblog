@@ -8,6 +8,7 @@ import {
     FETCH_END,
     FETCH_PAGES,
     FETCH_PAGE,
+    PAGE_SUBSCRIBE,
 } from '@/store/actions.type'
 import {
     SET_PAGES,
@@ -65,6 +66,12 @@ const actions = {
     commit(SET_PAGE, data)
     store.dispatch(FETCH_END)
     return data
+  },
+  [PAGE_SUBSCRIBE]({ dispatch }, pageName) {
+    return PagesService.update(pageName)
+      .then(() => {
+         dispatch(FETCH_PAGES)
+      })
   },
 }
 

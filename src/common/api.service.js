@@ -36,8 +36,8 @@ const ApiService = {
   },
 
   update(resource, slug, params) {
-    const vslug = slug ? `${slug}}/` : slug
-    return Vue.axios.put(`${resource}/${vslug}`, params)
+    const vslug = slug ? `${slug}/` : slug
+    return Vue.axios.patch(`${resource}/${vslug}`, params)
   },
 
   put(resource, params) {
@@ -69,6 +69,9 @@ export const PagesService = {
     },
     get(slug) {
         return ApiService.get('websites', slug)
+    },
+    update(slug) {
+      return ApiService.update('websites', slug)
     },
 }
 

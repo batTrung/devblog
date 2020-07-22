@@ -41,7 +41,11 @@ urlpatterns = [
         blog_views.PlaylistSerializer.as_view(),
         name=blog_views.PlaylistSerializer.name,
     ),
-
+    path(
+        'websites/<str:name>/subscribe/',
+        blog_views.WebsiteSubscribe.as_view(),
+        name=blog_views.WebsiteSubscribe.name,
+    ),
     #  Check Views
     path(
         'check/account/email/checker/<str:email>/',

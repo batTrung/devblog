@@ -24,13 +24,13 @@
                             <button
                                 v-if="page.subscribers.includes(currentUser.username)"
                                 class="btn-custom btn-light btn-sm mb-3 d-inline animate-up-2"
-                                @click="onSubscribe()">
+                                @click="onSubscribe(page.name)">
                                 <i class="fas fa-check"></i> Đã đăng ký
                             </button>
                             <button
                                 v-else
                                 class="btn-custom btn-danger btn-sm mb-3 d-inline animate-up-2"
-                                @click="onSubscribe()">
+                                @click="onSubscribe(page.name)">
                                 Đăng ký <i class="far fa-bell"></i>
                             </button>
                         </div>
@@ -63,7 +63,7 @@
 <script>
 import { mapGetters } from "vuex"
 import { truncatewords } from '@/common/filters'
-import { FETCH_PAGES } from "../store/actions.type"
+import { FETCH_PAGES, PAGE_SUBSCRIBE } from "../store/actions.type"
 import VLoading from '@/components/VLoading'
 import { PagesService } from "@/common/api.service"
 
@@ -129,9 +129,9 @@ export default {
             this.hasNext = true 
             this.$store.dispatch(FETCH_PAGES, this.getParams)
         },
-        onSubscribe() {
+        onSubscribe(pageName) {
             if (this.isAuthenticated) {
-                console.log('onSubscribe')
+                this.$store.dispatch(PAGE_SUBSCRIBE, `${pageName}/subscribe`)
             } else {
                 this.gotoLogin()
             }
