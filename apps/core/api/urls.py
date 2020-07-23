@@ -11,6 +11,7 @@ from .views import ApiRoot
 
 router = routers.DefaultRouter()
 router.register('websites', blog_viewsets.WebsiteViewSet)
+router.register('playlists', blog_viewsets.PlaylistViewSet, basename='playlist')
 
 urlpatterns = [
     path(
@@ -35,11 +36,6 @@ urlpatterns = [
         'posts/',
         blog_views.PostList.as_view(),
         name=blog_views.PostList.name,
-    ),
-    path(
-        'playlists/',
-        blog_views.PlaylistSerializer.as_view(),
-        name=blog_views.PlaylistSerializer.name,
     ),
     path(
         'websites/<str:name>/subscribe/',

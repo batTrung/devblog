@@ -15,9 +15,10 @@
                                 :key="index"
                                 :src="post.photo_url"
                                 :class="'l-' + (2 - index)">
-                            <a href="#">
+                            <router-link
+                                :to="{ name: 'playlist-detail', params: { slug: playlist.slug } }">
                                 <img :src="playlist.posts[0].photo_url" class="l-3">
-                            </a>
+                            </router-link>
                             <div class="items">{{ playlist.posts.length }}</div>
                             <div
                                 class="v-add left"
@@ -41,9 +42,10 @@
                             <span class="mr-3"><i class="fas fa-star text-warning mr-1"></i>{{ playlist.users_star.length }}</span>
                             <span class=""><i class="ti ti-timer text-primary mr-1"></i>{{ playlist.timesince }} trước</span>
                         </div>
-                        <a href="">
+                        <router-link
+                            :to="{ name: 'playlist-detail', params: { slug: playlist.slug } }">
                             <h6 class="font-weight-normal">{{ playlist.title }}</h6>
-                        </a>
+                        </router-link>
                         <div class="small d-flex align-items-center">
                             <b-avatar button :variant="playlist.user.username|generateColor" :src="playlist.user.photo" class="align-baseline mr-1" v-if="playlist.user.photo"></b-avatar>
                             <b-avatar button :variant="playlist.user.username|generateColor" :text="playlist.user.username|generateAvatar" class="align-baseline mr-1" v-else></b-avatar>

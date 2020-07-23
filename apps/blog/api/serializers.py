@@ -106,6 +106,7 @@ class PlayListSerializer(serializers.ModelSerializer):
         fields = (
             'user',
             'title',
+            'status',
             'slug',
             'posts',
             'views',

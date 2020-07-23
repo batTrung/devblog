@@ -624,3 +624,12 @@ p {
 #post-modal .modal-footer {
         justify-content: flex-start !important;
 }
+
+.breadcrumb-item+.breadcrumb-item:before {
+    content: "\f101";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: .625rem;
+    color: #66799e;
+    margin-top: 5px;
+}

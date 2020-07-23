@@ -30,27 +30,6 @@ class PostList(ListAPIView):
         return Post.objects.all()
 
 
-class PlaylistSerializer(ListAPIView):
-    serializer_class = PlayListSerializer
-    pagination_class = PlayListPagination
-    search_fields = (
-        'title',
-    )
-    ordering_fields = (
-        'updated',
-        'views',
-        'users_star',
-    )
-    name = 'playlist-list'
-
-    def get_queryset(self):
-        owner = self.request.query_params.get('owner', 'false')
-        is_owner = False if owner == 'false' or not owner else True
-        if is_owner and self.request.user.is_authenticated:
-            return PlayList.objects.filter(user=self.request.user)
-        return PlayList.objects.published()
-
-
 class TopicList(ListAPIView):
     queryset = Topic.objects.all()
     serializer_class = TopicSerializer

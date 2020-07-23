@@ -75,6 +75,11 @@ export default new Router({
       },
     },
     {
+      path: '/playlist/:slug',
+      name: 'playlist-detail',
+      component: () => import('@/views/PlayListDetail'),
+    },
+    {
       path: '*',
       name: '404',
       component: () => import('@/views/NotFound'),
