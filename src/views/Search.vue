@@ -346,7 +346,6 @@ import {
     FETCH_POSTS,
     FETCH_PAGES,
     FETCH_PLAYLISTS,
-    POST_LIKE,
 } from "../store/actions.type"
 import {
     SET_INFO_POST,
@@ -593,7 +592,10 @@ export default {
         },
         onLikePost(slug) {
             if (this.isAuthenticated) {
-                this.$store.dispatch(POST_LIKE, `${slug}/like`)
+                PostsService.update(`${slug}/like`)
+                    .then(() => {
+                        this.$store.dispatch(FETCH_POSTS, this.getPlayListsQuery)
+                    })
             } else {
                 this.gotoLogin()
             }

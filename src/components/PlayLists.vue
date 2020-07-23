@@ -47,7 +47,7 @@
                         <div class="small d-flex align-items-center">
                             <b-avatar button :variant="playlist.user.username|generateColor" :src="playlist.user.photo" class="align-baseline mr-1" v-if="playlist.user.photo"></b-avatar>
                             <b-avatar button :variant="playlist.user.username|generateColor" :text="playlist.user.username|generateAvatar" class="align-baseline mr-1" v-else></b-avatar>
-                            <a target="_blank" href="">{{ playlist.user.username }}</a>
+                            <a href="javascript:void(0)">{{ playlist.user.username }}</a>
                         </div>
                     </div>
                 </div>

@@ -3,7 +3,6 @@ import { PostsService } from '@/common/api.service'
 import {
     FETCH_POSTS,
     FETCH_POST,
-    POST_LIKE,
 } from '@/store/actions.type'
 import {
     SET_POSTS,
@@ -51,12 +50,6 @@ const actions = {
         .then(({ data }) => {
           commit(SET_POST, data)
         })
-    },
-    [POST_LIKE]({ dispatch }, slug) {
-        return PostsService.update(slug)
-            .then(() => {
-                dispatch(FETCH_POSTS)
-            })
     },
 }
 

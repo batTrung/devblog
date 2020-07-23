@@ -81,7 +81,6 @@
 import { mapGetters } from "vuex"
 import {
     FETCH_POSTS,
-    POST_LIKE,
 } from "../store/actions.type"
 import { PostsService } from "@/common/api.service"
 import { truncatechars } from '@/common/filters'
@@ -108,6 +107,7 @@ export default {
                     language: '',
                     search: '',
                     topic: '',
+                    liked: '',
                 }
             },
         },
@@ -157,7 +157,10 @@ export default {
         },
         onLikePost(slug) {
             if (this.isAuthenticated) {
-                this.$store.dispatch(POST_LIKE, `${slug}/like`)
+                PostsService.update(`${slug}/like`)
+                    .then(() => {
+                        this.fetchPosts()
+                    })
             } else {
                 this.gotoLogin()
             }

@@ -13,7 +13,6 @@ from .filters import PostFilter, TopicFilter
 
 
 class PostList(ListAPIView):
-    queryset = Post.objects.all()
     serializer_class = PostSerializer
     pagination_class = PostPagination
     filterset_class = PostFilter
@@ -23,6 +22,12 @@ class PostList(ListAPIView):
         'users_like',
     )
     name = 'post-list'
+
+    def get_queryset(self):
+        liked = self.request.query_params.get('liked', False)
+        if liked and self.request.user.is_authenticated:
+            return Post.objects.filter(users_like__in=[self.request.user])
+        return Post.objects.all()
 
 
 class PlaylistSerializer(ListAPIView):

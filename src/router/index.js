@@ -67,6 +67,14 @@ export default new Router({
       },
     },
     {
+      path: '/posts-liked',
+      name: 'posts-liked',
+      component: () => import('@/views/PostsLiked'),
+      meta: {
+        loginRequired: true,
+      },
+    },
+    {
       path: '*',
       name: '404',
       component: () => import('@/views/NotFound'),

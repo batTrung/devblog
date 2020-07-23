@@ -15,14 +15,12 @@
                         v-tooltip="'Danh sách của tôi'">
                         <i class="ti ti-layers-alt"></i>
                     </router-link>
-                    <a class="nav-link text-dark mb-0 h5"
-                        href="#"
+                    <router-link
+                        :to="{ name: 'posts-liked' }"
+                        class="nav-link text-dark mb-0 h5"
                         v-tooltip="'Bài viết đã thích'">
                         <i class="ti ti-heart"></i>
-                    </a>
-                    <a class="nav-link text-dark mb-0 h5" href="#" v-tooltip="'Xem lịch sử'">
-                        <i class="ti ti-filter"></i>
-                    </a>
+                    </router-link>
                 </nav>
                 <div class="mt-1">
                     <a href="#" class="icon icon-shape icon-shape-success rounded-circle">
