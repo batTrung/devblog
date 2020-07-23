@@ -64,6 +64,7 @@ export const PostsService = {
         })
     },
     update(slug) {
+      console.log('Update: ', slug)
       return ApiService.update('posts', slug)
     },
 }

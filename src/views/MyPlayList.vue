@@ -51,10 +51,12 @@
             </b-form>
         </div>
         <PlayLists
-            :query="playlistsQuery" />
+            :query="playlistsQuery"
+            :owner="isAuthenticated" />
     </div>
 </template>
 <script>
+import { mapGetters } from "vuex"
 import PlayLists from '@/components/PlayLists'
 
 export default {
@@ -70,6 +72,9 @@ export default {
                 search: '',
             },
         }
+    },
+    computed: {
+        ...mapGetters(['isAuthenticated'])
     },
     methods: {
         getActiveClass(a, b) {

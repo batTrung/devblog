@@ -70,6 +70,10 @@ export default {
             type: Number,
             required: false,
         },
+        owner: {
+            required: false,
+            default: '',
+        },
         query: {
             type: Object,
             required: false,
@@ -107,7 +111,7 @@ export default {
     },
     computed: {
         getParams() {
-            return this.query
+            return this.owner ? Object.assign(this.query, { owner: this.owner }) : this.query
         },
         ...mapGetters(['playLists', 'isAuthenticated', 'currentUser'])
     },

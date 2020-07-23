@@ -24,7 +24,7 @@
                                 class="form-control border-0 pl-0"
                                 name="search"
                                 placeholder="Tìm kiếm">
-                            <span style="margin-right: 5px; margin-top: 4px;">
+                            <span class="mx-2 mt-1">
                                 <b-button type="submit" pill variant="primary" size="sm">Search</b-button>
                             </span>
                         </div>

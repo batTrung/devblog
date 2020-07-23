@@ -11,7 +11,8 @@
                     </a>
                     <router-link
                         :to="{ name: 'my-playlist' }"
-                        class="nav-link text-dark mb-0 h5">
+                        class="nav-link text-dark mb-0 h5"
+                        v-tooltip="'Danh sách của tôi'">
                         <i class="ti ti-layers-alt"></i>
                     </router-link>
                     <a class="nav-link text-dark mb-0 h5"

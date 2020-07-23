@@ -56,6 +56,11 @@ urlpatterns = [
         blog_views.PostLike.as_view(),
         name=blog_views.PostLike.name,
     ),
+    path(
+        'posts/<slug:post_slug>/view/',
+        blog_views.PostIncreaseView.as_view(),
+        name=blog_views.PostIncreaseView.name,
+    ),
     #  Check Views
     path(
         'check/account/email/checker/<str:email>/',

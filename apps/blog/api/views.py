@@ -4,6 +4,7 @@ from rest_framework.generics import ListAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import AllowAny
 
 from ..models import Website, Topic, Post, PlayList
 from .serializers import PostSerializer, PlayListSerializer, TopicSerializer
@@ -25,7 +26,6 @@ class PostList(ListAPIView):
 
 
 class PlaylistSerializer(ListAPIView):
-    queryset = PlayList.objects.published()
     serializer_class = PlayListSerializer
     pagination_class = PlayListPagination
     search_fields = (
@@ -37,6 +37,13 @@ class PlaylistSerializer(ListAPIView):
         'users_star',
     )
     name = 'playlist-list'
+
+    def get_queryset(self):
+        owner = self.request.query_params.get('owner', 'false')
+        is_owner = False if owner == 'false' or not owner else True
+        if is_owner and self.request.user.is_authenticated:
+            return PlayList.objects.filter(user=self.request.user)
+        return PlayList.objects.published()
 
 
 class TopicList(ListAPIView):
@@ -113,3 +120,15 @@ class PostLike(APIView):
                 },
                 status = status.HTTP_401_UNAUTHORIZED,
             )
+
+
+class PostIncreaseView(APIView):
+    permission_classes = [AllowAny]
+
+    name = 'post-increase-view'
+
+    def patch(self, request, post_slug):
+        post = get_object_or_404(Post, slug=post_slug)
+        post.views += 1
+        post.save()
+        return Response(status = status.HTTP_200_OK)

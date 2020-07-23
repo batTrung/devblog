@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-6 my-2" v-for="(post, index) in posts.slice(0, num_post)" :key="index">
                 <div class="card h-100 d-flex flex-column justify-content-between shadow-sm" @mouseover="hoverPostId = index" @mouseleave="hoverPostId = null">
-                    <a :href="post.link" target="_blank" class="position-relative">
+                    <a :href="post.link" @click="increaseViewPost(post.slug)" target="_blank" class="position-relative">
                         <img :src="post.photo_url" class="card-img-top p-1" :alt="post.title" style="width: 100%; height: 169px">
                     </a>
                     <div
@@ -29,7 +29,7 @@
                             <span class="mr-3"><i class="far fa-heart text-danger mr-1"></i>{{ post.users_like.length }}</span>
                             <span class=""><i class="ti ti-timer text-primary mr-1"></i>{{ post.timesince }} trước</span>
                         </div>
-                        <a :href="post.link" target="_blank">
+                        <a :href="post.link" @click="increaseViewPost(post.slug)" target="_blank">
                             <div class="mb-2 h6 font-weight-normal">{{ post.title }}</div>
                         </a>
                         <router-link
@@ -161,6 +161,9 @@ export default {
             } else {
                 this.gotoLogin()
             }
+        },
+        increaseViewPost(slug) {
+            PostsService.update(`${slug}/view`)
         },
         scroll() {
             window.onscroll = () => {
