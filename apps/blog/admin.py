@@ -27,7 +27,7 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(PlayList)
 class PlayListAdmin(admin.ModelAdmin):
-    list_display = ('user', 'title',)
+    list_display = ('title', 'user', 'status',)
 
 
 @admin.register(Topic)

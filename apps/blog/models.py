@@ -9,8 +9,8 @@ from apps.common.behaviors import TitleSlugable
 from taggit.managers import TaggableManager
 from sorl.thumbnail import get_thumbnail
 
-from .constants import Language
-from .managers import WebsiteManager
+from .constants import Language, Status
+from .managers import WebsiteManager, PlayListManager
 
 
 class Topic(TitleSlugable):
@@ -128,9 +128,24 @@ class PlayList(TitleSlugable):
     )
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    status = models.CharField(
+        max_length=10,
+        choices=Status.choices,
+        default=Status.PUBLIC,
+    )
+
+    objects = PlayListManager()
 
     class Meta:
         ordering = ('-updated',)
 
     def timeago(self):
         return timesince(self.updated)
+
+
+class ViewLater():
+    owner = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    posts = models.ManyToManyField('Post')

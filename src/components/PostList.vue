@@ -17,14 +17,12 @@
                         </i>
                         <i class="far fa-heart text-gray" v-else></i>
                     </div>
-                    <b-dropdown variant="link" class="v-add right" right v-show="hoverPostId == index && isAuthenticated">
-                        <template v-slot:button-content>
-                            <i class="fas fa-plus"></i>
-                        </template>
-                        <b-dropdown-item href="#" class="py-2 p-0"><i class="ti ti-timer mr-2"></i> Xem sau</b-dropdown-item>
-                        <div class="dropdown-divider"></div>
-                        <b-dropdown-item href="#" class="py-2 p-0"><i class="ti ti-layers-alt mr-2"></i> Thêm vào danh sách</b-dropdown-item>
-                    </b-dropdown>
+                    <div
+                        class="v-add right text-gray"
+                        @click="$bvModal.show('post-modal')"
+                        v-show="hoverPostId == index && isAuthenticated">
+                        <i class="fas fa-plus"></i>
+                    </div>
                     <div class="card-body">
                         <div class="post-meta mb-2 small text-gray">
                             <span class="mr-3"><i class="ti ti-eye text-dark mr-1"></i>{{ post.views }}</span>
@@ -49,6 +47,33 @@
             <div class="col-12" v-show="!num_post">
                 <VLoading :show="isLoading" />
             </div>
+            <b-modal
+                id="post-modal"
+                centered title="Lưu bài viết"
+                size="sm">
+                <b-form-checkbox
+                    name="checkbox-1"
+                    value="accepted"
+                    size="lg"
+                    >
+                    <div class="d-flex justify-content-between">
+                        <small>Xem sau</small>
+                        <i class="ti ti-timer float-right"></i>
+                    </div>
+                </b-form-checkbox>
+                <b-form-checkbox
+                    name="checkbox-1"
+                    value="accepted"
+                    size="lg"
+                    >
+                    <small>I accept the terms and use dsd sd sd ssds </small>
+                    <i class="ti ti-layers-alt"></i>
+                </b-form-checkbox>
+                <template v-slot:modal-footer
+                    class="text-center d-block">
+                    <i class="fas fa-plus text-gray mr-2"></i> Tạo danh sách mới
+                </template>
+            </b-modal>
         </div>
     </b-overlay>
 </template>

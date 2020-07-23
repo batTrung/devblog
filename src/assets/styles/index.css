@@ -597,3 +597,26 @@ span.text-underline:after {
 p {
     color: #4a6f8a;
 }
+
+.custom-control-label {
+    display: block;
+}
+
+.modal-body {
+    max-width: 100%; 
+    width: auto !important; 
+    display: inline-block; 
+}
+
+#post-modal {
+    text-align: center;
+}
+
+#post-modal .modal-dialog {
+    max-width: 100%;
+    display: inline-block;
+}
+
+#post-modal .modal-footer {
+        justify-content: flex-start !important;
+}

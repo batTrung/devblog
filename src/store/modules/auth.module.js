@@ -103,6 +103,7 @@ const mutations = {
     state.isAuthenticated = false
     state.user = {}
     state.errors = []
+    ApiService.deleteHeader()
     JwtService.destroyToken()
   },
 }

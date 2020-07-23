@@ -1,5 +1,6 @@
 import os
 import string
+from datetime import timedelta
 
 import dj_database_url
 from celery.schedules import crontab
@@ -235,3 +236,8 @@ CORS_ORIGIN_WHITELIST = [
 THUMBNAIL_PRESERVE_FORMAT = True
 
 REST_USE_JWT = True
+
+# SIMPLE_JWT = {
+#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+#     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+# }

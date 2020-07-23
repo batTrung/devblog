@@ -18,6 +18,10 @@ const ApiService = {
     ] = `Bearer ${ JwtService.getAccessToken() }`;
   },
 
+  deleteHeader() {
+    delete Vue.axios.defaults.headers.common['Authorization']
+  },
+
   query(resource, params) {
     return Vue.axios.get(`${resource}/`, params).catch(error => {
       throw new Error(`[RWV] ApiService ${error}`)

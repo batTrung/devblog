@@ -12,7 +12,9 @@
                     <a class="nav-link text-dark mb-0 h5" href="#" v-tooltip="'Danh sách của bạn'">
                         <i class="ti ti-layers-alt"></i>
                     </a>
-                    <a class="nav-link text-dark mb-0 h5" href="#" v-tooltip="'Bài viết đã thích'">
+                    <a class="nav-link text-dark mb-0 h5"
+                        href="#"
+                        v-tooltip="'Bài viết đã thích'">
                         <i class="ti ti-heart"></i>
                     </a>
                     <a class="nav-link text-dark mb-0 h5" href="#" v-tooltip="'Xem lịch sử'">
