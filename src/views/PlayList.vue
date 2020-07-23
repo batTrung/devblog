@@ -16,7 +16,7 @@
                     <a 
                         href=""
                         :class="getActiveClass(playlistsQuery.ordering, '-users_star')"
-                        @click.prevent="playlistsQuery.ordering = '-users_star'">Nhiều sao
+                        @click.prevent="playlistsQuery.ordering = '-users_star'">Nhiều star
                     </a>
                 </li>
                 <li class="list-inline-item mr-3">

@@ -2,7 +2,6 @@ import { PlayListsService } from '@/common/api.service'
 
 import {
     FETCH_PLAYLISTS,
-    PLAYLIST_STAR,
 } from '@/store/actions.type'
 import {
     SET_PLAYLISTS,
@@ -42,12 +41,6 @@ const actions = {
               commit(SET_PLAYLISTS, data)
               commit(SET_INFO_PLAYLIST, data)
           })
-  },
-  [PLAYLIST_STAR]({ dispatch }, slug) {
-    return PlayListsService.update(slug)
-      .then(() => {
-        dispatch(FETCH_PLAYLISTS)
-      })
   },
 }
 

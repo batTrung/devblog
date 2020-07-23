@@ -32,6 +32,7 @@
                     <b-nav-item-dropdown right v-show="isAuthenticated">
                         <template slot="button-content">
                             <b-avatar size="2rem"></b-avatar>
+                            {{ currentUser.username }}
                         </template>
                         <b-dropdown-item @click="logout()">Đăng xuất</b-dropdown-item>
                     </b-nav-item-dropdown>

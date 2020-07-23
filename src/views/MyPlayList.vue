@@ -16,7 +16,7 @@
                     <a 
                         href=""
                         :class="getActiveClass(playlistsQuery.ordering, '-users_star')"
-                        @click.prevent="playlistsQuery.ordering = '-users_star'">Nhiều sao
+                        @click.prevent="playlistsQuery.ordering = '-users_star'">Nhiều star
                     </a>
                 </li>
                 <li class="list-inline-item mr-3">
@@ -24,13 +24,6 @@
                         href=""
                         :class="getActiveClass(playlistsQuery.ordering, '-views')"
                         @click.prevent="playlistsQuery.ordering = '-views'">Xem nhiều
-                    </a>
-                </li>
-                <li class="list-inline-item mr-3">
-                    <a 
-                        href=""
-                        :class="getActiveClass(playlistsQuery.ordering, '-views')"
-                        @click.prevent="playlistsQuery.ordering = '-views'">Đã star
                     </a>
                 </li>
             </ul>

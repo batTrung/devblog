@@ -268,7 +268,7 @@
                                                     <div class="items">{{ playlist.posts.length }}</div>
                                                     <div
                                                         class="v-add left"
-                                                        @click="onStar(playlist.user, playlist.slug)"
+                                                        @click="onStar(playlist.user.username, playlist.slug)"
                                                         v-show="hoverPlayListId == index"
                                                         v-tooltip="'Thêm sao cho danh sách'">
                                                         <i
@@ -301,10 +301,11 @@
                                                         </span>
                                                     </div>
                                                 </div>
-                                                <a href="" class="small">
-                                                    <span class="b-avatar mr-1 badge-secondary rounded-circle" style="width: 2.5em; height: 2.5em;"><span class="b-avatar-img"><img src="http://localhost:8000/media/websites/filters.png" alt="avatar"></span>
-                                                    </span> {{ playlist.user }}
-                                                </a>
+                                                <div class="small d-flex align-items-center">
+                                                    <b-avatar button :variant="playlist.user.username|generateColor" :src="playlist.user.photo" class="align-baseline mr-1" v-if="playlist.user.photo"></b-avatar>
+                                                    <b-avatar button :variant="playlist.user.username|generateColor" :text="playlist.user.username|generateAvatar" class="align-baseline mr-1" v-else></b-avatar>
+                                                    <a href="javascript:void(0)">{{ playlist.user.username }}</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -333,7 +334,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import { truncatewords } from '@/common/filters'
+import { truncatewords, generateAvatar, generateColor } from '@/common/filters'
 import {
     PostsService,
     PagesService,
@@ -345,8 +346,6 @@ import {
     FETCH_POSTS,
     FETCH_PAGES,
     FETCH_PLAYLISTS,
-    PAGE_SUBSCRIBE,
-    PLAYLIST_STAR,
     POST_LIKE,
 } from "../store/actions.type"
 import {
@@ -416,6 +415,8 @@ export default {
     },
     filters: {
         truncatewords,
+        generateAvatar,
+        generateColor,
     },
     computed: {
         getPostsQuery() {
@@ -572,14 +573,20 @@ export default {
         },
         onSubscribe(pageName) {
             if (this.isAuthenticated) {
-                this.$store.dispatch(PAGE_SUBSCRIBE, `${pageName}/subscribe`)
+                PagesService.update(`${pageName}/subscribe`)
+                    .then(() => {
+                        this.$store.dispatch(FETCH_PAGES, this.getPagesQuery)
+                    })
             } else {
                 this.gotoLogin()
             }
         },
         onStar(username, slug) {
             if (this.isAuthenticated) {
-                this.$store.dispatch(PLAYLIST_STAR, `${username}/${slug}/star`)
+                PlayListsService.update(`${username}/${slug}/star`)
+                    .then(() => {
+                        this.$store.dispatch(FETCH_PLAYLISTS, this.getPlayListsQuery)
+                    })
             } else {
                 this.gotoLogin()
             }

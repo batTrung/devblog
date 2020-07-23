@@ -21,14 +21,17 @@
                             <div class="items">{{ playlist.posts.length }}</div>
                             <div
                                 class="v-add left"
-                                @click="onStar(playlist.user, playlist.slug)"
-                                v-show="hoverPlayListId == index"
-                                v-tooltip="'Thêm sao cho danh sách'">
+                                @click="onStar(playlist.user.username, playlist.slug)"
+                                v-show="hoverPlayListId == index">
                                 <i
                                     class="fas fa-star text-warning"
+                                    v-tooltip="'Xóa star ' + playlist.title"
                                     v-if="playlist.users_star.includes(currentUser.username)">
                                 </i>
-                                <i class="far fa-star text-gray" v-else></i>
+                                <i
+                                    v-tooltip="'Thêm star ' + playlist.title"
+                                    class="far fa-star text-gray"
+                                    v-else></i>
                             </div>
                         </div>
                     </div>
@@ -41,9 +44,10 @@
                         <a href="">
                             <h6 class="font-weight-normal">{{ playlist.title }}</h6>
                         </a>
-                        <div class="small">
-                            <b-avatar button variant="primary" text="FF" class="align-baseline mr-1"></b-avatar>
-                            <a target="_blank" href="">{{ playlist.user }}</a>
+                        <div class="small d-flex align-items-center">
+                            <b-avatar button :variant="playlist.user.username|generateColor" :src="playlist.user.photo" class="align-baseline mr-1" v-if="playlist.user.photo"></b-avatar>
+                            <b-avatar button :variant="playlist.user.username|generateColor" :text="playlist.user.username|generateAvatar" class="align-baseline mr-1" v-else></b-avatar>
+                            <a target="_blank" href="">{{ playlist.user.username }}</a>
                         </div>
                     </div>
                 </div>
@@ -57,9 +61,9 @@
 <script>
 import { mapGetters } from "vuex"
 import VLoading from '@/components/VLoading'
+import { generateAvatar, generateColor } from '@/common/filters'
 import {
     FETCH_PLAYLISTS,
-    PLAYLIST_STAR,
 } from "../store/actions.type"
 import { PlayListsService } from "@/common/api.service"
 
@@ -84,6 +88,10 @@ export default {
                 }
             },
         },
+    },
+    filters: {
+        generateAvatar,
+        generateColor,
     },
     components: {
         VLoading,
@@ -127,7 +135,10 @@ export default {
         },
         onStar(username, slug) {
             if (this.isAuthenticated) {
-                this.$store.dispatch(PLAYLIST_STAR, `${username}/${slug}/star`)
+                PlayListsService.update(`${username}/${slug}/star`)
+                    .then(() => {
+                        this.fetchPlayLists()
+                    })
             } else {
                 this.gotoLogin()
             }

@@ -63,7 +63,7 @@
 <script>
 import { mapGetters } from "vuex"
 import { truncatewords } from '@/common/filters'
-import { FETCH_PAGES, PAGE_SUBSCRIBE } from "../store/actions.type"
+import { FETCH_PAGES } from "../store/actions.type"
 import VLoading from '@/components/VLoading'
 import { PagesService } from "@/common/api.service"
 
@@ -131,7 +131,10 @@ export default {
         },
         onSubscribe(pageName) {
             if (this.isAuthenticated) {
-                this.$store.dispatch(PAGE_SUBSCRIBE, `${pageName}/subscribe`)
+                PagesService.update(`${pageName}/subscribe`)
+                    .then(() => {
+                        this.fetchPages()
+                    })
             } else {
                 this.gotoLogin()
             }

@@ -82,7 +82,7 @@ class PlayListStar(APIView):
     def patch(self, request, username_owner, slug):
         user = request.user
         if user.is_authenticated:
-            playlist = get_object_or_404(PlayList.objects.published(), user__username=username_owner, slug=slug)
+            playlist = get_object_or_404(PlayList, user__username=username_owner, slug=slug)
             if user not in playlist.users_star.all():
                 playlist.users_star.add(user)
             else:
