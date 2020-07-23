@@ -62,6 +62,9 @@ export default new Router({
       path: '/my-playlist',
       name: 'my-playlist',
       component: () => import('@/views/MyPlayList'),
+      meta: {
+        loginRequired: true,
+      },
     },
     {
       path: '*',
@@ -70,3 +73,4 @@ export default new Router({
     },
   ]
 })
+

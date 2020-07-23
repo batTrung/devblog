@@ -66,7 +66,7 @@ const actions = {
         })
     })
   },
-  [CHECK_AUTH]({ commit, dispatch }) {
+  [CHECK_AUTH]({ commit, dispatch, state }) {
     if (JwtService.getAccessToken()) {
       ApiService.setHeader()
       ApiService.get("rest-auth/user")
@@ -87,6 +87,7 @@ const actions = {
     } else {
       commit(PURGE_AUTH)
     }
+    return state.isAuthenticated
   },
 }
 

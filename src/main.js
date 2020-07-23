@@ -23,14 +23,26 @@ import { CHECK_AUTH } from "@/store/actions.type";
 
 ApiService.init()
 
-router.beforeEach((to, from, next) =>
-  Promise.all([store.dispatch(CHECK_AUTH)]).then(next)
+router.beforeEach((to, from, next) => {
+      Promise.all([store.dispatch(CHECK_AUTH)])
+          .then(response => {
+              const loginRequired = to.matched.some(record => record.meta.loginRequired) && !response[0]
+              if (loginRequired) {
+                  next({
+                      name: 'login',
+                      query: { redirect: to.path },
+                  })
+              }
+              next()
+          })
+    }
 );
 
 [
     doLogin,
     titleMixin,
 ].forEach((x) => Vue.mixin(x))
+
 
 Vue.config.productionTip = false
 
