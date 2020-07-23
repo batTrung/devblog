@@ -64,13 +64,10 @@
 
 <script>
 import { mapGetters } from "vuex"
-
 import PostList from '@/components/PostList'
 import {
-    CHANGE_LAYOUT,
     FETCH_PAGE,
 } from '@/store/actions.type'
-
 import store from '@/store'
 
 export default {
@@ -80,15 +77,10 @@ export default {
     },
     beforeRouteEnter(to, from, next) {
         Promise.all([
-            store.dispatch(CHANGE_LAYOUT, 'nav-layout'),
             store.dispatch(FETCH_PAGE, to.params.name),
         ]).then(() => {
             next()
         })
-    },
-    beforeRouteLeave(to, from, next) {
-        store.dispatch(CHANGE_LAYOUT, 'base-layout')
-        next()
     },
     components: {
         PostList,

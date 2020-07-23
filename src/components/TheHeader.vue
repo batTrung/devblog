@@ -9,9 +9,11 @@
                     <a class="nav-link text-dark mb-0 h5" href="#" v-tooltip="'Bài viết xem sau'">
                         <i class="ti ti-timer"></i>
                     </a>
-                    <a class="nav-link text-dark mb-0 h5" href="#" v-tooltip="'Danh sách của bạn'">
+                    <router-link
+                        :to="{ name: 'my-playlist' }"
+                        class="nav-link text-dark mb-0 h5">
                         <i class="ti ti-layers-alt"></i>
-                    </a>
+                    </router-link>
                     <a class="nav-link text-dark mb-0 h5"
                         href="#"
                         v-tooltip="'Bài viết đã thích'">

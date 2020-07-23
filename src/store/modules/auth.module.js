@@ -78,7 +78,7 @@ const actions = {
             'rest-auth/token/refresh',
             { refresh: JwtService.getRefreshToken() },
            ).then(({ data }) => {
-             JwtService.saveToken(data.access)
+             JwtService.updateAccessToken(data.access)
              dispatch(CHECK_AUTH)
            }).catch(() => {
              commit(PURGE_AUTH)
@@ -103,7 +103,6 @@ const mutations = {
     state.isAuthenticated = false
     state.user = {}
     state.errors = []
-    ApiService.deleteHeader()
     JwtService.destroyToken()
   },
 }

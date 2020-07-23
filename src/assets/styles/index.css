@@ -163,6 +163,10 @@ ul li>a.color-active {
     color: #ea2c5a !important;
 }
 
+nav a.color-active > i {
+    color: #ea2c5a !important;
+}
+
 .input-group {
     border-radius: .45rem;
     transition: all .2s ease;

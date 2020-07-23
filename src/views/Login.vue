@@ -117,10 +117,8 @@
 <script>
 import { mapState } from "vuex"
 import { required, email } from 'vuelidate/lib/validators'
-import store from '@/store'
 import VMessages from '@/components/VMessages'
 import {
-    CHANGE_LAYOUT,
     LOGIN,
 } from '@/store/actions.type'
 
@@ -166,17 +164,6 @@ export default {
                   this.user.password = null
                 })
         },
-    },
-    beforeRouteEnter(to, from, next) {
-        Promise.all([
-            store.dispatch(CHANGE_LAYOUT, 'full-layout')
-        ]).then(() => {
-            next()
-        })
-    },
-    beforeRouteLeave(to, from, next) {
-        store.dispatch(CHANGE_LAYOUT, 'base-layout')
-        next()
     },
 }
 </script>

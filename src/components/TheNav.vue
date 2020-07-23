@@ -8,8 +8,8 @@
             <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav>
                     <b-nav-item :to="{ name: 'posts' }">Bài viết</b-nav-item>
-                    <b-nav-item :to="{ name: 'pages' }">Trang</b-nav-item>
                     <b-nav-item :to="{ name: 'play-list' }">Danh sách</b-nav-item>
+                    <b-nav-item :to="{ name: 'pages' }">Trang</b-nav-item>
                 </b-navbar-nav>
                 <b-navbar-nav class="ml-auto">
                     <b-nav-form @submit.prevent="onSubmit($event)">

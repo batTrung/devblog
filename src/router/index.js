@@ -16,6 +16,9 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: () => import('@/views/Login'),
+      meta: {
+        layout: () => import('@/layouts/Full'),
+      },
     },
     {
       path: '/register',
@@ -41,6 +44,9 @@ export default new Router({
       path: '/pages/:name',
       name: 'page-detail',
       component: () => import('@/views/Page'),
+      meta: {
+        layout: () => import('@/layouts/Nav'),
+      },
     },
     {
       path: '/playlist',
@@ -51,6 +57,11 @@ export default new Router({
       path: '/search',
       name: 'search',
       component: () => import('@/views/Search'),
+    },
+    {
+      path: '/my-playlist',
+      name: 'my-playlist',
+      component: () => import('@/views/MyPlayList'),
     },
     {
       path: '*',
