@@ -108,7 +108,7 @@
                                     Đăng ký
                                 </b-button>
                             </b-form>
-                            <div class="mt-3 mb-4 text-center"><span class="font-weight-normal">hoặc</span></div>
+                            <!-- <div class="mt-3 mb-4 text-center"><span class="font-weight-normal">hoặc</span></div>
                             <div class="btn-wrapper my-4 text-center">
                                 <b-avatar variant="facebook" class="mr-3">
                                     <custom-icon>
@@ -130,7 +130,7 @@
                                         <span aria-hidden="true" class="fab fa-twitter"></span>
                                     </custom-icon>
                                 </b-avatar>
-                            </div>
+                            </div> -->
                             <div class="d-block d-sm-flex justify-content-center align-items-center mt-4">
                                 <span class="font-weight-normal">
                                     Bạn đã có tài khoản? <router-link :to="{ name: 'login' }" style="color: #ea2c5a">Đăng nhập</router-link>

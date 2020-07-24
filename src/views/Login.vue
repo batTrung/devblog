@@ -60,7 +60,7 @@
                                         </b-form-invalid-feedback>
                                     </div>
                                 </b-form-group>
-                                <b-form-group>
+                                <!-- <b-form-group>
                                     <div class="d-flex justify-content-between align-items-center mb-2">
                                         <b-form-checkbox
                                             name="checkbox-1"
@@ -70,7 +70,7 @@
                                         </b-form-checkbox>
                                         <div><a href="" class="small text-right">Quên mật khẩu?</a></div>
                                     </div>
-                                </b-form-group>
+                                </b-form-group> -->
                                 <b-button
                                     block
                                     type="submit"
@@ -79,7 +79,7 @@
                                     Đăng nhập
                                 </b-button>
                             </b-form>
-                            <div class="mt-3 mb-4 text-center"><span class="font-weight-normal">hoặc đăng nhập với</span></div>
+                            <!-- <div class="mt-3 mb-4 text-center"><span class="font-weight-normal">hoặc đăng nhập với</span></div>
                             <div class="btn-wrapper my-4 text-center">
                                 <b-avatar variant="facebook" class="mr-3">
                                     <custom-icon>
@@ -101,7 +101,7 @@
                                         <span aria-hidden="true" class="fab fa-twitter"></span>
                                     </custom-icon>
                                 </b-avatar>
-                            </div>
+                            </div> -->
                             <div class="d-block d-sm-flex justify-content-center align-items-center mt-4">
                                 <span class="font-weight-normal">
                                     Chưa có tài khoản? <router-link :to="{ name: 'register' }" style="color: #ea2c5a">Đăng ký</router-link>

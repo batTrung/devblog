@@ -24,6 +24,9 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: () => import('@/views/Register'),
+      meta: {
+        layout: () => import('@/layouts/Full'),
+      },
     },
     {
       path: '/setting',
