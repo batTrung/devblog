@@ -9,7 +9,7 @@ from rest_framework.permissions import AllowAny
 from ..models import Website, Topic, Post, PlayList
 from .serializers import PostSerializer, PlayListSerializer, TopicSerializer
 from .paginations import PostPagination, PlayListPagination
-from .filters import PostFilter, TopicFilter
+from .filters import PostFilter
 
 
 class PostList(ListAPIView):
@@ -31,9 +31,10 @@ class PostList(ListAPIView):
 
 
 class TopicList(ListAPIView):
-    queryset = Topic.objects.all()
+    queryset = Topic.objects.filter(
+        websites__isnull=False,
+    ).distinct()
     serializer_class = TopicSerializer
-    filterset_class = TopicFilter
     name = 'topic-list'
 
 

@@ -58,7 +58,10 @@
                 </div>
             </aside>
             <div class="col-12 col-lg-9">
-                <b-overlay :show="isShowOverlay" opacity="0.7" rounded="sm">
+                <b-overlay
+                    :show="isShowOverlay"
+                    opacity="0.8"
+                    rounded="sm">
                     <div
                         class="post"
                         v-show="posts.length && checkCategory('post')">
@@ -362,7 +365,7 @@ export default {
         isPostLoading: false,
         isPageLoading: false,
         isPlayListLoading: false,
-        isShowOverlay: false,
+        isShowOverlay: true,
         num_post_each_page: 4,
         num_web_each_page: 3,
         num_playlist_each_page: 3,
@@ -409,13 +412,24 @@ export default {
         }
       }
     },
-    components: {
-        VLoading,
-    },
     filters: {
         truncatewords,
         generateAvatar,
         generateColor,
+    },
+    components: {
+        VLoading,
+    },
+    watch: {
+      searchQuery: {
+        handler() {
+          this.fetchData()
+        },
+        deep: true,
+      },
+      search() {
+        this.fetchData()
+      },
     },
     computed: {
         getPostsQuery() {
@@ -494,30 +508,15 @@ export default {
             'hasNextPlayList',
         ])
     },
-    watch: {
-      searchQuery: {
-        handler() {
-          this.fetchData()
-        },
-        deep: true,
-      },
-      search() {
-        this.fetchData()
-      },
-    },
-    mounted() {
-        this.$store.dispatch(FETCH_TOPICS, { website: true })
-        this.fetchData()
-    },
     methods: {
         fetchData() {
             this.isShowOverlay = true
             setTimeout(() => {
+                this.$store.dispatch(FETCH_POSTS, this.getPostsQuery)
+                this.$store.dispatch(FETCH_PAGES, this.getPagesQuery)
+                this.$store.dispatch(FETCH_PLAYLISTS, this.getPlayListsQuery)
                 this.isShowOverlay = false
             }, 500)
-            this.$store.dispatch(FETCH_POSTS, this.getPostsQuery)
-            this.$store.dispatch(FETCH_PAGES, this.getPagesQuery)
-            this.$store.dispatch(FETCH_PLAYLISTS, this.getPlayListsQuery)
         },
         checkCategory(value) {
             const categories = this.searchQuery.category
@@ -600,6 +599,13 @@ export default {
                 this.gotoLogin()
             }
         },
+    },
+    mounted() {
+        setTimeout(() => {
+            this.$store.dispatch(FETCH_TOPICS)
+            this.fetchData()
+            this.isShowOverlay = false
+        }, 500)
     },
 }
 </script>

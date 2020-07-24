@@ -129,3 +129,4 @@ class TopicSerializer(serializers.ModelSerializer):
             'title',
             'slug',
         )
+        read_only_fields = ('slug',)

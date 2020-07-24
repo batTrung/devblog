@@ -94,7 +94,6 @@ export const PlayListsService = {
         return ApiService.get('playlists', slug)
     },
     update(slug, params) {
-      console.log(params)
       return ApiService.update('playlists', slug, params)
     },
     delete(slug) {

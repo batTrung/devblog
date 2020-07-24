@@ -617,6 +617,7 @@ p {
 }
 
 #post-modal .modal-dialog {
+    min-width: 25%;
     max-width: 100%;
     display: inline-block;
 }

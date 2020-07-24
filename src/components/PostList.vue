@@ -1,7 +1,10 @@
 <template>
-    <b-overlay :show="isShowOverlay" opacity="0.6" rounded="sm">
-        <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6 my-2" v-for="(post, index) in posts.slice(0, num_post)" :key="index">
+    <b-overlay
+        :show="isShowOverlay"
+        opacity="0.8"
+        rounded="sm">
+        <div class="row" v-if="posts.length !== 0">
+            <div class="col-lg-3 col-md-4 col-sm-6 my-2" v-for="(post, index) in posts.slice(0, numPost)" :key="index">
                 <div class="card h-100 d-flex flex-column justify-content-between shadow-sm" @mouseover="hoverPostId = index" @mouseleave="hoverPostId = null">
                     <a :href="post.link" @click="increaseViewPost(post.slug)" target="_blank" class="position-relative">
                         <img :src="post.photo_url" class="card-img-top p-1" :alt="post.title" style="width: 100%; height: 169px">
@@ -44,12 +47,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12" v-show="!num_post">
+            <div
+                class="col-12"
+                v-show="!numPost">
                 <VLoading :show="isLoading" />
             </div>
             <b-modal
                 id="post-modal"
-                centered title="Lưu bài viết"
+                centered
+                title="Lưu bài viết"
                 size="sm"
                 no-stacking>
                 <b-form-checkbox
@@ -59,20 +65,23 @@
                     >
                     <div class="d-flex justify-content-between">
                         <small>Xem sau</small>
-                        <i class="ti ti-timer float-right"></i>
+                        <i class="ti ti-timer ml-3"></i>
                     </div>
                 </b-form-checkbox>
                 <b-form-checkbox
                     name="checkbox-1"
                     value="accepted"
-                    size="lg"
-                    >
-                    <small>I accept the terms and use dsd sd sd ssds </small>
-                    <i class="ti ti-layers-alt"></i>
+                    size="lg">
+                    <div class="d-flex justify-content-between">
+                        <small>Danh sách mới</small>
+                        <i class="ti ti-layers-alt ml-3"></i>
+                    </div>
                 </b-form-checkbox>
-                <template v-slot:modal-footer
+                <template
+                    v-slot:modal-footer
                     class="text-center d-block">
-                    <a href="javascript:void(0)"
+                    <a
+                        href="javascript:void(0)"
                         v-b-modal.add-playlist>
                         <i class="fas fa-plus text-gray mr-2"></i> Tạo danh sách mới
                     </a>
@@ -90,16 +99,23 @@
                     <b-form-group
                         label="Trạng thái">
                         <b-form-select>
-                            <b-form-select-option value="Công khai">Công khai</b-form-select-option>
-                            <b-form-select-option value="Ẩn">Ẩn</b-form-select-option>
+                            <b-form-select-option value="public">Công khai</b-form-select-option>
+                            <b-form-select-option value="private">Ẩn</b-form-select-option>
                         </b-form-select>
                     </b-form-group>
                 </b-form>
                 <div class="d-flex justify-content-end">
-                    <button class="btn btn-secondary mr-2" @click="$bvModal.hide('add-playlist')">Đóng</button>
+                    <button
+                        class="btn btn-secondary mr-2"
+                        @click="$bvModal.hide('add-playlist')">
+                        Đóng
+                    </button>
                     <button class="btn btn-primary">Lưu</button>
                 </div>
             </b-modal>
+        </div>
+        <div class="text-center" v-else>
+            <p>Không tìm thấy bài viết nào</p>
         </div>
     </b-overlay>
 </template>
@@ -115,7 +131,7 @@ import VLoading from '@/components/VLoading'
 export default {
     name: 'PostList',
     props: {
-        num_post: {
+        numPost: {
             type: Number,
             required: false,
         },
@@ -149,7 +165,7 @@ export default {
             hoverPostId: null,
             page: 1,
             isLoading: false,
-            isShowOverlay: false,
+            isShowOverlay: true,
             hasNext: true,
         }
     },
@@ -158,22 +174,21 @@ export default {
             handler() {
                 this.isShowOverlay = true
                 setTimeout(() => {
+                    this.fetchPosts()
                     this.isShowOverlay = false
                 }, 300)
-                this.fetchPosts()
             },
             deep: true,
         },
     },
     computed: {
         getParams() {
-            return Object.assign(this.query, { website: this.website })
+            return Object.assign(
+                this.query,
+                { website: this.website },
+            )
         },
         ...mapGetters(['posts', 'currentUser', 'isAuthenticated'])
-    },
-    mounted() {
-        this.fetchPosts()
-        this.scroll()
     },
     methods: {
         fetchPosts() {
@@ -196,7 +211,7 @@ export default {
         },
         scroll() {
             window.onscroll = () => {
-                let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight + 200 > document.documentElement.offsetHeight;
+                const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight + 200 > document.documentElement.offsetHeight
                 if (bottomOfWindow && this.hasNext) {
                     this.hasNext = false
                     const params = Object.assign(
@@ -220,6 +235,13 @@ export default {
                 }
             }
         },
+    },
+    mounted() {
+        setTimeout(() => {
+            this.fetchPosts()
+            this.isShowOverlay = false
+        }, 500)
+        this.scroll()
     },
 }
 </script>

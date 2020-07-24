@@ -64,8 +64,7 @@
                 </b-nav>
             </div>
         </div>
-        <PostList 
-            :query="postsQuery" />
+        <PostList :query="postsQuery" />
     </div>
 </template>
 <script>
@@ -100,7 +99,7 @@ export default {
         },
     },
     mounted() {
-        this.$store.dispatch(FETCH_TOPICS, { website: true })
+        this.$store.dispatch(FETCH_TOPICS)
     },
 }
 </script>

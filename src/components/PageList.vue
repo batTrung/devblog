@@ -1,17 +1,21 @@
 <template>
-    <b-overlay :show="isShowOverlay" opacity="0.6" rounded="sm">
-        <div class="row">
+    <b-overlay
+        :show="isShowOverlay"
+        opacity="0.8"
+        rounded="sm">
+        <div class="row" v-if="pages.length !== 0">
             <div class="col-md-4 col-sm-6 my-2"
-                v-for="(page, index) in pages.slice(0, num_page)"
+                v-for="(page, index) in pages.slice(0, numPage)"
                 :key="index">
-                <div class="card h-100 d-flex flex-column justify-content-between shadow-sm border-light" style="border-radius: .35rem;">
+                <div
+                    class="card h-100 d-flex flex-column justify-content-between shadow-sm border-light"
+                    style="border-radius: .35rem;">
                     <div class="card-body d-flex flex-column pb-0">
-                        <router-link
-                            :to="{ name: 'page-detail', params: { name: page.name }}">
+                        <router-link :to="{ name: 'page-detail', params: { name: page.name }}">
                             <b-avatar
                                 size="lg" 
                                 :src="page.photo_url"
-                                class="mr-2">   
+                                class="mr-2">
                             </b-avatar>
                             {{ page.name }}
                         </router-link>
@@ -53,9 +57,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12" v-show="!num_page">
+            <div class="col-12" v-show="!numPage">
                 <VLoading :show="isLoading" />
             </div>
+        </div>
+        <div class="text-center" v-else>
+            <p>Không tìm thấy trang nào</p>
         </div>
     </b-overlay>
 </template>
@@ -70,7 +77,7 @@ import { PagesService } from "@/common/api.service"
 export default {
     name: 'PageList',
     props: {
-        num_page: {
+        numPage: {
             type: Number,
             required: false,
         },
@@ -97,7 +104,7 @@ export default {
         return {
             page: 1,
             isLoading: false,
-            isShowOverlay: false,
+            isShowOverlay: true,
             hasNext: true,
         }
     },
@@ -106,9 +113,9 @@ export default {
             handler() {
                 this.isShowOverlay = true
                 setTimeout(() => {
+                    this.fetchPages()
                     this.isShowOverlay = false
                 }, 300)
-                this.fetchPages()
             },
             deep: true,
         },
@@ -119,10 +126,6 @@ export default {
         },
         ...mapGetters(['pages', 'isAuthenticated', 'currentUser'])
     },
-    mounted() {
-        this.fetchPages()
-        this.scroll()
-    },
     methods: {
         fetchPages() {
             this.page = 1
@@ -131,7 +134,8 @@ export default {
         },
         onSubscribe(pageName) {
             if (this.isAuthenticated) {
-                PagesService.update(`${pageName}/subscribe`)
+                const vslug = `${pageName}/subscribe`
+                PagesService.update(vslug)
                     .then(() => {
                         this.fetchPages()
                     })
@@ -166,6 +170,12 @@ export default {
             }
         },
     },
-
+    mounted() {
+        setTimeout(() => {
+            this.fetchPages()
+            this.isShowOverlay = false
+        }, 500)
+        this.scroll()
+    },
 }
 </script>

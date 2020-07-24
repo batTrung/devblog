@@ -4,25 +4,35 @@
             <div class="d-flex justify-content-between">
                 <ul class="list-inline mt-2">
                     <li class="list-inline-item mr-3">
-                        <router-link :to="{ name: 'posts' }" class="h5">Bài viết</router-link>
+                        <router-link
+                            :to="{ name: 'posts' }"
+                            class="h5">
+                            Bài viết
+                        </router-link>
                     </li>
                     <li class="list-inline-item mr-3 active">
                         <a
-                            href=""
+                            href="#"
                             :class="getActiveClass(postsQuery.ordering, '-created')"
-                            @click.prevent="postsQuery.ordering = '-created'">Mới cập nhật</a>
+                            @click.prevent="postsQuery.ordering = '-created'">
+                            Mới cập nhật
+                        </a>
                     </li>
                     <li class="list-inline-item mr-3">
                         <a
-                            href=""
+                            href="#"
                             :class="getActiveClass(postsQuery.ordering, '-views')"
-                            @click.prevent="postsQuery.ordering = '-views'">Xem nhiều</a>
+                            @click.prevent="postsQuery.ordering = '-views'">
+                            Xem nhiều
+                        </a>
                     </li>
                     <li class="list-inline-item mr-3">
                         <a
-                            href=""
+                            href="#"
                             :class="getActiveClass(postsQuery.ordering, '-users_like')"
-                            @click.prevent="postsQuery.ordering = '-users_like'">Nhiều lượt thích</a>
+                            @click.prevent="postsQuery.ordering = '-users_like'">
+                            Nhiều lượt thích
+                        </a>
                     </li>
                 </ul>
                 <b-nav>
@@ -32,7 +42,9 @@
                         </template>
                         <b-dropdown-item
                             :class="getActiveClass(postsQuery.topic, '')"
-                            @click.prevent="postsQuery.topic = ''">Tất cả</b-dropdown-item>
+                            @click.prevent="postsQuery.topic = ''">
+                            Tất cả
+                        </b-dropdown-item>
                         <b-dropdown-item
                             v-for="(topic, index) in topics"
                             :key="index"
@@ -44,7 +56,7 @@
                 </b-nav>
             </div>
             <PostList
-                :num_post="8"
+                :numPost="8"
                 :query="postsQuery" />
         </div>
         <div class="page">
@@ -54,23 +66,26 @@
                 </li>
                 <li class="list-inline-item mr-3">
                     <a 
-                        href=""
+                        href="#"
                         :class="getActiveClass(playlistsQuery.ordering, '-users_star')"
-                        @click.prevent="playlistsQuery.ordering = '-users_star'">Nhiều sao
+                        @click.prevent="playlistsQuery.ordering = '-users_star'">
+                        Nhiều sao
                     </a>
                 </li>
                 <li class="list-inline-item mr-3">
                     <a 
-                        href=""
+                        href="#"
                         :class="getActiveClass(playlistsQuery.ordering, '-updated')"
-                        @click.prevent="playlistsQuery.ordering = '-updated'">Vừa cập nhật
+                        @click.prevent="playlistsQuery.ordering = '-updated'">
+                        Vừa cập nhật
                     </a>
                 </li>
                 <li class="list-inline-item mr-3">
                     <a 
-                        href=""
+                        href="#"
                         :class="getActiveClass(playlistsQuery.ordering, '-views')"
-                        @click.prevent="playlistsQuery.ordering = '-views'">Xem nhiều
+                        @click.prevent="playlistsQuery.ordering = '-views'">
+                        Xem nhiều
                     </a>
                 </li>
             </ul>
@@ -124,7 +139,7 @@
                 </b-nav>
             </div>
             <PageList
-                :num_page="3"
+                :numPage="3"
                 :query="pagesQuery" />
         </div>
     </div>
@@ -175,7 +190,7 @@ export default {
         },
     },
     mounted() {
-        this.$store.dispatch(FETCH_TOPICS, { website: true })
+        this.$store.dispatch(FETCH_TOPICS)
     },
 }
 </script>
