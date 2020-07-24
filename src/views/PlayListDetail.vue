@@ -53,7 +53,7 @@
                             <div
                                 class="d-flex align-items-center justify-content-between text-muted small">
                                 <div>
-                                    <i class="fas fa-lock fa-sm mr-1"></i> {{ playlist.status }}
+                                    <i class="fas fa-lock fa-sm mr-1"></i> {{ playlist.status_display }}
                                 </div>
                                 <b-dropdown
                                     variant="link"

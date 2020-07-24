@@ -90,6 +90,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ('username', 'photo',)
+        read_only_fields = ('username', 'photo',)
 
 
 class PlayListSerializer(serializers.ModelSerializer):
@@ -97,11 +98,11 @@ class PlayListSerializer(serializers.ModelSerializer):
     posts = PostPhotoSerializer(many=True, read_only=True)
     timesince = serializers.CharField(source='timeago', read_only=True)
     users_star = serializers.SlugRelatedField(
-        queryset = get_user_model().objects.all(),
         many=True,
         slug_field='username',
+        read_only=True,
     )
-    status = serializers.CharField(source='get_status_display', read_only=True)
+    status_display = serializers.CharField(source='get_status_display', read_only=True)
 
     class Meta:
         model = PlayList
@@ -109,6 +110,7 @@ class PlayListSerializer(serializers.ModelSerializer):
             'user',
             'title',
             'status',
+            'status_display',
             'slug',
             'posts',
             'views',
@@ -117,6 +119,7 @@ class PlayListSerializer(serializers.ModelSerializer):
             'updated',
             'timesince',
         )
+        read_only_fields = ('users_star', 'views',)
 
 
 class TopicSerializer(serializers.ModelSerializer):

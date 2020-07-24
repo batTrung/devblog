@@ -1,8 +1,10 @@
-from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from ..models import Website, PlayList
 from .serializers import WebsiteSerializer, PlayListSerializer
 from .paginations import WebsitePagination, PlayListPagination
+from .permissions import IsOwnerOrReadOnly
 from .filters import WebsiteFilter
 
 
@@ -24,9 +26,13 @@ class WebsiteViewSet(ReadOnlyModelViewSet):
     vname = 'website-list'
 
 
-class PlaylistViewSet(ReadOnlyModelViewSet):
+class PlaylistViewSet(ModelViewSet):
     serializer_class = PlayListSerializer
     pagination_class = PlayListPagination
+    permission_classes = [
+        IsAuthenticatedOrReadOnly,
+        IsOwnerOrReadOnly,
+    ]
     lookup_field = 'slug'
     search_fields = (
         'title',
@@ -44,3 +50,6 @@ class PlaylistViewSet(ReadOnlyModelViewSet):
         if is_owner and self.request.user.is_authenticated:
             return PlayList.objects.filter(user=self.request.user)
         return PlayList.objects.published()
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
