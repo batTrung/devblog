@@ -73,7 +73,8 @@
                                     <b-dropdown-item>
                                         <div
                                             class="d-flex justify-content-between"
-                                            v-b-modal.edit-playlist>
+                                            v-b-modal.edit-playlist
+                                            @click="onEditPlayList(playlist)">
                                             Sửa
                                             <i class="far fa-edit text-primary"></i>
                                         </div>
@@ -105,19 +106,28 @@
                 <b-form>
                     <b-form-group
                         label="Tên danh sách">
-                        <b-form-input v-model="playlist.title"></b-form-input>
+                        <b-form-input v-model="playListForm.title"></b-form-input>
                     </b-form-group>
                     <b-form-group
                         label="Trạng thái">
-                        <b-form-select v-model="playlist.status">
-                            <b-form-select-option value="Công khai">Công khai</b-form-select-option>
-                            <b-form-select-option value="Ẩn">Ẩn</b-form-select-option>
+                        <b-form-select v-model="playListForm.status">
+                            <b-form-select-option value="public">Công khai</b-form-select-option>
+                            <b-form-select-option value="private">Ẩn</b-form-select-option>
                         </b-form-select>
                     </b-form-group>
                 </b-form>
                 <div class="d-flex justify-content-end">
-                    <button class="btn btn-secondary mr-2" @click="$bvModal.hide('edit-playlist')">Quay lại</button>
-                    <button class="btn btn-success">Cập nhật</button>
+                    <button
+                        class="btn btn-secondary mr-2"
+                        @click="$bvModal.hide('edit-playlist')">
+                        Quay lại
+                    </button>
+                    <button
+                        class="btn btn-success"
+                        @click="onSubmitPlayListForm()"
+                        >
+                        Cập nhật
+                    </button>
                 </div>
             </b-modal>
             <div class="col-12 col-md-8">
@@ -156,7 +166,7 @@ export default {
     name: 'PlayListDetail',
     beforeRouteEnter(to, from, next) {
         Promise.all([
-            store.dispatch(FETCH_PLAYLIST, to.params.slug),
+            store.dispatch(FETCH_PLAYLIST, `${to.params.slug}`),
         ]).then(() => {
             next()
         })
@@ -164,6 +174,10 @@ export default {
     data() {
         return {
             hoverPlayListId: null,
+            playListForm: {
+                title: '',
+                status: '',
+            },
         }
     },
     filters: {
@@ -174,11 +188,16 @@ export default {
         ...mapGetters(['playlist', 'isAuthenticated', 'currentUser'])
     },
     methods: {
+        fetchPlayList() {
+            const slug = `${this.currentUser}/${this.$route.params.slug}`
+            this.$store.dispatch(FETCH_PLAYLIST, slug)
+        },
         onStar(username, slug) {
             if (this.isAuthenticated) {
-                PlayListsService.update(`${username}/${slug}/star`)
+                const vslug = `${username}/${slug}/star`
+                PlayListsService.update(vslug)
                     .then(() => {
-                        this.$store.dispatch(FETCH_PLAYLIST, this.$route.params.slug)
+                        this.fetchPlayList()
                     })
             } else {
                 this.gotoLogin()
@@ -193,6 +212,19 @@ export default {
                     )
                     this.$bvModal.hide('delete-playlist')
                     this.$router.push({ name: 'my-playlist' })
+                })
+        },
+        onEditPlayList(playlist) {
+            this.playListForm.title = playlist.title
+            this.playListForm.status = playlist.status
+        },
+        onSubmitPlayListForm() {
+            PlayListsService.update(this.$route.params.slug, this.playListForm)
+                .then(() => {
+                    console.log('success')
+                })
+                .catch(error => {
+                    console.error(error)
                 })
         },
     },

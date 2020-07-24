@@ -90,7 +90,6 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ('username', 'photo',)
-        read_only_fields = ('username', 'photo',)
 
 
 class PlayListSerializer(serializers.ModelSerializer):

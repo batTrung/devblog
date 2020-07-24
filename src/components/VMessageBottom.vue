@@ -31,9 +31,7 @@ export default {
   },
   watch: {
     message() {
-        console.log('message on change: ', this.message)
         this.dismissCountDown = 5
-        console.log('dismissCountDown: ', this.dismissCountDown)
     },
   },
   methods: {

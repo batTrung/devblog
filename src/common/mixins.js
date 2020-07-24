@@ -13,7 +13,7 @@ export const titleMixin = {
   created() {
     const title = getTitle(this)
     if (title) {
-      document.title = `DevBat - ${title}`
+      document.title = `DevBlog - ${title}`
     }
   }
 }
