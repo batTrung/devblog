@@ -101,6 +101,8 @@ class PlayListSerializer(serializers.ModelSerializer):
         many=True,
         slug_field='username',
     )
+    status = serializers.CharField(source='get_status_display', read_only=True)
+
     class Meta:
         model = PlayList
         fields = (

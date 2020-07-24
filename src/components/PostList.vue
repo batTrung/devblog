@@ -50,7 +50,8 @@
             <b-modal
                 id="post-modal"
                 centered title="Lưu bài viết"
-                size="sm">
+                size="sm"
+                no-stacking>
                 <b-form-checkbox
                     name="checkbox-1"
                     value="accepted"
@@ -71,8 +72,33 @@
                 </b-form-checkbox>
                 <template v-slot:modal-footer
                     class="text-center d-block">
-                    <i class="fas fa-plus text-gray mr-2"></i> Tạo danh sách mới
+                    <a href="javascript:void(0)"
+                        v-b-modal.add-playlist>
+                        <i class="fas fa-plus text-gray mr-2"></i> Tạo danh sách mới
+                    </a>
                 </template>
+            </b-modal>
+            <b-modal
+                id="add-playlist"
+                title="Tạo danh sách mới"
+                hide-footer>
+                <b-form>
+                    <b-form-group
+                        label="Tên danh sách">
+                        <b-form-input></b-form-input>
+                    </b-form-group>
+                    <b-form-group
+                        label="Trạng thái">
+                        <b-form-select>
+                            <b-form-select-option value="Công khai">Công khai</b-form-select-option>
+                            <b-form-select-option value="Ẩn">Ẩn</b-form-select-option>
+                        </b-form-select>
+                    </b-form-group>
+                </b-form>
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-secondary mr-2" @click="$bvModal.hide('add-playlist')">Đóng</button>
+                    <button class="btn btn-primary">Lưu</button>
+                </div>
             </b-modal>
         </div>
     </b-overlay>

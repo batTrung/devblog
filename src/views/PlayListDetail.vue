@@ -49,36 +49,37 @@
                             <b-avatar button :variant="playlist.user.username|generateColor" :text="playlist.user.username|generateAvatar" class="align-baseline mr-1" v-else></b-avatar>
                             <a href="javascript:void(0)">{{ playlist.user.username }}</a>
                         </div>
-                        <div class="d-flex align-items-center justify-content-between text-muted small">
-                            <div>
-                                <i class="fas fa-lock fa-sm mr-2"></i>
-                            Ẩn
+                        <div v-show="playlist.user.username == currentUser.username">
+                            <div
+                                class="d-flex align-items-center justify-content-between text-muted small">
+                                <div>
+                                    <i class="fas fa-lock fa-sm mr-1"></i> {{ playlist.status }}
+                                </div>
+                                <b-dropdown
+                                    variant="link"
+                                    no-caret
+                                    right>
+                                    <template v-slot:button-content>
+                                        <i class="fas fa-ellipsis-v text-gray"></i>
+                                    </template>
+                                    <b-dropdown-item>
+                                        <div
+                                            class="d-flex justify-content-between"
+                                            v-b-modal.delete-playlist>
+                                            Xóa
+                                            <i class="fas fa-trash-alt text-danger"></i>
+                                        </div>
+                                    </b-dropdown-item>
+                                    <b-dropdown-item>
+                                        <div
+                                            class="d-flex justify-content-between"
+                                            v-b-modal.edit-playlist>
+                                            Sửa
+                                            <i class="far fa-edit text-primary"></i>
+                                        </div>
+                                    </b-dropdown-item>
+                                </b-dropdown>
                             </div>
-                            <b-dropdown
-                                variant="link"
-                                no-caret
-                                right
-                                v-show="playlist.user.username == currentUser.username">
-                                <template v-slot:button-content>
-                                    <i class="fas fa-ellipsis-v text-gray"></i>
-                                </template>
-                                <b-dropdown-item>
-                                    <div
-                                        class="d-flex justify-content-between"
-                                        v-b-modal.delete-playlist>
-                                        Xóa
-                                        <i class="fas fa-trash-alt text-danger"></i>
-                                    </div>
-                                </b-dropdown-item>
-                                <b-dropdown-item>
-                                    <div
-                                        class="d-flex justify-content-between"
-                                        v-b-modal.edit-playlist>
-                                        Sửa
-                                        <i class="far fa-edit text-primary"></i>
-                                    </div>
-                                </b-dropdown-item>
-                            </b-dropdown>
                         </div>
                     </div>
                 </div>
@@ -109,8 +110,8 @@
                     <b-form-group
                         label="Trạng thái">
                         <b-form-select v-model="playlist.status">
-                            <b-form-select-option value="public">Công khai</b-form-select-option>
-                            <b-form-select-option value="private">Ẩn</b-form-select-option>
+                            <b-form-select-option value="Công khai">Công khai</b-form-select-option>
+                            <b-form-select-option value="Ẩn">Ẩn</b-form-select-option>
                         </b-form-select>
                     </b-form-group>
                 </b-form>
