@@ -94,7 +94,7 @@
                 </p>
                 <div class="d-flex justify-content-end">
                     <button class="btn btn-secondary mr-2" @click="$bvModal.hide('delete-playlist')">Quay lại</button>
-                    <button class="btn btn-danger">Xóa</button>
+                    <button class="btn btn-danger" @click="deletePlayList(playlist.slug)">Xóa</button>
                 </div>
             </b-modal>
             <b-modal
@@ -144,8 +144,12 @@ import { mapGetters } from "vuex"
 import store from '@/store'
 import { generateAvatar, generateColor } from '@/common/filters'
 import {
+    PLAYLIST_DELETE,
     FETCH_PLAYLIST,
 } from '@/store/actions.type'
+import {
+    MESSAGE_SET,
+} from '@/store/mutations.type'
 import { PlayListsService } from "@/common/api.service"
 
 export default {
@@ -174,11 +178,22 @@ export default {
             if (this.isAuthenticated) {
                 PlayListsService.update(`${username}/${slug}/star`)
                     .then(() => {
-                        console.log('on star')
+                        this.$store.dispatch(FETCH_PLAYLIST, this.$route.params.slug)
                     })
             } else {
                 this.gotoLogin()
             }
+        },
+        deletePlayList(slug) {
+            this.$store.dispatch(PLAYLIST_DELETE, slug)
+                .then(() => {
+                    this.$store.commit(
+                        MESSAGE_SET,
+                        `Danh sách đã được xóa`,
+                    )
+                    this.$bvModal.hide('delete-playlist')
+                    this.$router.push({ name: 'my-playlist' })
+                })
         },
     },
 }

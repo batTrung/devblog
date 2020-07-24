@@ -48,8 +48,9 @@ const ApiService = {
     return Vue.axios.put(`${resource}/`, params)
   },
 
-  delete(resource) {
-    return Vue.axios.delete(`${resource}/`).catch(error => {
+  delete(resource, slug) {
+    const vslug = slug ? `${slug}/` : slug
+    return Vue.axios.delete(`${resource}/${vslug}`).catch(error => {
       throw new Error(`[RWV] ApiService ${error}`)
     })
   },
@@ -94,6 +95,9 @@ export const PlayListsService = {
     },
     update(slug) {
       return ApiService.update('playlists', slug)
+    },
+    delete(slug) {
+      return ApiService.delete('playlists', slug)
     },
 }
 

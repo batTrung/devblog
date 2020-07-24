@@ -622,7 +622,7 @@ p {
 }
 
 #post-modal .modal-footer {
-        justify-content: flex-start !important;
+    justify-content: flex-start !important;
 }
 
 .breadcrumb-item+.breadcrumb-item:before {
@@ -632,4 +632,19 @@ p {
     font-size: .625rem;
     color: #66799e;
     margin-top: 5px;
+}
+
+.message-bottom {
+    max-width: auto !important;
+    max-width: 100%;
+    width: auto !important;
+    display: block;
+    position: absolute;
+    bottom: 2px;
+    left: 5px;
+    z-index: 15;
+}
+
+.card-body {
+    z-index: 10;
 }

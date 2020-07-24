@@ -5,6 +5,7 @@ import {
     FETCH_END,
     FETCH_PLAYLISTS,
     FETCH_PLAYLIST,
+    PLAYLIST_DELETE,
 } from '@/store/actions.type'
 import {
     SET_PLAYLISTS,
@@ -57,6 +58,10 @@ const actions = {
     store.dispatch(FETCH_END)
     return data
   },
+  // eslint-disable-next-line
+  [PLAYLIST_DELETE]({ commit }, slug) {
+    return PlayListsService.delete(slug)
+  },
 }
 
 const mutations = {
@@ -70,7 +75,6 @@ const mutations = {
       state.hasNextPlayList = data.has_next
   },
   [SET_PLAYLIST](state, data) {
-    console.log('Data playlist: ', data)
     state.playlist = data
   },
 }

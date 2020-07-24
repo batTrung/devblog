@@ -1,6 +1,6 @@
 <template>
-    <b-overlay :show="isShowOverlay" opacity="0.6" rounded="sm">
-        <div class="row">
+    <b-overlay :show="isShowOverlay" opacity="0.6" rounded="sm">    
+        <div class="row" v-if="playLists.length !== 0">
             <div class="col-lg-3 col-md-4 col-sm-6 my-2"
                 v-for="(playlist, index) in playLists.slice(0, numPlayList)"
                 :key="index">
@@ -57,6 +57,9 @@
             <div class="col-12" v-show="!numPlayList">
                 <VLoading :show="isLoading" />
             </div>
+        </div>
+        <div class="text-center" v-else>
+            <p>Danh sách trống</p>
         </div>
     </b-overlay>
 </template>

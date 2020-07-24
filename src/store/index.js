@@ -7,6 +7,7 @@ import page from './modules/page.module'
 import playlist from './modules/playlist.module'
 import topic from './modules/topic.module'
 import search from './modules/search.module'
+import home from './modules/home.module'
 
 Vue.use(Vuex)
 
@@ -18,5 +19,6 @@ export default new Vuex.Store({
     playlist,
     topic,
     search,
+    home,
   },
 })
