@@ -15,10 +15,15 @@ class Command(BaseCommand):
         topic_data = [
             'Web Development',
             'Data Analytics',
+            'Programming',
             'Machine Learning',
+            'Deep Learning',
             'Software Engineering',
             'Design & illustration',
             'Computers & Technology',
+            'Podcast',
+            'Python',
+            'Javascript',
         ]
 
         topics = [

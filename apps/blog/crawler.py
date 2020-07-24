@@ -56,9 +56,10 @@ class Crawler():
         print("Start with ", web)
         count = 0
         if bs:
-            posts = bs.select(web.post_tag)[::-1]
+            posts_data = bs.select(web.post_tag)
+            top_posts = posts_data[4-len(posts_data)::-1]
             print("-> Tim thay posts: ")
-            for result in posts:
+            for result in top_posts:
                 if count >= int(web.max_post):
                     print('Count > max_post')
                     return
@@ -82,7 +83,7 @@ class Crawler():
                             print('TITLE: ', title)
                             print('IMAGE: ', image)
                     else:
-                        return
+                        pass
 
     def post_exists(self, title):
         slug = slugify(title)
