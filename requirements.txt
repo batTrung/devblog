@@ -9,3 +9,9 @@ celery==4.4.2
 redis==3.5.1
 requests==2.23.0
 beautifulsoup4==4.9.1
+django-storages==1.9.1
+boto3==1.14.28
+gunicorn==20.0.4
+dj-rest-auth==1.0.9
+djangorestframework-simplejwt==4.4.0
+django-filter==2.2.0

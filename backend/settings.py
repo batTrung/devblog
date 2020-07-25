@@ -237,9 +237,12 @@ REST_FRAMEWORK = {
     ],
 }
 
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:8080',
-]
+CORS_ORIGIN_WHITELIST = config(
+    'CORS_ORIGIN_WHITELIST',
+    default='http://localhost:8080',
+    cast=Csv(),
+)
+
 
 #  ignore error OSError: cannot write mode RGBA as JPEG
 THUMBNAIL_PRESERVE_FORMAT = True
