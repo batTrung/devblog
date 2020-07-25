@@ -15,6 +15,7 @@ class PostFilter(FilterSet):
     )
     search = django_filters.CharFilter(field_name="title", lookup_expr='icontains')
     topic = django_filters.AllValuesFilter(field_name="website__topic__title")
+    playlist = django_filters.AllValuesFilter(field_name='playlist__title')
 
     class Meta:
         model = Post
