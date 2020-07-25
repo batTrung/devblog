@@ -79,9 +79,6 @@ class Crawler():
                         post_saved = self.save_post(web, full_link_post, title, image)
                         if post_saved:
                             count += 1
-                            print('LINK DETAIL: ', full_link_post)
-                            print('TITLE: ', title)
-                            print('IMAGE: ', image)
                     else:
                         pass
 
