@@ -37,7 +37,7 @@ if USE_S3:
     PRIVATE_FILE_STORAGE = 'apps.core.storage_backends.PrivateMediaStorage'
 else:
     STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'staticfiles')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
