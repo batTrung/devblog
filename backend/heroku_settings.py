@@ -44,5 +44,5 @@ else:
 
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'dist'),
+    os.path.join(BASE_DIR, 'dist', 'static'),
 )
