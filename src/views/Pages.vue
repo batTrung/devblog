@@ -101,7 +101,6 @@ export default {
         },
     },
     mounted() {
-        console.log('API_URL: ', process.env.VUE_APP_API_URL)
         this.$store.dispatch(FETCH_TOPICS, { website: true })
     },
 }

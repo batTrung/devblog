@@ -3,6 +3,7 @@ import re
 from urllib.parse import urlparse
 from urllib.parse import urljoin
 
+from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.utils.text import slugify
 
@@ -87,6 +88,7 @@ class Crawler():
         return Post.objects.filter(slug=slug).exists()
 
     def save_post(self, web, full_link_post, title, link_image):
+
         post = Post(website=web, link=full_link_post, title=title)
         try:
             post.save()
@@ -101,9 +103,10 @@ class Crawler():
         response = requests.get(url)
         if self.status_ok(response) and image_name:
             try:
-                print('Save photo: ', image_name)
-                post.photo.save(image_name, ContentFile(response.content), save=True)
-            except AttributeError as e:
+                image_obj = default_storage.save(image_name, ContentFile(response.content))
+                post.photo = image_obj
+                post.save()
+            except Exception as e:
                 print(f"Can't save image: {e}")
 
     def get_image_name(self, post, url):
@@ -111,7 +114,7 @@ class Crawler():
         result = pattern.search(url)
         if result:
             return result.group(1)
-        return f'{post.slug}.jpg'
+        return f'posts/{post.slug}.jpg'
 
     def status_ok(self, response):
         return response.status_code == 200

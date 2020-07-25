@@ -6,8 +6,6 @@ import JwtService from "@/common/jwt.service"
 
 const ApiService = {
   init() {
-    console.log(`process.env.VUE_APP_API_URL: ${process.env.VUE_APP_API_URL}`)
-    console.log(`API_URL: ${API_URL}`)
     Vue.use(VueAxios, axios)
     Vue.axios.defaults.baseURL = API_URL
     Vue.axios.defaults.xsrfCookieName = 'csrftoken'
