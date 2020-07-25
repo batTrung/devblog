@@ -51,10 +51,10 @@ const actions = {
               commit(SET_INFO_PLAYLIST, data)
           })
   },
-  [FETCH_PLAYLIST]({ commit }, payload) {
+  [FETCH_PLAYLIST]({ commit }, { params, slug }) {
     store.dispatch(FETCH_START)
     store.dispatch(FETCH_END)
-    return PlayListsService.query(payload.params, payload.slug)
+    return PlayListsService.query(params, slug)
       .then(({ data }) => {
         commit(SET_PLAYLIST, data)
       })

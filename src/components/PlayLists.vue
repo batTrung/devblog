@@ -20,7 +20,7 @@
                                 :src="post.photo_url"
                                 :class="'l-' + (2 - index)">
                             <router-link
-                                :to="{ name: 'playlist-detail', params: { slug: playlist.slug, owner: owner } }">
+                                :to="{ name: 'playlist-detail', params: { slug: playlist.slug }, query: getQuery() }">
                                 <img
                                     :src="playlist.posts[0].photo_url"
                                     class="l-3">
@@ -57,7 +57,7 @@
                                 {{ playlist.timesince }} trước
                             </span>
                         </div>
-                        <router-link :to="{ name: 'playlist-detail', params: { slug: playlist.slug } }">
+                        <router-link :to="{ name: 'playlist-detail', params: { slug: playlist.slug }, query: getQuery() }">
                             <h6 class="font-weight-normal">{{ playlist.title }}</h6>
                         </router-link>
                         <div class="small d-flex align-items-center">
@@ -170,6 +170,9 @@ export default {
             } else {
                 this.gotoLogin()
             }
+        },
+        getQuery() {
+            return this.owner ? { owner: this.owner } : {}
         },
         scroll() {
             window.onscroll = () => {

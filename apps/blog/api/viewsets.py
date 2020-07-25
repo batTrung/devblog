@@ -1,5 +1,5 @@
 from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework import permissions
 from rest_framework.decorators import action
 
 from ..models import Website, PlayList
@@ -31,7 +31,7 @@ class PlaylistViewSet(ModelViewSet):
     serializer_class = PlayListSerializer
     pagination_class = PlayListPagination
     permission_classes = [
-        IsAuthenticatedOrReadOnly,
+        permissions.IsAuthenticatedOrReadOnly,
         IsOwnerOrReadOnly,
         isOwnerOrPublicPlayList,
     ]
@@ -47,15 +47,14 @@ class PlaylistViewSet(ModelViewSet):
     vname = 'playlist-list'
 
     def get_queryset(self):
+        if not self.request.method in permissions.SAFE_METHODS:
+            return PlayList.objects.all()
         is_owner = 'owner' in self.request.query_params
         user = self.request.user
         if is_owner and user.is_authenticated:
             return PlayList.objects.filter(user=user)
         return PlayList.objects.published()
 
-    @action(detail=True, methods=['get'])
-    def contents(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

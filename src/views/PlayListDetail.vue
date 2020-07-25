@@ -98,7 +98,7 @@
                 </p>
                 <div class="d-flex justify-content-end">
                     <button class="btn btn-secondary mr-2" @click="$bvModal.hide('delete-playlist')">Quay lại</button>
-                    <button class="btn btn-danger" @click="deletePlayList(playlist.slug)">Xóa</button>
+                    <button class="btn btn-danger" @click="deletePlayList()">Xóa</button>
                 </div>
             </b-modal>
             <b-modal
@@ -172,15 +172,10 @@ export default {
             type: String,
             required: true,
         },
-        owner: {
-            type: Boolean,
-            required: false,
-            default: () => (false),
-        },
     },
     beforeRouteEnter(to, from, next) {
         const payload = {
-            params: to.params.owner ? { owner: true } : '',
+            params: to.query,
             slug: to.params.slug,
         }
         Promise.all([
@@ -209,15 +204,17 @@ export default {
         generateColor,
     },
     computed: {
+        getPayload() {
+            return {
+                params: this.$route.query,
+                slug: this.slug,
+            }
+        },
         ...mapGetters(['playlist', 'isAuthenticated', 'currentUser'])
     },
     methods: {
         fetchPlayList() {
-            const payload = {
-                params: { owner: true },
-                slug: this.slug,
-            }
-            this.$store.dispatch(FETCH_PLAYLIST, payload)
+            this.$store.dispatch(FETCH_PLAYLIST, this.getPayload)
                 .catch(() => {
                     this.$router.push({ name: 'not-found' })
                 })
@@ -233,8 +230,8 @@ export default {
                 this.gotoLogin()
             }
         },
-        deletePlayList(slug) {
-            this.$store.dispatch(PLAYLIST_DELETE, slug)
+        deletePlayList() {
+            this.$store.dispatch(PLAYLIST_DELETE, this.slug)
                 .then(() => {
                     this.$store.commit(
                         MESSAGE_SET,
@@ -251,7 +248,8 @@ export default {
         onSubmitPlayListForm() {
             PlayListsService.update(this.slug, this.playListForm)
                 .then(() => {
-                    console.log('success')
+                    this.fetchPlayList()
+                    this.$bvModal.hide('edit-playlist')
                 })
                 .catch(error => {
                     console.error(error)
