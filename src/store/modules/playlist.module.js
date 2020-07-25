@@ -51,13 +51,12 @@ const actions = {
               commit(SET_INFO_PLAYLIST, data)
           })
   },
-  [FETCH_PLAYLIST]({ commit }, { params, slug }) {
+  async [FETCH_PLAYLIST]({ commit }, { params, slug }) {
     store.dispatch(FETCH_START)
     store.dispatch(FETCH_END)
-    return PlayListsService.query(params, slug)
-      .then(({ data }) => {
-        commit(SET_PLAYLIST, data)
-      })
+    const { data } = await PlayListsService.query(params, slug)
+    commit(SET_PLAYLIST, data)
+    return data
   },
   // eslint-disable-next-line
   [PLAYLIST_DELETE]({ commit }, slug) {
