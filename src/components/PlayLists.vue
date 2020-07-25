@@ -20,7 +20,7 @@
                                 :src="post.photo_url"
                                 :class="'l-' + (2 - index)">
                             <router-link
-                                :to="{ name: 'playlist-detail', params: { slug: playlist.slug } }">
+                                :to="{ name: 'playlist-detail', params: { slug: playlist.slug, owner: owner } }">
                                 <img
                                     :src="playlist.posts[0].photo_url"
                                     class="l-3">
@@ -90,13 +90,13 @@
     </b-overlay>
 </template>
 <script>
-import { mapGetters } from "vuex"
+import { mapGetters } from 'vuex'
 import VLoading from '@/components/VLoading'
 import { generateAvatar, generateColor } from '@/common/filters'
 import {
     FETCH_PLAYLISTS,
-} from "../store/actions.type"
-import { PlayListsService } from "@/common/api.service"
+} from '../store/actions.type'
+import { PlayListsService } from '@/common/api.service'
 
 export default {
     name: 'PlayLists',

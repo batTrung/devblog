@@ -22,8 +22,9 @@ const ApiService = {
     delete Vue.axios.defaults.headers.common['Authorization']
   },
 
-  query(resource, params) {
-    return Vue.axios.get(`${resource}/`, params).catch(error => {
+  query(resource, params, slug='') {
+    const vslug = slug ? `${slug}/` : slug
+    return Vue.axios.get(`${resource}/${vslug}`, params).catch(error => {
       throw new Error(`[RWV] ApiService ${error}`)
     })
   },
@@ -85,10 +86,14 @@ export const PagesService = {
 
 
 export const PlayListsService = {
-    query(params) {
-        return ApiService.query('playlists', {
+    query(params, slug) {
+        return ApiService.query(
+          'playlists',
+          {
             params: params
-        })
+          },
+          slug,
+        )
     },
     get(slug) {
         return ApiService.get('playlists', slug)

@@ -1,5 +1,8 @@
 <template>
-    <div>
+    <b-overlay
+        :show="isShowOverlay"
+        opacity="0.8"
+        rounded="sm">
         <div class="row">
             <div class="col-12 col-md-4">
                 <div class="card h-100 d-flex flex-column justify-content-between bg-transparent border-0">
@@ -146,11 +149,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </b-overlay>
 </template>
 
 <script>
-import { mapGetters } from "vuex"
+import { mapGetters } from 'vuex'
 import store from '@/store'
 import { generateAvatar, generateColor } from '@/common/filters'
 import {
@@ -160,19 +163,40 @@ import {
 import {
     MESSAGE_SET,
 } from '@/store/mutations.type'
-import { PlayListsService } from "@/common/api.service"
+import { PlayListsService } from '@/common/api.service'
 
 export default {
     name: 'PlayListDetail',
+    props: {
+        slug: {
+            type: String,
+            required: true,
+        },
+        owner: {
+            type: Boolean,
+            required: false,
+            default: () => (false),
+        },
+    },
     beforeRouteEnter(to, from, next) {
+        const payload = {
+            params: to.params.owner ? { owner: true } : '',
+            slug: to.params.slug,
+        }
         Promise.all([
-            store.dispatch(FETCH_PLAYLIST, `${to.params.slug}`),
+            store.dispatch(FETCH_PLAYLIST, payload),
         ]).then(() => {
-            next()
+            next();
         })
+        .catch(() => {
+            next({
+                name: 'not-found',
+            })
+        });
     },
     data() {
         return {
+            isShowOverlay: true,
             hoverPlayListId: null,
             playListForm: {
                 title: '',
@@ -189,8 +213,14 @@ export default {
     },
     methods: {
         fetchPlayList() {
-            const slug = `${this.currentUser}/${this.$route.params.slug}`
-            this.$store.dispatch(FETCH_PLAYLIST, slug)
+            const payload = {
+                params: { owner: true },
+                slug: this.slug,
+            }
+            this.$store.dispatch(FETCH_PLAYLIST, payload)
+                .catch(() => {
+                    this.$router.push({ name: 'not-found' })
+                })
         },
         onStar(username, slug) {
             if (this.isAuthenticated) {
@@ -219,7 +249,7 @@ export default {
             this.playListForm.status = playlist.status
         },
         onSubmitPlayListForm() {
-            PlayListsService.update(this.$route.params.slug, this.playListForm)
+            PlayListsService.update(this.slug, this.playListForm)
                 .then(() => {
                     console.log('success')
                 })
@@ -227,6 +257,11 @@ export default {
                     console.error(error)
                 })
         },
+    },
+    mounted() {
+        setTimeout(() => {
+            this.isShowOverlay = false
+        }, 500)
     },
 }
 </script>

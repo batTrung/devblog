@@ -7,23 +7,26 @@
                 </li>
                 <li class="list-inline-item mr-3">
                     <a 
-                        href=""
+                        href="#"
                         :class="getActiveClass(playlistsQuery.ordering, '-updated')"
-                        @click.prevent="playlistsQuery.ordering = '-updated'">Vừa cập nhật
+                        @click.prevent="playlistsQuery.ordering = '-updated'">
+                        Vừa cập nhật
                     </a>
                 </li>
                 <li class="list-inline-item mr-3">
                     <a 
-                        href=""
+                        href="#"
                         :class="getActiveClass(playlistsQuery.ordering, '-users_star')"
-                        @click.prevent="playlistsQuery.ordering = '-users_star'">Nhiều star
+                        @click.prevent="playlistsQuery.ordering = '-users_star'">
+                        Nhiều star
                     </a>
                 </li>
                 <li class="list-inline-item mr-3">
                     <a 
-                        href=""
+                        href="#"
                         :class="getActiveClass(playlistsQuery.ordering, '-views')"
-                        @click.prevent="playlistsQuery.ordering = '-views'">Xem nhiều
+                        @click.prevent="playlistsQuery.ordering = '-views'">
+                        Xem nhiều
                     </a>
                 </li>
             </ul>
