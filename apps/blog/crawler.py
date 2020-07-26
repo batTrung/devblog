@@ -107,8 +107,8 @@ class Crawler():
         if self.status_ok(response) and image_name:
             try:
                 image_content = ContentFile(response.content)
-                image_obj = default_storage().save(image_name, image_content)
-                post.photo = image_name
+                image_path = default_storage().save(image_name, image_content)
+                post.photo = image_path
                 post.save()
             except Exception as e:
                 print(f"Can't save image: {e}")
@@ -117,8 +117,8 @@ class Crawler():
         pattern = re.compile(r'/([^/]+\.(jpg|jpeg|png|gif))', re.IGNORECASE)
         result = pattern.search(url)
         if result:
-            return result.group(1)
-        return f'{post.slug}.jpg'
+            return f'posts/{result.group(1)}'
+        return f'posts/{post.slug}.jpg'
 
     def status_ok(self, response):
         return response.status_code == 200
