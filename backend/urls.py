@@ -9,7 +9,7 @@ urlpatterns = [
     path('api/v1/', include('apps.core.api.urls')),
     path('api-auth/', include('rest_framework.urls')),
 
-    # re_path('.*', TemplateView.as_view(template_name='index.html')),
+    re_path('.*', TemplateView.as_view(template_name='index.html')),
 ]
 
 if settings.DEBUG:
