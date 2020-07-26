@@ -1,0 +1,174 @@
+[
+{
+  "model": "blog.website",
+  "pk": 1,
+  "fields": {
+    "name": "simpleisbetterthancomplex.com",
+    "posts_url": "https://simpleisbetterthancomplex.com/",
+    "post_tag": ".container .eight.columns .card.post-summary",
+    "link_tag": ".post-title>a",
+    "title_tag": ".post .post-title",
+    "image_tag": ".post .post-featured-image img",
+    "content_image_tag": null,
+    "description": "Stories about Python, Django and Web Development",
+    "photo": "websites/g1077_wRpJJCp.png",
+    "language": "en",
+    "created": "2020-07-10T09:38:05.884Z",
+    "topic": null,
+    "max_post": 5,
+    "is_active": true,
+    "subscribers": [
+      1
+    ]
+  }
+},
+{
+  "model": "blog.website",
+  "pk": 2,
+  "fields": {
+    "name": "dev.to",
+    "posts_url": "https://dev.to/",
+    "post_tag": ".articles-list .substories .crayons-story",
+    "link_tag": ".crayons-story h2.crayons-story__title>a",
+    "title_tag": "header.crayons-article__header h1",
+    "image_tag": "header.crayons-article__header img.crayons-article__cover__image",
+    "content_image_tag": ".crayons-article__body a.article-body-image-wrapper>img",
+    "description": "I kinda love this github new feature about readme profile files.\r\n\r\nSo i decided to create profile views counter, but then it got me thinking why not to create profile readme generator?\r\n\r\nSo in me weekends i spent about 4 hours creating this simple tool that allows you to create nice and beautiful github readme files.",
+    "photo": "websites/xx.png",
+    "language": "en",
+    "created": "2020-07-10T10:12:19.942Z",
+    "topic": null,
+    "max_post": 5,
+    "is_active": false,
+    "subscribers": [
+      1
+    ]
+  }
+},
+{
+  "model": "blog.website",
+  "pk": 3,
+  "fields": {
+    "name": "viblo.asia",
+    "posts_url": "http://viblo.asia/",
+    "post_tag": ".container .post-feed  .post-feed-item",
+    "link_tag": ".post-title--inline h3>a",
+    "title_tag": "article.post-content h1.article-content__title",
+    "image_tag": "",
+    "content_image_tag": "article.post-content img",
+    "description": "Viblo l\u00e0 n\u01a1i chia s\u1ebb c\u00e1c ki\u1ebfn th\u1ee9c v\u1ec1 c\u00f4ng ngh\u1ec7, n\u00ean \u0111\u1eebng ng\u1ea7n ng\u1ea1i vi\u1ebft b\u00e0i \u0111\u1ec3 chia s\u1ebb nh\u1eefng \u0111i\u1ec1u b\u1ea1n bi\u1ebft cho m\u1ecdi ng\u01b0\u1eddi.",
+    "photo": "websites/g1192_gRyDWeh.png",
+    "language": "vi",
+    "created": "2020-07-19T07:22:39.533Z",
+    "topic": null,
+    "max_post": 5,
+    "is_active": false,
+    "subscribers": []
+  }
+},
+{
+  "model": "blog.website",
+  "pk": 4,
+  "fields": {
+    "name": "ehkoo.com",
+    "posts_url": "https://ehkoo.com/",
+    "post_tag": "main.container article",
+    "link_tag": "a",
+    "title_tag": "article header>h1",
+    "image_tag": "article figure>img",
+    "content_image_tag": "article figure>img",
+    "description": "L\u00e0 m\u1ed9t trang v\u1ec1 l\u1eadp tr\u00ecnh m\u1edbi keng x\u00e0 beng, ch\u1ee7 y\u1ebfu n\u00f3i v\u1ec1 c\u00f4ng ngh\u1ec7 web v\u00e0 nh\u1eefng chuy\u1ec7n l\u1eadp tr\u00ecnh xung quanh ch\u00fang. \u00dd t\u01b0\u1edfng th\u1ef1c hi\u1ec7n Ehkoo c\u00f3 t\u1eeb 2014 nh\u01b0ng sau \u0111\u00f3 v\u00ec qu\u00e1 l\u00e0m bi\u1ebfng m\u00e0 website b\u1ecf l\u01a1 kh\u00f4ng c\u1eadp nh\u1eadt. \u0110\u1ebfn cu\u1ed1i n\u0103m 2017 th\u00ec b\u1ed7ng nhi\u00ean \u0111\u01b0\u1ee3c h\u1ed3i sinh m\u00e0 kh\u00f4ng r\u00f5 l\u00fd do.",
+    "photo": "websites/rect892_UhNGt4v.png",
+    "language": "vi",
+    "created": "2020-07-24T04:20:36.547Z",
+    "topic": null,
+    "max_post": 5,
+    "is_active": false,
+    "subscribers": []
+  }
+},
+{
+  "model": "blog.website",
+  "pk": 5,
+  "fields": {
+    "name": "niviki.com",
+    "posts_url": "https://niviki.com/blog",
+    "post_tag": ".container-inner div.post",
+    "link_tag": "h2>a",
+    "title_tag": ".container-inner h1",
+    "image_tag": ".container-inner img.featureImage",
+    "content_image_tag": ".container-inner img",
+    "description": "C\u00e1c n\u1ed9i dung b\u1ea1n c\u00f3 th\u1ec3 t\u00ecm th\u1ea5y t\u1ea1i NIVIKI: X\u00e2y d\u1ef1ng MVP m\u1ed9t c\u00e1ch tinh g\u1ecdn, Chia s\u1ebb kinh nghi\u1ec7m ph\u00e1t tri\u1ec3n c\u00e1c side projects, Podcast v\u1ec1 cu\u1ed9c s\u1ed1ng v\u00e0 c\u00f4ng ngh\u1ec7, C\u00e1c kho\u00e1 h\u1ecdc l\u1eadp tr\u00ecnh, Book club.",
+    "photo": "websites/g1522_BDughib.png",
+    "language": "vi",
+    "created": "2020-07-24T04:31:55.810Z",
+    "topic": null,
+    "max_post": 5,
+    "is_active": false,
+    "subscribers": []
+  }
+},
+{
+  "model": "blog.website",
+  "pk": 6,
+  "fields": {
+    "name": "codeaholicguy.com",
+    "posts_url": "https://codeaholicguy.com/",
+    "post_tag": "main article.post",
+    "link_tag": "header h1>a",
+    "title_tag": "main article.post header>h1",
+    "image_tag": "div.entry-content img",
+    "content_image_tag": "div.entry-content img",
+    "description": "",
+    "photo": "websites/g1722_Bv2Ir2t.png",
+    "language": "vi",
+    "created": "2020-07-24T04:39:02.112Z",
+    "topic": null,
+    "max_post": 5,
+    "is_active": false,
+    "subscribers": []
+  }
+},
+{
+  "model": "blog.website",
+  "pk": 7,
+  "fields": {
+    "name": "onextrapixel.com",
+    "posts_url": "https://onextrapixel.com/category/design/",
+    "post_tag": ".blog-posts-listing .blog-posts-listing-inner .post-s4",
+    "link_tag": ".post-s4-main h2.post-s4-title>a",
+    "title_tag": ".blog-post-single > h1.blog-post-single-title",
+    "image_tag": ".blog-post-single .blog-post-single-thumb>img",
+    "content_image_tag": ".blog-post-single img",
+    "description": "Onextrapixel (OXP) is a leading online magazine and resource site for designers and web developers. The Singapore based portal aims to collect, explore, as well as share useful tips, news, tutorials, tools and resources, on design, development and other inspirational topics. We hope that everyone will find something here that is useful and interesting.",
+    "photo": "websites/text2186.png",
+    "language": "en",
+    "created": "2020-07-24T04:49:23.453Z",
+    "topic": null,
+    "max_post": 5,
+    "is_active": false,
+    "subscribers": []
+  }
+},
+{
+  "model": "blog.website",
+  "pk": 8,
+  "fields": {
+    "name": "codesource.io",
+    "posts_url": "https://codesource.io/",
+    "post_tag": "div.grid-posts .articles article",
+    "link_tag": "header h1.title>a",
+    "title_tag": "article.main-article header h1.title",
+    "image_tag": "article.main-article header .featured-image>img",
+    "content_image_tag": "article.main-article img",
+    "description": "",
+    "photo": "websites/image3001.png",
+    "language": "en",
+    "created": "2020-07-24T04:58:15.937Z",
+    "topic": null,
+    "max_post": 5,
+    "is_active": false,
+    "subscribers": []
+  }
+}
+]

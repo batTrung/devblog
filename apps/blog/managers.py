@@ -18,7 +18,6 @@ class WebsiteManager(models.Manager):
         return self.get_queryset().filter(is_active=True)
 
 
-
 class PostManager(models.Manager):
     def get_queryset(self):
         return super(
