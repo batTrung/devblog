@@ -3,7 +3,7 @@ import re
 from urllib.parse import urlparse
 from urllib.parse import urljoin
 
-from apps.core.storage_backends import PublicMediaStorage
+from django.core.files.storage import get_storage_class
 from django.core.files.base import ContentFile
 from django.utils.text import slugify
 
@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 
 from .models import Post, Website
 
-media_storage = PublicMediaStorage()
+default_storage = get_storage_class()
 
 
 class Crawler():
@@ -96,8 +96,8 @@ class Crawler():
             post.save()
             self.save_photo(post, link_image)
             return True
-        except ValueError:
-            print(f"Can't save post!")
+        except ValueError as e:
+            print(f"Can't save post!: ", e)
             return None
 
     def save_photo(self, post, url):
@@ -106,9 +106,9 @@ class Crawler():
         response = requests.get(url)
         if self.status_ok(response) and image_name:
             try:
-                print('image_name: ', image_name)
-                image_obj = media_storage.save(image_name, ContentFile(response.content))
-                post.photo = image_obj
+                image_content = ContentFile(response.content)
+                image_obj = default_storage().save(image_name, image_content)
+                post.photo = image_name
                 post.save()
             except Exception as e:
                 print(f"Can't save image: {e}")
@@ -117,8 +117,8 @@ class Crawler():
         pattern = re.compile(r'/([^/]+\.(jpg|jpeg|png|gif))', re.IGNORECASE)
         result = pattern.search(url)
         if result:
-            return f'posts/{result.group(1)}'
-        return f'posts/{post.slug}.jpg'
+            return result.group(1)
+        return f'{post.slug}.jpg'
 
     def status_ok(self, response):
         return response.status_code == 200
