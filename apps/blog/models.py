@@ -10,7 +10,7 @@ from taggit.managers import TaggableManager
 from sorl.thumbnail import get_thumbnail
 
 from .constants import Language, Status
-from .managers import WebsiteManager, PlayListManager
+from .managers import WebsiteManager, PlayListManager, PostManager
 
 
 class Topic(TitleSlugable):
@@ -95,6 +95,8 @@ class Post(TitleSlugable):
     created = models.DateTimeField(auto_now_add=True)
     photo = models.ImageField(upload_to='posts/', blank=True, null=True)
     users_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='posts_saved', blank=True)
+
+    objects = PostManager()
 
     class Meta:
         ordering = ('-created',)
