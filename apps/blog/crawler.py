@@ -59,7 +59,7 @@ class Crawler():
         if bs:
             posts_data = bs.select(web.post_tag)
             top_posts = posts_data[4-len(posts_data)::-1]
-            print("-> Tim thay posts: ")
+            print("-> Tim thay posts")
             for result in top_posts:
                 if count >= int(web.max_post):
                     print('Count > max_post')
@@ -73,7 +73,7 @@ class Crawler():
                 bs_detail = self.get_req(full_link_post)
                 if bs_detail:
                     title = self.safe_get(bs_detail, web, web.title_tag, 'text')
-                    if title and not self.post_exists(title):
+                    if title and not self.slug_exists(title):
                         image = self.safe_get(bs_detail, web, web.image_tag, 'image')
                         if not image:
                             image = self.safe_get(bs_detail, web, web.content_image_tag, 'image')
@@ -83,12 +83,12 @@ class Crawler():
                     else:
                         pass
 
-    def post_exists(self, title):
+    def slug_exists(self, title):
         slug = slugify(title)
         return Post.objects.filter(slug=slug).exists()
 
     def save_post(self, web, full_link_post, title, link_image):
-
+        print(f'Luu Post: {title}')
         post = Post(website=web, link=full_link_post, title=title)
         try:
             post.save()
@@ -99,10 +99,12 @@ class Crawler():
             return None
 
     def save_photo(self, post, url):
+        print('Luiwu hinh anh')
         image_name = self.get_image_name(post, url)
         response = requests.get(url)
         if self.status_ok(response) and image_name:
             try:
+                print('image_name: ', image_name)
                 image_obj = default_storage.save(image_name, ContentFile(response.content))
                 post.photo = image_obj
                 post.save()
@@ -113,7 +115,7 @@ class Crawler():
         pattern = re.compile(r'/([^/]+\.(jpg|jpeg|png|gif))', re.IGNORECASE)
         result = pattern.search(url)
         if result:
-            return result.group(1)
+            return f'posts/{result.group(1)}'
         return f'posts/{post.slug}.jpg'
 
     def status_ok(self, response):
@@ -126,9 +128,6 @@ class Crawler():
         loop = asyncio.new_event_loop()
         loop.run_until_complete(self.async_crawl(loop, website_ids))
         loop.close()
-        # for web in websites:
-        #     print(f'start with: {web}')
-        #     self.start_crawl(web)
 
     async def async_crawl(self, loop, website_ids):
         futures = [asyncio.ensure_future(self.fetch_web(loop, web_id)) for web_id in website_ids]
