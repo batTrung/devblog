@@ -3,7 +3,7 @@ import re
 from urllib.parse import urlparse
 from urllib.parse import urljoin
 
-from django.core.files.storage import default_storage
+from apps.core.storage_backends import PublicMediaStorage
 from django.core.files.base import ContentFile
 from django.utils.text import slugify
 
@@ -11,6 +11,8 @@ import requests
 from bs4 import BeautifulSoup
 
 from .models import Post, Website
+
+media_storage = PublicMediaStorage()
 
 
 class Crawler():
@@ -105,7 +107,7 @@ class Crawler():
         if self.status_ok(response) and image_name:
             try:
                 print('image_name: ', image_name)
-                image_obj = default_storage.save(image_name, ContentFile(response.content))
+                image_obj = media_storage.save(image_name, ContentFile(response.content))
                 post.photo = image_obj
                 post.save()
             except Exception as e:
