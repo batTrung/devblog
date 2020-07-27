@@ -66,6 +66,7 @@ const actions = {
 
 const mutations = {
   [SET_PLAYLISTS](state, data) {
+    console.log('set playlist: ', data.results)
       state.playLists = data.results
   },
   [SET_INFO_PLAYLIST](state, data) {

@@ -47,7 +47,7 @@ class PostSerializer(serializers.ModelSerializer):
     timesince = serializers.CharField(source='timeago', read_only=True)
     photo_url = serializers.SerializerMethodField()
     users_like = serializers.SlugRelatedField(
-        queryset = get_user_model().objects.all(),
+        queryset=get_user_model().objects.all(),
         many=True,
         slug_field='username',
     )

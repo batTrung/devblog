@@ -2,7 +2,7 @@
     <b-overlay
         :show="isShowOverlay"
         opacity="0.8"
-        rounded="sm">    
+        rounded="sm">
         <div class="row" v-if="playLists.length !== 0">
             <div
                 class="col-lg-3 col-md-4 col-sm-6 my-2"

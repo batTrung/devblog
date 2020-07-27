@@ -7,8 +7,8 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny
 
 from ..models import Website, Topic, Post, PlayList
-from .serializers import PostSerializer, PlayListSerializer, TopicSerializer
-from .paginations import PostPagination, PlayListPagination
+from .serializers import PostSerializer, TopicSerializer
+from .paginations import PostPagination
 from .filters import PostFilter
 
 
@@ -50,14 +50,14 @@ class WebsiteSubscribe(APIView):
             else:
                 web.subscribers.remove(user)
             return Response(
-                status = status.HTTP_200_OK,
+                status=status.HTTP_200_OK,
             )
         else:
             return Response(
                 {
                     'detail': 'User is unauthorized'
                 },
-                status = status.HTTP_401_UNAUTHORIZED,
+                status=status.HTTP_401_UNAUTHORIZED,
             )
 
 
@@ -73,14 +73,14 @@ class PlayListStar(APIView):
             else:
                 playlist.users_star.remove(user)
             return Response(
-                status = status.HTTP_200_OK,
+                status=status.HTTP_200_OK,
             )
         else:
             return Response(
                 {
                     'detail': 'User is unauthorized'
                 },
-                status = status.HTTP_401_UNAUTHORIZED,
+                status=status.HTTP_401_UNAUTHORIZED,
             )
 
 
@@ -96,14 +96,14 @@ class PostLike(APIView):
             else:
                 post.users_like.remove(user)
             return Response(
-                status = status.HTTP_200_OK,
+                status=status.HTTP_200_OK,
             )
         else:
             return Response(
                 {
                     'detail': 'User is unauthorized'
                 },
-                status = status.HTTP_401_UNAUTHORIZED,
+                status=status.HTTP_401_UNAUTHORIZED,
             )
 
 
@@ -116,4 +116,4 @@ class PostIncreaseView(APIView):
         post = get_object_or_404(Post, slug=post_slug)
         post.views += 1
         post.save()
-        return Response(status = status.HTTP_200_OK)
+        return Response(status=status.HTTP_200_OK)

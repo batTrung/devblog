@@ -1,6 +1,5 @@
 from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
 from rest_framework import permissions
-from rest_framework.decorators import action
 
 from ..models import Website, PlayList
 from .serializers import WebsiteSerializer, PlayListSerializer
@@ -54,7 +53,6 @@ class PlaylistViewSet(ModelViewSet):
         if is_owner and user.is_authenticated:
             return PlayList.objects.filter(user=user)
         return PlayList.objects.published()
-
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
