@@ -68,11 +68,8 @@
     </div>
 </template>
 <script>
-import { mapGetters } from "vuex"
 import PostList from '@/components/PostList'
-import {
-    FETCH_TOPICS,
-} from '@/store/actions.type'
+import { activeClass, getTopics } from '@/common/mixins'
 
 export default {
     name: 'PostsLiked',
@@ -80,9 +77,10 @@ export default {
     components: {
         PostList,
     },
-    computed: {
-        ...mapGetters(['topics'])
-    },
+    mixins: [
+        activeClass,
+        getTopics,
+    ],
     data() {
         return {
             postsQuery: {
@@ -93,14 +91,6 @@ export default {
                 liked: 'true',
             },
         }
-    },
-    methods: {
-        getActiveClass(a, b) {
-            return a == b ? 'color-active' : ''
-        },
-    },
-    mounted() {
-        this.$store.dispatch(FETCH_TOPICS)
     },
 }
 </script>

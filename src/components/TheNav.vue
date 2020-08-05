@@ -2,7 +2,7 @@
     <b-navbar toggleable="lg" type="dark" class="border-bottom bg-nav">
         <div class="container">
             <b-navbar-brand :to="{name: 'home'}">
-                <img src="../assets/logo-1.png" alt="Logo">
+                <img src="../assets/images/logo-1.png" alt="Logo">
             </b-navbar-brand>
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
             <b-collapse id="nav-collapse" is-nav>

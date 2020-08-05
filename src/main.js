@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '@icon/themify-icons/themify-icons.css'
 import 'nprogress/nprogress.css';
+import VueLazyload from 'vue-lazyload'
+
 import './assets/styles/index.css';
 import './assets/vendor/fontawesome-5.11.2/css/fontawesome.min.css';
 import VTooltip from 'v-tooltip'
@@ -20,6 +22,13 @@ import { CHECK_AUTH } from "@/store/actions.type";
   BootstrapVue,
   VTooltip,
 ].forEach((x) => Vue.use(x))
+
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  error: require('@/assets/images/error.jpg'),
+  loading: require('@/assets/images/loading-spin.gif'),
+  attempt: 1
+})
 
 ApiService.init()
 

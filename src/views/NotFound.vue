@@ -1,7 +1,7 @@
 <template>
     <div class="text-center pt-5">
       <div>
-        <img src="../assets/404.png" alt="">
+        <img src="../assets/images/404.png" alt="">
       </div>
       <h1 class="display-4">Oops! Page not found</h1>
       <b-button

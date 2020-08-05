@@ -17,12 +17,12 @@
                             <img
                                 v-for="(post, index) in playlist.posts.slice(1, 3)"
                                 :key="index"
-                                :src="post.photo_url"
+                                v-lazy="post.photo"
                                 :class="'l-' + (2 - index)">
                             <router-link
                                 :to="{ name: 'playlist-detail', params: { slug: playlist.slug }, query: getQuery() }">
                                 <img
-                                    :src="playlist.posts[0].photo_url"
+                                    v-lazy="playlist.posts[0].photo"
                                     class="l-3">
                             </router-link>
                             <div class="items">{{ playlist.posts.length }}</div>
