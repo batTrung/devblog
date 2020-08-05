@@ -112,10 +112,10 @@ export default {
         query: {
             handler() {
                 this.isShowOverlay = true
-                setTimeout(() => {
-                    this.fetchPages()
-                    this.isShowOverlay = false
-                }, 300)
+                this.fetchPages()
+                    .then(() => {
+                        this.isShowOverlay = false
+                    })
             },
             deep: true,
         },
@@ -130,7 +130,7 @@ export default {
         fetchPages() {
             this.page = 1
             this.hasNext = true 
-            this.$store.dispatch(FETCH_PAGES, this.getParams)
+            return this.$store.dispatch(FETCH_PAGES, this.getParams)
         },
         onSubscribe(pageName) {
             if (this.isAuthenticated) {
@@ -171,11 +171,11 @@ export default {
         },
     },
     mounted() {
-        setTimeout(() => {
-            this.fetchPages()
-            this.isShowOverlay = false
-        }, 500)
-        this.scroll()
+        this.fetchPages()
+            .then(() => {
+                this.isShowOverlay = false
+                this.scroll()
+            })
     },
 }
 </script>

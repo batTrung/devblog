@@ -194,7 +194,7 @@ export default {
         fetchPosts() {
             this.page = 1
             this.hasNext = true
-            this.$store.dispatch(FETCH_POSTS, this.getParams)
+            return this.$store.dispatch(FETCH_POSTS, this.getParams)
         },
         onLikePost(slug) {
             if (this.isAuthenticated) {
@@ -237,11 +237,11 @@ export default {
         },
     },
     mounted() {
-        setTimeout(() => {
-            this.fetchPosts()
-            this.isShowOverlay = false
-        }, 500)
-        this.scroll()
+        this.fetchPosts()
+            .then(() => {
+                this.isShowOverlay = false
+                this.scroll()
+            })
     },
 }
 </script>

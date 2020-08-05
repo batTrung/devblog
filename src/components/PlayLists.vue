@@ -158,7 +158,7 @@ export default {
         fetchPlayLists() {
             this.page = 1
             this.hasNext = true
-            this.$store.dispatch(FETCH_PLAYLISTS, this.getParams)
+            return this.$store.dispatch(FETCH_PLAYLISTS, this.getParams)
         },
         onStar(username, slug) {
             if (this.isAuthenticated) {
@@ -202,11 +202,11 @@ export default {
         },
     },
     mounted() {
-        setTimeout(() => {
-            this.fetchPlayLists()
-            this.isShowOverlay = false
-        }, 500)
-        this.scroll()
+        this.fetchPlayLists()
+            .then(() => {
+              this.isShowOverlay = false
+              this.scroll()
+            })
     },
 }
 </script>

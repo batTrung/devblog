@@ -82,7 +82,7 @@
                                                 :href="post.link"
                                                 class="position-relative">
                                                 <img 
-                                                    :src="post.photo_url"
+                                                    v-lazy="post.photo"
                                                     :alt="post.title"
                                                     class="card-img p-2"
                                                     style="max-height: 240px">
@@ -132,7 +132,7 @@
                                                     class="small"
                                                     :to="{ name: 'page-detail', params: { name: post.website.name }}">
                                                     <b-avatar
-                                                        :src="post.website.photo_url"
+                                                        :src="post.website.photo"
                                                         class="mr-1">   
                                                     </b-avatar>
                                                     {{ post.website.name }}
@@ -174,7 +174,7 @@
                                                 :to="{ name: 'page-detail', params: { name: page.name }}">
                                                 <b-avatar
                                                     size="10rem" 
-                                                    :src="page.photo_url"
+                                                    :src="page.photo"
                                                     class="mr-2">   
                                                 </b-avatar>
                                             </router-link>
@@ -263,10 +263,10 @@
                                                     <img
                                                         v-for="(post, index) in playlist.posts.slice(1, 3)"
                                                         :key="index"
-                                                        :src="post.photo_url"
+                                                        v-lazy="post.photo"
                                                         :class="'l-' + (2 - index)">
                                                     <a href="#">
-                                                        <img :src="playlist.posts[0].photo_url" class="l-3">
+                                                        <img v-lazy="playlist.posts[0].photo" class="l-3">
                                                     </a>
                                                     <div class="items">{{ playlist.posts.length }}</div>
                                                     <div
@@ -355,6 +355,7 @@ import {
     SET_INFO_PLAYLIST,
 } from '@/store/mutations.type'
 import { getTopics } from '@/common/mixins'
+import store from '@/store'
 
 export default {
     name: 'Search',
@@ -513,12 +514,14 @@ export default {
     methods: {
         fetchData() {
             this.isShowOverlay = true
-            setTimeout(() => {
-                this.$store.dispatch(FETCH_POSTS, this.getPostsQuery)
-                this.$store.dispatch(FETCH_PAGES, this.getPagesQuery)
-                this.$store.dispatch(FETCH_PLAYLISTS, this.getPlayListsQuery)
+            Promise.all([
+                store.dispatch(FETCH_POSTS, this.getPostsQuery),
+                store.dispatch(FETCH_PAGES, this.getPagesQuery),
+                store.dispatch(FETCH_PLAYLISTS, this.getPlayListsQuery),
+            ])
+            .then(() => {
                 this.isShowOverlay = false
-            }, 500)
+            })
         },
         checkCategory(value) {
             const categories = this.searchQuery.category
@@ -603,10 +606,7 @@ export default {
         },
     },
     mounted() {
-        setTimeout(() => {
-            this.fetchData()
-            this.isShowOverlay = false
-        }, 500)
+        this.fetchData()
     },
 }
 </script>
