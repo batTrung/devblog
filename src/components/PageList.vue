@@ -14,7 +14,7 @@
                         <router-link :to="{ name: 'page-detail', params: { name: page.name }}">
                             <b-avatar
                                 size="lg" 
-                                :src="page.photo_url"
+                                :src="page.photo"
                                 class="mr-2">
                             </b-avatar>
                             {{ page.name }}

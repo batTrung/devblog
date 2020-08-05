@@ -7,7 +7,6 @@ from django.utils.timesince import timesince
 
 from apps.common.behaviors import TitleSlugable
 from taggit.managers import TaggableManager
-from sorl.thumbnail import get_thumbnail
 
 from .constants import Language, Status
 from .managers import WebsiteManager, PlayListManager, PostManager
@@ -82,11 +81,6 @@ class Website(models.Model):
     def count_views(self):
         return sum(post.views for post in self.posts.all())
 
-    def thumbnail_photo_obj(self):
-        if self.photo:
-            return get_thumbnail(self.photo, 'x160', quality=90)
-        return ''
-
 
 class Post(TitleSlugable):
     website = models.ForeignKey(Website, on_delete=models.CASCADE, related_name='posts')
@@ -106,14 +100,6 @@ class Post(TitleSlugable):
 
     def timeago(self):
         return timesince(self.created)
-
-    def thumbnail_photo_obj(self):
-        photo_obj = self.get_photo_obj()
-        image_obj = Image.open(photo_obj)
-        if image_obj.mode == 'RGB':
-            return get_thumbnail(photo_obj, '245x161', quality=90)
-        else:
-            return photo_obj
 
 
 class PlayList(TitleSlugable):

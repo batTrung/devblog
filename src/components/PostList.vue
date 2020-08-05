@@ -7,7 +7,7 @@
             <div class="col-lg-3 col-md-4 col-sm-6 my-2" v-for="(post, index) in posts.slice(0, numPost)" :key="index">
                 <div class="card h-100 d-flex flex-column justify-content-between shadow-sm" @mouseover="hoverPostId = index" @mouseleave="hoverPostId = null">
                     <a :href="post.link" @click="increaseViewPost(post.slug)" target="_blank" class="position-relative">
-                        <img :src="post.photo_url" class="card-img-top p-1" :alt="post.title" style="width: 100%; height: 169px">
+                        <img :src="post.photo" class="card-img-top p-1" :alt="post.title" style="width: 100%; height: 169px">
                     </a>
                     <div
                         @click="onLikePost(post.slug)"
@@ -39,7 +39,7 @@
                             class="small"
                             :to="{ name: 'page-detail', params: { name: post.website.name }}">
                             <b-avatar
-                                :src="post.website.photo_url"
+                                :src="post.website.photo"
                                 class="mr-1">   
                             </b-avatar>
                             {{ post.website.name|truncatechars(25) }}

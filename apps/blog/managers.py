@@ -26,6 +26,7 @@ class PostManager(models.Manager):
                 'website',
             ).prefetch_related(
                 'users_like',
+                'website__subscribers',
             )
 
 

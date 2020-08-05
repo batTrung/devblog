@@ -14,7 +14,6 @@ class WebsiteSerializer(serializers.HyperlinkedModelSerializer):
     post_count = serializers.CharField(source='posts.count', read_only=True)
     countViews = serializers.CharField(source='count_views', read_only=True)
     root_url = serializers.CharField(source='get_url', read_only=True)
-    photo_url = serializers.SerializerMethodField()
     subscribers = serializers.SlugRelatedField(
         queryset=get_user_model().objects.all(),
         many=True,
@@ -30,27 +29,35 @@ class WebsiteSerializer(serializers.HyperlinkedModelSerializer):
             'root_url',
             'post_count',
             'countViews',
-            'photo_url',
+            'photo',
             'description',
             'timesince',
             'subscribers',
         )
         lookup_field = 'name'
 
-    def get_photo_url(self, web):
-        request = self.context.get('request')
-        return request.build_absolute_uri(web.thumbnail_photo_obj().url)
+
+class WebsitePostSerializer(serializers.ModelSerializer):
+    subscribers = serializers.SlugRelatedField(
+        queryset=get_user_model().objects.all(),
+        many=True,
+        slug_field='username',
+    )
+
+    class Meta:
+        model = Website
+        fields = ('photo', 'name', 'subscribers',)
 
 
 class PostSerializer(serializers.ModelSerializer):
-    website = WebsiteSerializer(many=False, read_only=True)
+    website = WebsitePostSerializer(many=False, read_only=True)
     timesince = serializers.CharField(source='timeago', read_only=True)
-    photo_url = serializers.SerializerMethodField()
     users_like = serializers.SlugRelatedField(
         queryset=get_user_model().objects.all(),
         many=True,
         slug_field='username',
     )
+    photo = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
@@ -62,27 +69,27 @@ class PostSerializer(serializers.ModelSerializer):
             'views',
             'created',
             'timesince',
-            'photo_url',
+            'photo',
             'users_like',
         )
 
-    def get_photo_url(self, post):
+    def get_photo(self, post):
         request = self.context.get('request')
-        return request.build_absolute_uri(post.thumbnail_photo_obj().url)
+        return request.build_absolute_uri(post.get_photo_obj().url)
 
 
 class PostPhotoSerializer(serializers.ModelSerializer):
-    photo_url = serializers.SerializerMethodField()
+    photo = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
         fields = (
-            'photo_url',
+            'photo',
         )
 
-    def get_photo_url(self, post):
+    def get_photo(self, post):
         request = self.context.get('request')
-        return request.build_absolute_uri(post.thumbnail_photo_obj().url)
+        return request.build_absolute_uri(post.get_photo_obj().url)
 
 
 class UserSerializer(serializers.ModelSerializer):
