@@ -502,19 +502,19 @@ span.text-underline:after {
     max-width: 500px!important; 
 }
 
-.bg-nav-green {
-    background-color: #16a085;
+.bg-nav {
+    background: linear-gradient(89deg,#259f94 3%,#1da767 98%);
 }
 
-.bg-nav-green a {
+.bg-nav a {
     color: #fff !important;
 }
 
-.bg-nav-green ul li>a.color-active {
+.bg-nav ul li>a.color-active {
     color: #dddddd !important;
 }
 
-.bg-nav-green a.dropdown-item {
+.bg-nav a.dropdown-item {
     color: #212529 !important
 }
 

@@ -1,5 +1,5 @@
 <template>
-    <b-navbar toggleable="lg" type="dark" class="border-bottom bg-nav-green bb-green">
+    <b-navbar toggleable="lg" type="dark" class="border-bottom bg-nav">
         <div class="container">
             <b-navbar-brand :to="{name: 'home'}">
                 <img src="../assets/logo-1.png" alt="Logo">
@@ -25,7 +25,7 @@
                                 name="search"
                                 placeholder="Tìm kiếm">
                             <span class="mx-2 mt-1">
-                                <b-button type="submit" pill variant="primary" size="sm">Search</b-button>
+                                <b-button type="submit" pill variant="secondary" size="sm">Search</b-button>
                             </span>
                         </div>
                     </b-nav-form>
