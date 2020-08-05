@@ -10,11 +10,11 @@
                         <img
                             v-for="(post, index) in playlist.posts.slice(1, 3)"
                             :key="index"
-                            :src="post.photo_url"
+                            v-lazy="post.photo"
                             :class="'l-' + (2 - index)">
                         <router-link
                             :to="{ name: 'playlist-detail', params: { slug: playlist.slug } }">
-                            <img :src="playlist.posts[0].photo_url" class="l-3">
+                            <img v-lazy="playlist.posts[0].photo" class="l-3">
                         </router-link>
                         <div class="items">{{ playlist.posts.length }}</div>
                         <div
@@ -170,7 +170,7 @@
                                         :href="post.link"
                                         class="position-relative">
                                         <img 
-                                            :src="post.photo_url"
+                                            v-lazy="post.photo"
                                             :alt="post.title"
                                             class="card-img p-2"
                                             style="max-height: 240px">
@@ -212,7 +212,7 @@
                                             class="small"
                                             :to="{ name: 'page-detail', params: { name: post.website.name }}">
                                             <b-avatar
-                                                :src="post.website.photo_url"
+                                                :src="post.website.photo"
                                                 class="mr-1">   
                                             </b-avatar>
                                             {{ post.website.name }}
@@ -249,6 +249,7 @@ import {
 } from '@/store/mutations.type'
 import { PlayListsService, PostsService } from '@/common/api.service'
 import VLoading from '@/components/VLoading'
+import { activeClass, onScroll } from '@/common/mixins'
 
 export default {
     name: 'PlayListDetail',
@@ -274,6 +275,10 @@ export default {
             })
         });
     },
+    mixins: [
+        activeClass,
+        onScroll,
+    ],
     data() {
         return {
             page: 1,
@@ -302,10 +307,10 @@ export default {
         postsQuery: {
             handler() {
                 this.isShowOverlay = true
-                setTimeout(() => {
-                    this.fetchPosts()
-                    this.isShowOverlay = false
-                }, 300)
+                this.fetchPosts()
+                    .then(() => {
+                        this.isShowOverlay = false
+                    })
             },
             deep: true,
         },
@@ -317,7 +322,7 @@ export default {
                 slug: this.slug,
             }
         },
-        getPostsQuery() {
+        getParams() {
             return Object.assign(
                 { playlist: this.slug },
                 this.postsQuery,
@@ -327,9 +332,9 @@ export default {
     },
     methods: {
         fetchPosts() {
-            this.$store.dispatch(
+            return this.$store.dispatch(
                 FETCH_POSTS,
-                this.getPostsQuery,
+                this.getParams,
             )
         },
         fetchPlayList() {
@@ -371,9 +376,6 @@ export default {
                     this.$bvModal.hide('edit-playlist')
                 })
         },
-        getActiveClass(a, b) {
-            return a == b ? 'color-active' : ''
-        },
         onLikePost(slug) {
             if (this.isAuthenticated) {
                 PostsService.update(`${slug}/like`)
@@ -384,39 +386,13 @@ export default {
                 this.gotoLogin()
             }
         },
-        scroll() {
-            window.onscroll = () => {
-                const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight + 200 > document.documentElement.offsetHeight
-                if (bottomOfWindow && this.hasNext) {
-                    this.hasNext = false
-                    const params = Object.assign(
-                        { page: this.page + 1 },
-                        this.getPostsQuery,
-                    )
-                    PostsService.query(params)
-                        .then(({ data }) => {
-                            this.isLoading = true
-                            setTimeout(() => {
-                                this.isLoading = false
-                                this.posts.push(...data.results)
-                            }, 500)
-                            this.page++
-                            if (data.has_next) {
-                                setTimeout(() => {
-                                    this.hasNext = true
-                                }, 1000)
-                            }
-                        })
-                }
-            }
-        },
     },
     mounted() {
-        setTimeout(() => {
-            this.fetchPosts()
-            this.isShowOverlay = false
-        }, 500)
-        this.scroll()
+        this.fetchPosts()
+            .then(() => {
+                this.isShowOverlay = false
+                this.scroll(PostsService, this.posts)
+            })
     },
 }
 </script>

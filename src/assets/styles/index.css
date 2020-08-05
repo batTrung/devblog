@@ -42,10 +42,8 @@ h6,
     color: #869ab8 !important;
 }
 
-.page {
-    padding-bottom: 12px;
-    border-bottom: solid 1px #eceff0;
-    padding-top: 28px;
+.section {
+    padding: 50px 0px;
 }
 
 .tooltip {
@@ -321,7 +319,7 @@ nav a.color-active > i {
 }
 
 .bg-main {
-    background-color: #fbfdfe !important;
+    background-color: #F4F8FB !important;
 }
 
 .nav-scroller nav a>i {
@@ -659,4 +657,34 @@ p {
 
 .card-body {
     z-index: 10;
+}
+
+.v-card {
+    padding: 40px;
+    padding-bottom: 20px;
+    background: #fff;
+    box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.06);
+    border-radius: 4px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.v-card:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    left: 0px;
+    bottom: 0px;
+    background-image: linear-gradient(127deg, #21b6a1 0%, #46b879 91%);
+}
+
+.btn-rounded {
+    border-radius: 50px;
+    padding: 10px 30px;
+}
+
+.page {
+    background-size: 100% auto;
+    height: 200px;
 }

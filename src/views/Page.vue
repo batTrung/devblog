@@ -1,15 +1,13 @@
 <template>
     <div>
-        <div class="container-fluid" style="background-color: #758AA2">
-            <div class="row pb-5">
-                <div class="container my-5 text-center">
-                </div>
-            </div>
+        <div
+            class="container-fluid page"
+            v-lazy:background-image="require('@/assets/images/page.png')">
         </div>
         <div class="container">
-            <div class="card border-light text-center mb-4">
+            <div class="card border-light text-center mb-4 v-card">
                 <div class="profile-thumbnail mx-auto mt-n6">
-                    <b-avatar :src="page.photo_url" size="8rem" class="card-img-top"></b-avatar>
+                    <b-avatar :src="page.photo" size="8rem" class="card-img-top"></b-avatar>
                 </div>
                 <div class="card-body pt-0">
                     <a
@@ -69,6 +67,7 @@ import {
     FETCH_PAGE,
 } from '@/store/actions.type'
 import store from '@/store'
+import { activeClass } from '@/common/mixins'
 
 export default {
     name: 'Page',
@@ -85,6 +84,9 @@ export default {
     components: {
         PostList,
     },
+    mixins: [
+        activeClass,
+    ],
     data() {
         return {
             postsQuery: {
@@ -97,10 +99,5 @@ export default {
     computed: {
         ...mapGetters(['page'])
     },
-    methods: {
-        getActiveClass(a, b) {
-            return a == b ? 'color-active' : ''
-        },
-    }
 }
 </script>

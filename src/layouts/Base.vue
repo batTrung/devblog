@@ -1,10 +1,10 @@
 <template>
-    <div id="app" class="bg-main" style="min-height: 100vh">
+    <div id="app">
       <TheNav />
       <TheHeader
         class="mb-6"
         v-show="isAuthenticated" />
-      <main class="container my-4">
+      <main>
         <router-view />
       </main>
     </div>

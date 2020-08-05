@@ -1,5 +1,5 @@
 <template>
-    <b-navbar toggleable="lg" type="dark" class="border-bottom bg-nav">
+    <b-navbar toggleable="lg" type="dark" class="bg-nav">
         <div class="container">
             <b-navbar-brand :to="{name: 'home'}">
                 <img src="../assets/images/logo-1.png" alt="Logo">
