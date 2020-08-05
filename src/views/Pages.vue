@@ -12,7 +12,7 @@
                         <input
                             type="text"
                             class="form-control border-0 pb-2 mr-4 pl-0"
-                            placeholder="Tìm kiếm bài viết"
+                            placeholder="Tìm kiếm trang"
                             v-model.lazy="pagesQuery.search"
                             @keyup="pagesQuery.search = $event.target.value">
                     </div>

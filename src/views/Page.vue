@@ -49,7 +49,8 @@
                         <input
                             type="text"
                             class="form-control border-0 pb-2 mr-4 pl-0"
-                            placeholder="Tìm kiếm bài viết" v-model="postsQuery.search">
+                            placeholder="Tìm kiếm bài viết" v-model.lazy="postsQuery.search"
+                            @keyup="postsQuery.search = $event.target.value">
                     </div>
                 </b-form>
             </div>
