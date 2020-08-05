@@ -457,6 +457,12 @@ span.text-underline:after {
     border-color: #dfa42d;
 }
 
+.btn-pink {
+    color: #fff !important;
+    background-color: #ee5586;
+    border-color: #df3e72;
+}
+
 .btn-danger:hover {
     color: #fff;
     background-color: #df3b3b;
@@ -488,6 +494,11 @@ span.text-underline:after {
 .btn-orange:hover {
     color: #fff;
     background-color: #edab25;
+}
+
+.btn-pink:hover {
+    color: #fff;
+    background-color: #d33769;
 }
 
 .min-vh-100 {

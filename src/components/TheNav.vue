@@ -41,14 +41,14 @@
                     <b-button
                         :to="{ name: 'login' }"
                         variant="link"
-                        class="btn-custom btn-success mr-2 animate-up-1"
+                        class="btn-custom btn-warning mr-2 animate-up-1"
                         size="sm">
                         Đăng nhập
                     </b-button>
                     <b-button
                         :to="{ name: 'register' }"
                         variant="link"
-                        class="btn-custom btn-primary animate-up-1"
+                        class="btn-custom btn-pink animate-up-1"
                         size="sm">
                         Đăng ký
                     </b-button>

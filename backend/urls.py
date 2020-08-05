@@ -6,6 +6,8 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
 
+    path('', include('apps.core.urls')),
+
     path('api/v1/', include('apps.core.api.urls')),
     path('api-auth/', include('rest_framework.urls')),
 
@@ -16,3 +18,10 @@ if settings.DEBUG:
     from django.conf.urls.static import static
 
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    try:
+        import debug_toolbar
+        urlpatterns = [
+            path('__debug__/', include(debug_toolbar.urls)),
+        ] + urlpatterns
+    except ImportError:
+        pass
