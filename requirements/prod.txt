@@ -1,1 +1,5 @@
 -r base.txt
+
+django-storages==1.9.1
+boto3==1.14.28
+gunicorn==20.0.4
