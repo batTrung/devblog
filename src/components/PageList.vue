@@ -73,6 +73,7 @@ import { truncatewords } from '@/common/filters'
 import { FETCH_PAGES } from "../store/actions.type"
 import VLoading from '@/components/VLoading'
 import { PagesService } from "@/common/api.service"
+import { onScroll } from '@/common/mixins'
 
 export default {
     name: 'PageList',
@@ -100,6 +101,9 @@ export default {
     components: {
         VLoading,
     },
+    mixins: [
+        onScroll,
+    ],
     data() {
         return {
             page: 1,
@@ -143,38 +147,12 @@ export default {
                 this.gotoLogin()
             }
         },
-        scroll() {
-            window.onscroll = () => {
-                let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight + 200 > document.documentElement.offsetHeight;
-                if (bottomOfWindow && this.hasNext) {
-                    this.hasNext = false
-                    const params = Object.assign(
-                        { page: this.page + 1 },
-                        this.getParams,
-                    )
-                    PagesService.query(params)
-                        .then(({ data }) => {
-                            this.isLoading = true
-                            setTimeout(() => {
-                                this.isLoading = false
-                                this.pages.push(...data.results)
-                            }, 700)
-                            this.page++
-                            if (data.has_next) {
-                                setTimeout(() => {
-                                    this.hasNext = true
-                                }, 1000)
-                            }
-                        })
-                }
-            }
-        },
     },
     mounted() {
         this.fetchPages()
             .then(() => {
                 this.isShowOverlay = false
-                this.scroll()
+                this.scroll(PagesService, this.pages)
             })
     },
 }

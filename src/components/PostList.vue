@@ -127,6 +127,7 @@ import {
 import { PostsService } from "@/common/api.service"
 import { truncatechars } from '@/common/filters'
 import VLoading from '@/components/VLoading'
+import { onScroll } from '@/common/mixins'
 
 export default {
     name: 'PostList',
@@ -160,6 +161,9 @@ export default {
     components: {
         VLoading,
     },
+    mixins: [
+        onScroll,
+    ],
     data() {
         return {
             hoverPostId: null,
@@ -209,38 +213,12 @@ export default {
         increaseViewPost(slug) {
             PostsService.update(`${slug}/view`)
         },
-        scroll() {
-            window.onscroll = () => {
-                const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight + 200 > document.documentElement.offsetHeight
-                if (bottomOfWindow && this.hasNext) {
-                    this.hasNext = false
-                    const params = Object.assign(
-                        { page: this.page + 1 },
-                        this.getParams,
-                    )
-                    PostsService.query(params)
-                        .then(({ data }) => {
-                            this.isLoading = true
-                            setTimeout(() => {
-                                this.isLoading = false
-                                this.posts.push(...data.results)
-                            }, 700)
-                            this.page++
-                            if (data.has_next) {
-                                setTimeout(() => {
-                                    this.hasNext = true
-                                }, 1000)
-                            }
-                        })
-                }
-            }
-        },
     },
     mounted() {
         this.fetchPosts()
             .then(() => {
                 this.isShowOverlay = false
-                this.scroll()
+                this.scroll(PostsService, this.posts)
             })
     },
 }

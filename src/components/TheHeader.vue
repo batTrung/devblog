@@ -1,5 +1,5 @@
 <template>
-    <div class="nav-scroller bg-white box-shadow border-bottom">
+    <div class="nav-scroller bg-white box-shadow border-bottom position-sticky">
         <div class="container">
             <div class="d-flex justify-content-between">
                 <nav class="nav nav-underline">
@@ -42,3 +42,12 @@ export default {
     },
 }
 </script>
+
+<style>
+.position-sticky {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 0;
+    z-index: 100;
+}
+</style>
