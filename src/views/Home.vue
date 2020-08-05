@@ -145,13 +145,10 @@
     </div>
 </template>
 <script>
-import { mapGetters } from "vuex"
 import PostList from '@/components/PostList';
 import PageList from '@/components/PageList'
 import PlayLists from '@/components/PlayLists'
-import {
-    FETCH_TOPICS,
-} from '@/store/actions.type'
+import { activeClass, getTopics } from '@/common/mixins'
 
 export default {
     name: 'Home',
@@ -161,6 +158,10 @@ export default {
         PageList,
         PlayLists,
     },
+    mixins: [
+        activeClass,
+        getTopics,
+    ],
     data() {
         return {
             postsQuery: {
@@ -180,17 +181,6 @@ export default {
                 search: '',
             },
         }
-    },
-    computed: {
-        ...mapGetters(['topics'])
-    },
-    methods: {
-        getActiveClass(a, b) {
-            return a == b ? 'color-active' : ''
-        },
-    },
-    mounted() {
-        this.$store.dispatch(FETCH_TOPICS)
     },
 }
 </script>

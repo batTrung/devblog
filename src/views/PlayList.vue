@@ -49,6 +49,7 @@
 </template>
 <script>
 import PlayLists from '@/components/PlayLists'
+import { activeClass } from '@/common/mixins'
 
 export default {
     name: 'PlayList',
@@ -56,6 +57,9 @@ export default {
     components: {
         PlayLists,
     },
+    mixins: [
+        activeClass,
+    ],
     data() {
         return {
             playlistsQuery: {
@@ -68,6 +72,6 @@ export default {
         getActiveClass(a, b) {
             return a == b ? 'color-active' : ''
         },
-    }
+    },
 }
 </script>

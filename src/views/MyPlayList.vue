@@ -54,6 +54,7 @@
 <script>
 import { mapGetters } from "vuex"
 import PlayLists from '@/components/PlayLists'
+import { activeClass } from '@/common/mixins'
 
 export default {
     name: 'MyPlayList',
@@ -61,6 +62,9 @@ export default {
     components: {
         PlayLists,
     },
+    mixins: [
+        activeClass,
+    ],
     data() {
         return {
             playlistsQuery: {
@@ -72,10 +76,5 @@ export default {
     computed: {
         ...mapGetters(['isAuthenticated'])
     },
-    methods: {
-        getActiveClass(a, b) {
-            return a == b ? 'color-active' : ''
-        },
-    }
 }
 </script>

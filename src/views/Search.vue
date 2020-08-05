@@ -345,7 +345,6 @@ import {
 } from "@/common/api.service"
 import VLoading from '@/components/VLoading'
 import {
-    FETCH_TOPICS,
     FETCH_POSTS,
     FETCH_PAGES,
     FETCH_PLAYLISTS,
@@ -355,9 +354,21 @@ import {
     SET_INFO_PAGE,
     SET_INFO_PLAYLIST,
 } from '@/store/mutations.type'
+import { getTopics } from '@/common/mixins'
 
 export default {
     name: 'Search',
+    filters: {
+        truncatewords,
+        generateAvatar,
+        generateColor,
+    },
+    components: {
+        VLoading,
+    },
+    mixins: [
+        getTopics,
+    ],
     data() {
       return {
         hoverPostId: null,
@@ -411,14 +422,6 @@ export default {
           ],
         }
       }
-    },
-    filters: {
-        truncatewords,
-        generateAvatar,
-        generateColor,
-    },
-    components: {
-        VLoading,
     },
     watch: {
       searchQuery: {
@@ -490,7 +493,6 @@ export default {
             'isAuthenticated',
             'currentUser',
             'search',
-            'topics',
             'posts',
             'pagePost',
             'numPagePost',
@@ -602,7 +604,6 @@ export default {
     },
     mounted() {
         setTimeout(() => {
-            this.$store.dispatch(FETCH_TOPICS)
             this.fetchData()
             this.isShowOverlay = false
         }, 500)

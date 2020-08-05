@@ -70,11 +70,8 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex"
 import PageList from '@/components/PageList'
-import {
-    FETCH_TOPICS,
-} from '@/store/actions.type'
+import { activeClass, getTopics } from '@/common/mixins'
 
 export default {
     name: 'Pages',
@@ -82,6 +79,10 @@ export default {
     components: {
         PageList,
     },
+    mixins: [
+        activeClass,
+        getTopics,
+    ],
     data() {
         return {
             pagesQuery: {
@@ -91,17 +92,6 @@ export default {
                 topic: '',
             },
         }
-    },
-    computed: {
-        ...mapGetters(['topics'])
-    },
-    methods: {
-        getActiveClass(a, b) {
-            return a == b ? 'color-active' : ''
-        },
-    },
-    mounted() {
-        this.$store.dispatch(FETCH_TOPICS, { website: true })
     },
 }
 </script>

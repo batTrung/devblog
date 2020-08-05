@@ -1,6 +1,10 @@
+import { mapGetters } from "vuex"
 import {
   SET_ERRORS,
 } from '@/store/mutations.type'
+import {
+    FETCH_TOPICS,
+} from '@/store/actions.type'
 
 function getTitle(vm) {
   const { title } = vm.$options
@@ -33,4 +37,21 @@ export const doLogin = {
       )
     }
   }
+}
+
+export const activeClass = {
+  methods: {
+    getActiveClass(a, b) {
+      return a == b ? 'color-active' : ''
+    },
+  },
+}
+
+export const getTopics = {
+  computed: {
+    ...mapGetters(['topics'])
+  },
+  mounted() {
+    this.$store.dispatch(FETCH_TOPICS)
+  },
 }
