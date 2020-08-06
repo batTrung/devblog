@@ -43,6 +43,7 @@ h6,
 }
 
 .section {
+    position: relative;
     padding: 50px 0px;
 }
 
@@ -687,4 +688,24 @@ p {
 .page {
     background-size: 100% auto;
     height: 200px;
+}
+
+.pattern.bottom {
+    bottom: -10px;
+    transform: rotate(180deg);
+}
+.pattern {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-repeat: repeat-x;
+    background-position: bottom;
+    background-size: 1450px 160px;
+    height: 0;
+    padding: 0;
+    padding-bottom: 140px;
+}
+
+.pb-7, .py-7 {
+    padding-bottom: 7rem !important;
 }

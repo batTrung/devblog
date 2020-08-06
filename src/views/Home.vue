@@ -13,7 +13,7 @@
               <div class="container">
                   <div class="row">
                       <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                          <h1>DevBlog</h1>
+                          <h1>Technology Blogs For Developers</h1>
                           <p>
                               Tổng hợp các bài viết từ các trang học lập trình phổ biến, giúp cho việc xem và cập nhật tin tức trở nên dễ dàng và tiện lợi.
                           </p>
