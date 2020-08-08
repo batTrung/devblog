@@ -88,6 +88,9 @@ export default new Router({
       name: 'not-found',
       component: () => import('@/views/NotFound'),
     },
-  ]
+  ],
+  scrollBehavior() {
+    document.getElementById('app').scrollIntoView();
+  },
 })
 
