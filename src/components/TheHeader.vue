@@ -7,24 +7,24 @@
                         Go to:
                     </div>
                     <a class="nav-link text-dark mb-0 h5" href="#" v-tooltip="'Bài viết xem sau'">
-                        <i class="ti ti-timer"></i>
+                        <i class="far fa-clock"></i>
                     </a>
                     <router-link
                         :to="{ name: 'my-playlist' }"
                         class="nav-link text-dark mb-0 h5"
                         v-tooltip="'Danh sách của tôi'">
-                        <i class="ti ti-layers-alt"></i>
+                        <i class="fas fa-layer-group"></i>
                     </router-link>
                     <router-link
                         :to="{ name: 'posts-liked' }"
                         class="nav-link text-dark mb-0 h5"
                         v-tooltip="'Bài viết đã thích'">
-                        <i class="ti ti-heart"></i>
+                        <i class="far fa-heart"></i>
                     </router-link>
                 </nav>
-                <div class="mt-1">
+                <div class="my-1">
                     <a href="#" class="icon icon-shape icon-shape-success rounded-circle">
-                        <i class="ti ti-plus"></i>
+                      <i class="fas fa-plus"></i>
                     </a>
                 </div>
             </div>
