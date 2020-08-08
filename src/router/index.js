@@ -90,7 +90,7 @@ export default new Router({
     },
   ],
   scrollBehavior() {
-    document.getElementById('app').scrollIntoView();
+    return { x: 0, y: 0 };
   },
 })
 
