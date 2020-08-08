@@ -1,5 +1,5 @@
 <template>
-    <b-navbar toggleable="lg" type="dark" class="bg-nav">
+    <b-navbar toggleable="lg" type="dark" class="bg-nav fixed-top">
         <div class="container">
             <b-navbar-brand :to="{name: 'home'}">
                 <img src="../assets/images/logo-1.png" alt="Logo">
@@ -89,19 +89,3 @@ export default {
     },
 }
 </script>
-
-<style>
-.smart-scroll {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 1030;
-}
-.scrolled-down {
-   transform:translateY(-100%); transition: all 0.3s ease-in-out;
-}
-.scrolled-up {
-   transform:translateY(0); transition: all 0.3s ease-in-out;
-}
-</style>

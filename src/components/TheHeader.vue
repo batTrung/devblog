@@ -1,10 +1,11 @@
 <template>
-    <div class="nav-scroller bg-white box-shadow border-bottom position-sticky">
+    <div
+        class="nav-scroller bg-white box-shadow-sm smart-scroll">
         <div class="container">
             <div class="d-flex justify-content-between">
                 <nav class="nav nav-underline">
                     <div class="nav-link text-dark mb-0">
-                        Go to:
+                        Go to: {{ isUp }}
                     </div>
                     <a class="nav-link text-dark mb-0 h5" href="#" v-tooltip="'Bài viết xem sau'">
                         <i class="far fa-clock"></i>
@@ -34,12 +35,16 @@
 
 <script>
 import { mapGetters } from "vuex"
+import { onScroll } from '@/common/mixins'
 
 export default {
     name: 'TheHeader',
     computed: {
       ...mapGetters(['currentUser'])
     },
+    mixins: [
+       onScroll, 
+    ],
 }
 </script>
 
@@ -49,5 +54,20 @@ export default {
     position: sticky !important;
     top: 0;
     z-index: 100;
+}
+.smart-scroll {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.scrolled-down {
+   transform:translateY(-100%); transition: all 0.3s ease-in-out;
+}
+
+.scrolled-up {
+   transform:translateY(0); transition: all 0.3s ease-in-out;
 }
 </style>
