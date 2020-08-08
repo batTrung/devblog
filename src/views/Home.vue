@@ -26,7 +26,7 @@
                                       <img src="../assets/images/apps/1.png" class="img-fluid" alt="">
                                   </div>
                                   <div class="base">
-                                      <strong>djangobat</strong>
+                                      <strong>Clean code</strong>
                                       <div class="platforms">
                                         <i class="far fa-file-code"></i>
                                         <i class="fab fa-app-store"></i>
@@ -38,7 +38,7 @@
                                       <img src="../assets/images/apps/1.png" class="img-fluid" alt="">
                                   </div>
                                   <div class="base">
-                                      <strong>Q & A</strong>
+                                      <strong>Refactoring</strong>
                                       <div class="platforms">
                                         <i class="far fa-file-code"></i>
                                         <i class="fab fa-app-store"></i>
@@ -50,7 +50,7 @@
                                       <img src="../assets/images/apps/1.png" class="img-fluid" alt="">
                                   </div>
                                   <div class="base">
-                                      <strong>E-Commerce</strong>
+                                      <strong>Testing</strong>
                                       <div class="platforms">
                                         <i class="far fa-file-code"></i>
                                         <i class="fab fa-app-store"></i>

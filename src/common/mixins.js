@@ -94,9 +94,14 @@ export const onScroll = {
           // Auto hide and show navbar
           const navbar = document.getElementsByClassName('smart-scroll')
           if (navbar.length > 0) {
+              let el = navbar[0]
               let scrollTop = window.scrollY
               this.isUp = scrollTop < this.lastScrollTop
-              console.log(this.isUp)
+              if (this.isUp) {
+                el.style.display = 'block'
+              } else {
+                el.style.display = 'none'
+              }
               this.lastScrollTop = scrollTop
           }
         }
