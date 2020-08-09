@@ -1,6 +1,6 @@
 <template>
-    <div class="section bg-main min-vh-100">
-        <div class="container">
+    <div class="section bg-main min-vh-100 mt-5">
+        <div class="container mt-5">
             <div class="d-flex justify-content-between">
                 <div>
                     <div class="input-group bg-white rounded-pill border mr-2 mb-2">

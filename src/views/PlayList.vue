@@ -1,6 +1,6 @@
 <template>
-    <div class="section bg-main min-vh-100">
-        <div class="container">
+    <div class="section bg-main min-vh-100 mt-5">
+        <div class="container mt-5">
             <div class="d-flex justify-content-between">
                 <ul class="list-inline mt-2">
                     <li class="list-inline-item mr-3">

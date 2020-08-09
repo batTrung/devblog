@@ -316,7 +316,7 @@ nav a.color-active > i {
 }
 
 .bg-soft {
-    background-color: #f5f9fe !important;
+    background-color: #F0F5FF !important;
 }
 
 .bg-main {
@@ -517,7 +517,6 @@ span.text-underline:after {
 }
 
 .bg-nav {
-    z-index: 101;
     background: linear-gradient(89deg,#259f94 3%,#1da767 98%);
 }
 

@@ -1,6 +1,6 @@
 <template>
-    <div class="section bg-main min-vh-100">
-        <div class="container">
+    <div class="section bg-main min-vh-100 mt-5">
+        <div class="container mt-5">
             <div class="row">
                 <aside class="col-12 col-lg-3 d-none d-lg-block order-2">
                     <div class="card border-light p-3 mb-3">
