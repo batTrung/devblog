@@ -103,9 +103,9 @@
                                                     <template v-slot:button-content>
                                                         <i class="fas fa-plus"></i>
                                                     </template>
-                                                    <b-dropdown-item href="#" class="py-2 p-0"><i class="ti ti-timer mr-2"></i> Xem sau</b-dropdown-item>
+                                                    <b-dropdown-item href="#" class="py-2 p-0"><i class="far fa-clock mr-2"></i> Xem sau</b-dropdown-item>
                                                     <div class="dropdown-divider"></div>
-                                                    <b-dropdown-item href="#" class="py-2 p-0"><i class="ti ti-layers-alt mr-2"></i> Thêm vào danh sách</b-dropdown-item>
+                                                    <b-dropdown-item href="#" class="py-2 p-0"><i class="fas fa-layer-group mr-2"></i> Thêm vào danh sách</b-dropdown-item>
                                                 </b-dropdown>
                                             </div>
                                             <div class="col-12 col-lg-6 col-xl-8">
@@ -116,7 +116,7 @@
                                                     <div class="d-flex my-3">
                                                         <div class="post-meta mb-2 small text-gray">
                                                             <span class="mr-3">
-                                                                <i class="ti ti-eye text-dark mr-1"></i>
+                                                                <i class="far fa-eye text-dark mr-1"></i>
                                                                 {{ post.views }}
                                                             </span>
                                                             <span class="mr-3">
@@ -124,7 +124,7 @@
                                                                 {{ post.users_like.length }}
                                                             </span>
                                                             <span>
-                                                                <i class="ti ti-timer text-primary mr-1"></i>
+                                                                <i class="far fa-clock text-primary mr-1"></i>
                                                                 {{ post.timesince }} trước
                                                             </span>
                                                         </div>
@@ -292,7 +292,7 @@
                                                     <div class="d-flex my-3">
                                                         <div class="post-meta mb-2 small text-gray">
                                                             <span class="mr-3">
-                                                                <i class="ti ti-eye text-dark mr-1"></i>
+                                                                <i class="far fa-eye text-dark mr-1"></i>
                                                                 {{ playlist.views }}
                                                             </span>
                                                             <span class="mr-3">
@@ -300,7 +300,7 @@
                                                                 {{ playlist.users_star.length }}
                                                             </span>
                                                             <span>
-                                                                <i class="ti ti-timer text-primary mr-1"></i>
+                                                                <i class="far fa-clock text-primary mr-1"></i>
                                                                 {{ playlist.timesince }} trước
                                                             </span>
                                                         </div>

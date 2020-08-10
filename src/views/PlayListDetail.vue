@@ -37,9 +37,9 @@
                         </div>
                         <div class="card-body bg-white shadow-sm border-bottom">
                             <div class="post-meta mb-2 small text-gray">
-                                <span class="mr-3"><i class="ti ti-eye text-dark mr-1"></i>{{ playlist.views }}</span>
+                                <span class="mr-3"><i class="far fa-eye text-dark mr-1"></i>{{ playlist.views }}</span>
                                 <span class="mr-3"><i class="fas fa-star text-warning mr-1"></i>{{ playlist.users_star.length }}</span>
-                                <span class=""><i class="ti ti-timer text-primary mr-1"></i>{{ playlist.timesince }} trước</span>
+                                <span class=""><i class="far fa-clock text-primary mr-1"></i>{{ playlist.timesince }} trước</span>
                             </div>
                             <router-link
                                 :to="{ name: 'playlist-detail', params: { slug: playlist.slug } }">
@@ -197,7 +197,7 @@
                                                 <div class="d-flex my-3">
                                                     <div class="post-meta mb-2 small text-gray">
                                                         <span class="mr-3">
-                                                            <i class="ti ti-eye text-dark mr-1"></i>
+                                                            <i class="far fa-eye text-dark mr-1"></i>
                                                             {{ post.views }}
                                                         </span>
                                                         <span class="mr-3">
@@ -205,7 +205,7 @@
                                                             {{ post.users_like.length }}
                                                         </span>
                                                         <span>
-                                                            <i class="ti ti-timer text-primary mr-1"></i>
+                                                            <i class="far fa-clock text-primary mr-1"></i>
                                                             {{ post.timesince }} trước
                                                         </span>
                                                     </div>

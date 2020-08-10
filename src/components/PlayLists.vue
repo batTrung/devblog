@@ -45,7 +45,7 @@
                     <div class="card-body bg-white shadow-sm border-bottom">
                         <div class="post-meta mb-2 small text-gray">
                             <span class="mr-3">
-                                <i class="ti ti-eye text-dark mr-1"></i>
+                                <i class="far fa-eye text-dark mr-1"></i>
                                 {{ playlist.views }}
                             </span>
                             <span class="mr-3">
@@ -53,7 +53,7 @@
                                 {{ playlist.users_star.length }}
                             </span>
                             <span>
-                                <i class="ti ti-timer text-primary mr-1"></i>
+                                <i class="far fa-clock text-primary mr-1"></i>
                                 {{ playlist.timesince }} trước
                             </span>
                         </div>

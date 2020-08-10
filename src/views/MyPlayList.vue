@@ -35,7 +35,7 @@
                     <div class="input-group bg-white rounded-pill border mr-2 mb-2">
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-transparent border-0">
-                                <i class="ti ti-search"></i>
+                                <i class="fas fa-search"></i>
                             </span>
                         </div>
                         <input

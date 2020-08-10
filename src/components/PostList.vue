@@ -28,9 +28,9 @@
                     </div>
                     <div class="card-body">
                         <div class="post-meta mb-2 small text-gray">
-                            <span class="mr-3"><i class="ti ti-eye text-dark mr-1"></i>{{ post.views }}</span>
+                            <span class="mr-3"><i class="far fa-eye text-dark mr-1"></i>{{ post.views }}</span>
                             <span class="mr-3"><i class="far fa-heart text-danger mr-1"></i>{{ post.users_like.length }}</span>
-                            <span class=""><i class="ti ti-timer text-primary mr-1"></i>{{ post.timesince }} trước</span>
+                            <span class=""><i class="far fa-clock text-primary mr-1"></i>{{ post.timesince }} trước</span>
                         </div>
                         <a :href="post.link" @click="increaseViewPost(post.slug)" target="_blank">
                             <div class="mb-2 h6 font-weight-normal">{{ post.title }}</div>
@@ -65,7 +65,7 @@
                     >
                     <div class="d-flex justify-content-between">
                         <small>Xem sau</small>
-                        <i class="ti ti-timer ml-3"></i>
+                        <i class="far fa-clock ml-3"></i>
                     </div>
                 </b-form-checkbox>
                 <b-form-checkbox
@@ -74,7 +74,7 @@
                     size="lg">
                     <div class="d-flex justify-content-between">
                         <small>Danh sách mới</small>
-                        <i class="ti ti-layers-alt ml-3"></i>
+                        <i class="fas fa-layer-group ml-3"></i>
                     </div>
                 </b-form-checkbox>
                 <template
