@@ -8,7 +8,7 @@
                 v-for="(page, index) in pages.slice(0, numPage)"
                 :key="index">
                 <div
-                    class="card h-100 d-flex flex-column justify-content-between shadow-sm border-light"
+                    class="card h-100 d-flex flex-column justify-content-between shadow-sm border-light border-left"
                     style="border-radius: .35rem;">
                     <div class="card-body d-flex flex-column pb-0">
                         <router-link :to="{ name: 'page-detail', params: { name: page.name }}">

@@ -717,3 +717,9 @@ p {
 .box-shadow-sm {
     box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.15) !important;
 }
+
+.border-left {
+    border-radius: 0.35rem;
+    border-left-color: #4aa37d !important;
+    border-left-width: 3px !important;
+}

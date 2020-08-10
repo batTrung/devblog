@@ -1,7 +1,7 @@
 <template>
     <div>
         <section class="section bg-nav pb-7">
-            <div class="container text-center">
+            <div class="container text-center my-5">
                 <h1 class="mb-3 text-white py-4">{{ page.name }}</h1>
             </div>
             <div
