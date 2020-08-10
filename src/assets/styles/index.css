@@ -716,3 +716,7 @@ p {
     border-bottom-color: #edf1f0 !important;
     border-bottom-width: 3px !important;
 }
+
+.mt-12 {
+    margin-top: 12rem;
+}
