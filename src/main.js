@@ -12,7 +12,7 @@ import VTooltip from 'v-tooltip'
 import App from './App.vue'
 import router from '@/router'
 import store from '@/store'
-import { titleMixin, doLogin } from '@/common/mixins'
+import { titleMixin, doLogin, backToTopCurrentRoute } from '@/common/mixins'
 import ApiService from '@/common/api.service'
 import { CHECK_AUTH } from "@/store/actions.type"
 
@@ -32,22 +32,23 @@ Vue.use(VueLazyload, {
 ApiService.init()
 
 router.beforeEach((to, from, next) => {
-      Promise.all([store.dispatch(CHECK_AUTH)])
-          .then(response => {
-              const loginRequired = to.matched.some(record => record.meta.loginRequired) && !response[0]
-              if (loginRequired) {
-                  next({
-                      name: 'login',
-                      query: { redirect: to.path },
-                  })
-              }
-              next()
-          })
-    }
+    Promise.all([store.dispatch(CHECK_AUTH)])
+        .then(response => {
+            const loginRequired = to.matched.some(record => record.meta.loginRequired) && !response[0]
+            if (loginRequired) {
+                next({
+                    name: 'login',
+                    query: { redirect: to.path },
+                })
+            }
+            next()
+        })
+  }
 );
 
 [
     doLogin,
+    backToTopCurrentRoute,
     titleMixin,
 ].forEach((x) => Vue.mixin(x))
 

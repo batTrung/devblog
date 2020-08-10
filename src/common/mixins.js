@@ -111,3 +111,18 @@ export const onScroll = {
       },
   },
 }
+
+export const backToTopCurrentRoute = {
+   mounted() {
+      const elLink = `a[href="${this.$route.path}"]`
+      document.querySelector(elLink).addEventListener('click', () => {
+          window.scroll(
+            {
+              top: 0,
+              left: 0,
+              behavior: 'smooth',
+            }
+          );
+      })
+  },
+}
