@@ -24,7 +24,7 @@
                     </router-link>
                 </nav>
                 <div class="my-1">
-                    <a href="#" class="icon icon-shape icon-shape-success rounded-circle">
+                    <a href="#" class="icon icon-shape icon-shape-success rounded-circle" v-tooltip="'Yêu cầu trang mới'">
                       <i class="fas fa-plus"></i>
                     </a>
                 </div>

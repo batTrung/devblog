@@ -202,8 +202,8 @@ nav a.color-active > i {
 }
 
 .icon-shape-success {
-    color: #208163 !important;
-    background-color: rgba(32,129,99,.1);
+    color: #ffffff !important;
+    background-color: rgb(41, 143, 215);
 }
 
 .icon-shape-dark {
