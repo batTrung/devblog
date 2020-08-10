@@ -11,7 +11,7 @@
         </section>
         <section class="section">      
             <div class="container">
-                <div class="card border-light text-center mb-4 v-card">
+                <div class="card text-center mb-4">
                     <div class="profile-thumbnail mx-auto mt-n6">
                         <b-avatar :src="page.photo" size="8rem" class="card-img-top"></b-avatar>
                     </div>

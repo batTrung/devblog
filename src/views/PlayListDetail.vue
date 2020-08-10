@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body bg-white shadow-sm">
+                        <div class="card-body bg-white shadow-sm border-bottom">
                             <div class="post-meta mb-2 small text-gray">
                                 <span class="mr-3"><i class="ti ti-eye text-dark mr-1"></i>{{ playlist.views }}</span>
                                 <span class="mr-3"><i class="fas fa-star text-warning mr-1"></i>{{ playlist.users_star.length }}</span>
@@ -162,7 +162,7 @@
                                 v-for="(post, index) in posts"
                                 :key="index">
                                 <div
-                                    class="card h-100 d-flex flex-column justify-content-between border-light bb-red"
+                                    class="card h-100 d-flex flex-column justify-content-between border-light border-bottom-light"
                                     @mouseover="hoverPostId = index"
                                     @mouseleave="hoverPostId = null">
                                     <div class="row no-gutters align-items-center">

@@ -664,25 +664,6 @@ p {
     z-index: 10;
 }
 
-.v-card {
-    padding: 40px;
-    padding-bottom: 20px;
-    background: #fff;
-    box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.06);
-    border-radius: 4px;
-    margin-bottom: 30px;
-    position: relative;
-}
-
-.v-card:before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 5px;
-    left: 0px;
-    bottom: 0px;
-    background-image: linear-gradient(127deg, #21b6a1 0%, #46b879 91%);
-}
 
 .btn-rounded {
     border-radius: 50px;
@@ -722,4 +703,16 @@ p {
     border-radius: 0.35rem;
     border-left-color: #4aa37d !important;
     border-left-width: 3px !important;
+}
+
+.border-bottom {
+    border-radius: 0.35rem;
+    border-bottom-color: #4aa37d !important;
+    border-bottom-width: 3px !important;
+}
+
+.border-bottom-light {
+    border-radius: 0.35rem;
+    border-bottom-color: #edf1f0 !important;
+    border-bottom-width: 3px !important;
 }

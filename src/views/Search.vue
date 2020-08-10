@@ -73,7 +73,7 @@
                                     v-for="(post, index) in posts"
                                     :key="index">
                                     <div
-                                        class="card h-100 d-flex flex-column justify-content-between border-light bb-red"
+                                        class="card h-100 d-flex flex-column justify-content-between border-light border-bottom-light"
                                         @mouseover="hoverPostId = index"
                                         @mouseleave="hoverPostId = null">
                                         <div class="row no-gutters align-items-center">
@@ -168,7 +168,7 @@
                                     class="col-12 col-sm-10 col-md-6 col-lg-12 mb-2"
                                     v-for="(page, index) in pages"
                                     :key="index">
-                                    <div class="card h-100 d-flex flex-column justify-content-between border-light bb-red">
+                                    <div class="card h-100 d-flex flex-column justify-content-between border-light border-bottom-light">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col-12 col-lg-6 col-xl-4 text-center p-2">
                                                 <router-link
@@ -254,7 +254,7 @@
                                     v-for="(playlist, index) in playLists"
                                     :key="index">
                                     <div
-                                        class="card h-100 d-flex flex-column justify-content-between border-light bb-red"
+                                        class="card h-100 d-flex flex-column justify-content-between border-light border-bottom-light"
                                         @mouseover="hoverPlayListId = index"
                                         @mouseleave="hoverPlayListId = null">
                                         <div class="row no-gutters align-items-center">

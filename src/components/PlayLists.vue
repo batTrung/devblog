@@ -42,7 +42,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body bg-white shadow-sm">
+                    <div class="card-body bg-white shadow-sm border-bottom">
                         <div class="post-meta mb-2 small text-gray">
                             <span class="mr-3">
                                 <i class="ti ti-eye text-dark mr-1"></i>
