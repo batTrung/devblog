@@ -3,10 +3,10 @@
         <section class="welcome-area">
           <div
             class="welcome-bg"
-            :style="{'background-image': 'url(' + require('@/assets/images/welcome.jpg') + ')'}">
+            v-lazy:background-image="require('@/assets/images/welcome.jpg')">
               <div
                 class="welcome-clip"
-                :style="{'background': 'url(' + require('@/assets/images/bg-bottom.svg') + ') bottom center no-repeat'}">
+                v-lazy:background-image="require('@/assets/images/bg-bottom.svg')">
                 </div>
           </div>
           <div class="welcome-content">
@@ -282,6 +282,8 @@ export default {
 }
 
 .welcome-area .welcome-bg .welcome-clip {
+    background-position: bottom center;
+    background-repeat: no-repeat;
     position: absolute;
     width: 100%;
     height: 100%;
