@@ -63,6 +63,9 @@ export const onScroll = {
       isUp: true,
     }
   },
+  computed: {
+    ...mapGetters(['isAuthenticated'])
+  },
   methods: {
       scroll(service, items) {
         window.onscroll = () => {
@@ -97,7 +100,7 @@ export const onScroll = {
               let el = navbar[0]
               let scrollTop = window.scrollY
               this.isUp = scrollTop < this.lastScrollTop
-              if (this.isUp) {
+              if (this.isUp && this.isAuthenticated) {
                 el.style.display = 'block'
               } else {
                 el.style.display = 'none'

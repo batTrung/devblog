@@ -5,7 +5,7 @@
             <div class="d-flex justify-content-between">
                 <nav class="nav nav-underline">
                     <div class="nav-link text-dark mb-0">
-                        Go to: {{ isUp }}
+                        Go to:
                     </div>
                     <a class="nav-link text-dark mb-0 h5" href="#" v-tooltip="'Bài viết xem sau'">
                         <i class="far fa-clock"></i>
