@@ -363,6 +363,10 @@ nav a.color-active > i {
     color: #3b5999;
 }
 
+.icon-youtube span {
+    color: rgb(255, 0, 0);
+}
+
 .icon-twitter span {
     color: #1da1f2;
 }

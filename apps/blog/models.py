@@ -137,3 +137,25 @@ class ViewLater():
         on_delete=models.CASCADE,
     )
     posts = models.ManyToManyField('Post')
+
+
+class Social(models.Model):
+    name = models.CharField(max_length=10)
+    icon = models.CharField(max_length=10)
+    websites = models.ManyToManyField(
+        'Website',
+        related_name='socials',
+        through='LinkSocial',
+    )
+
+    def __str__(self):
+        return self.name
+
+
+class LinkSocial(models.Model):
+    social = models.ForeignKey('Social', on_delete=models.CASCADE)
+    website = models.ForeignKey('Website', on_delete=models.CASCADE)
+    link = models.URLField(blank=True)
+
+    def __str__(self):
+        return self.link

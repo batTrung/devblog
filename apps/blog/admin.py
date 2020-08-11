@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import Topic, Post, Website, PlayList
+from .models import Topic, Post, Website, PlayList, Social, LinkSocial
 
 
 @admin.register(Website)
@@ -33,3 +33,13 @@ class PlayListAdmin(admin.ModelAdmin):
 @admin.register(Topic)
 class TopicAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug',)
+
+
+@admin.register(Social)
+class SocialAdmin(admin.ModelAdmin):
+    list_display = ('name', 'icon',)
+
+
+@admin.register(LinkSocial)
+class LinkSocialAdmin(admin.ModelAdmin):
+    list_display = ('social', 'website', 'link',)
