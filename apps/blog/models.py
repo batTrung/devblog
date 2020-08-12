@@ -153,8 +153,8 @@ class Social(models.Model):
 
 
 class LinkSocial(models.Model):
-    social = models.ForeignKey('Social', on_delete=models.CASCADE)
-    website = models.ForeignKey('Website', on_delete=models.CASCADE)
+    social = models.ForeignKey('Social', on_delete=models.CASCADE, related_name='link_socials')
+    website = models.ForeignKey('Website', on_delete=models.CASCADE, related_name='link_socials')
     link = models.URLField(blank=True)
 
     def __str__(self):

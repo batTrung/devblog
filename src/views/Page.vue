@@ -23,9 +23,12 @@
                             {{ page.name }}
                         </a>
                         <ul class="list-unstyled d-flex justify-content-center mt-3 mb-0">
-                            <li><a href="#" aria-label="facebook social link" class="icon-facebook mr-3"><span class="fab fa-facebook-f"></span></a></li>
-                            <li><a href="#" aria-label="twitter social link" class="icon-twitter mr-3"><span class="fab fa-twitter"></span></a></li>
-                            <li><a href="#" aria-label="dribbble social link" class="icon-google mr-3"><span class="fab fa-google"></span></a></li>
+                            <li v-for="(social, index) of page.socials"
+                                :key="index">
+                                <a :href="social.link" :class="'mr-3 icon-' + social.name">
+                                    <span :class="'fab fa-' + social.icon"></span>
+                                </a>
+                            </li>
                         </ul>
                         <p class="my-2">{{ page.description }}</p>
                     </div>

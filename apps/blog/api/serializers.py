@@ -2,10 +2,19 @@ from django.contrib.auth import get_user_model
 
 from rest_framework import serializers
 
-from ..models import Topic, Website, Post, PlayList
+from ..models import Topic, Website, Post, PlayList, LinkSocial
 
 
-class WebsiteSerializer(serializers.HyperlinkedModelSerializer):
+class LinkSocialSerialzer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField(source='social.id')
+    name = serializers.ReadOnlyField(source='social.name')
+
+    class Meta:
+        model = LinkSocial
+        fields = ('id', 'name', 'url',)
+
+
+class WebsiteSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name='website-detail',
         lookup_field='name',
@@ -19,6 +28,7 @@ class WebsiteSerializer(serializers.HyperlinkedModelSerializer):
         many=True,
         slug_field='username',
     )
+    socials = LinkSocialSerialzer(source='link_socials', many=True, read_only=True)
 
     class Meta:
         model = Website
@@ -33,6 +43,7 @@ class WebsiteSerializer(serializers.HyperlinkedModelSerializer):
             'description',
             'timesince',
             'subscribers',
+            'socials',
         )
         lookup_field = 'name'
 
