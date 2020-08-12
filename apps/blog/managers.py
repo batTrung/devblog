@@ -12,6 +12,7 @@ class WebsiteManager(models.Manager):
             ).prefetch_related(
                 'posts',
                 'subscribers',
+                'link_socials',
             )
 
     def actived(self):
@@ -43,3 +44,13 @@ class PlayListManager(models.Manager):
 
     def published(self):
         return self.get_queryset().filter(status=Status.PUBLIC)
+
+
+
+class SocialManager(models.Manager):
+    def get_queryset(self):
+        return super(
+            SocialManager, self).get_queryset(
+            ).select_related(
+                'social',
+            )
