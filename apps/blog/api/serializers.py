@@ -6,12 +6,12 @@ from ..models import Topic, Website, Post, PlayList, LinkSocial
 
 
 class LinkSocialSerialzer(serializers.ModelSerializer):
-    id = serializers.ReadOnlyField(source='social.id')
     name = serializers.ReadOnlyField(source='social.name')
+    icon = serializers.ReadOnlyField(source='social.icon')
 
     class Meta:
         model = LinkSocial
-        fields = ('id', 'name', 'url',)
+        fields = ('id', 'name', 'icon', 'link',)
 
 
 class WebsiteSerializer(serializers.ModelSerializer):
@@ -28,7 +28,11 @@ class WebsiteSerializer(serializers.ModelSerializer):
         many=True,
         slug_field='username',
     )
-    socials = LinkSocialSerialzer(source='link_socials', many=True, read_only=True)
+    socials = LinkSocialSerialzer(
+        source='link_socials',
+        many=True,
+        read_only=True,
+    )
 
     class Meta:
         model = Website

@@ -25,7 +25,7 @@
                         <ul class="list-unstyled d-flex justify-content-center mt-3 mb-0">
                             <li v-for="(social, index) of page.socials"
                                 :key="index">
-                                <a :href="social.link" :class="'mr-3 icon-' + social.name">
+                                <a :href="social.link" target="_blank" :class="'mr-3 icon-' + social.name">
                                     <span :class="'fab fa-' + social.icon"></span>
                                 </a>
                             </li>
